@@ -1,36 +1,12 @@
 //Keyboard.js
-var display = {
-    canvas: 0,
-    valid: false,
-    ctx: 0,
-    width: 0,
-    height: 0,
-    isDrag: false,
-    mx: 0,
-    my: 0,
-    mySel: null,
-    offsetx: 0,
-    offsety: 0,
-    getCtx: function() {
-        var elemt = document.getElementById('canvas');
-        if (elemt && elemt.getContext) {
-            this.ctx = elemt.getContext('2d');
-        }
-    },
-    draw: function() {
-        this.getCtx();
-        if (this.ctx) {
-            if (this.valid === false) {
-                this.ctx.fillStyle = "#11f";
-                this.ctx.fillRect(0, 0, 400, 300);
-                this.valid = true;
-		update();
-		player.draw(this.ctx);
-            }
-        }
-    }
 
-};
+function stuffToDraw(){
+	display.ctx.fillStyle = "#11f";
+	display.ctx.fillRect(0, 0, 400, 300);
+	display.valid = true;
+	update();
+	player.draw(display.ctx);
+}
 
 function Box() {
     this.x = 0;
@@ -57,21 +33,7 @@ function addRect(x, y, w, h, fill) {
 
 var player = addRect(200,200,40,40,'#F02FB6');
 
-var keysDown = {};//handles multiple keys
-
-addEventListener("keydown", function (e){
-	document.getElementById("debug").innerHTML = ("Key " + e.keyCode + " was pressed.");
-	keysDown[e.keyCode] = true;
-	invalidate();
-}, false);
-
-addEventListener("keyup", function (e) {
-	delete keysDown[e.keyCode];
-	invalidate();
-}, false);
-
 var update = function (/*modifier*/){
-	
 	if (38 in keysDown) {  //up
 		player.y -=10;
 	}
@@ -86,30 +48,8 @@ var update = function (/*modifier*/){
 	}
 };
 
-/*
-function printKeyCode(event) {
-    event = event || window.event;
-    document.getElementById("debug").innerHTML = ("Key " + event.keyCode + " was pressed.");
-    if (parseInt(event.keyCode, 10) == 40) { //down
-        player.y += 10;
-    }
-    if (parseInt(event.keyCode, 10) == 38) { //up
-        player.y += -10;
-    }
-    if (parseInt(event.keyCode, 10) == 37) { // <-
-        player.x += -10;
-    }
-    if (parseInt(event.keyCode, 10) == 39) { // ->
-        player.x += 10;
-    }
-    invalidate();
-    display.draw();
-}
-registerEventHandler(document, "keydown", printKeyCode);
-*/
-
 function frame (){
-display.draw();
+	display.draw();
 }
 
 setInterval(frame, 20);

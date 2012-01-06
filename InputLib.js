@@ -5,7 +5,6 @@ Input Library
 //document.createElement("canvas");
 //document.body.appendChild(canvas);
 
-/*
 var display = {
     canvas: 0,
     valid: false,
@@ -15,7 +14,7 @@ var display = {
     isDrag: false,
     mx: 0,
     my: 0,
-    mySel: 0,
+    mySel: null,
     offsetx: 0,
     offsety: 0,
     getCtx: function() {
@@ -28,15 +27,12 @@ var display = {
         this.getCtx();
         if (this.ctx) {
             if (this.valid === false) {
-                this.ctx.fillStyle = "#11f";
-                this.ctx.fillRect(0, 0, 400, 300);
-                this.valid = true;
+                stuffToDraw();
             }
         }
     }
 
 };
-*/
 
 //TODO init function for canvas x,y size.
 
@@ -64,6 +60,19 @@ function registerEventHandler(node, event, handler) {
     }
 }
 
+var keysDown = {};//handles multiple keys
+
+addEventListener("keydown", function (e){
+	document.getElementById("debug").innerHTML = ("Key " + e.keyCode + " was pressed.");
+	keysDown[e.keyCode] = true;
+	invalidate();
+}, false);
+
+addEventListener("keyup", function (e) {
+	delete keysDown[e.keyCode];
+	invalidate();
+}, false);
 
 
-var status = "loaded";
+
+var status = "InputLib loaded";
