@@ -24,6 +24,7 @@ var display = {
                 this.ctx.fillStyle = "#11f";
                 this.ctx.fillRect(0, 0, 400, 300);
                 this.valid = true;
+		update();
 		player.draw(this.ctx);
             }
         }
@@ -56,7 +57,37 @@ function addRect(x, y, w, h, fill) {
 
 var player = addRect(200,200,40,40,'#F02FB6');
 
-function printKeyCode(event) {//TODO handle multiple keys at a time.
+var keysDown = {};//handles multiple keys
+
+addEventListener("keydown", function (e){
+	document.getElementById("debug").innerHTML = ("Key " + e.keyCode + " was pressed.");
+	keysDown[e.keyCode] = true;
+	invalidate();
+}, false);
+
+addEventListener("keyup", function (e) {
+	delete keysDown[e.keyCode];
+	invalidate();
+}, false);
+
+var update = function (/*modifier*/){
+	
+	if (38 in keysDown) {  //up
+		player.y -=10;
+	}
+	if (40 in keysDown) {  //down
+		player.y +=10;
+	}
+	if (37 in keysDown) {  // <-
+		player.x -=10;
+	}
+	if (39 in keysDown) {  // ->
+		player.x +=10;
+	}
+};
+
+/*
+function printKeyCode(event) {
     event = event || window.event;
     document.getElementById("debug").innerHTML = ("Key " + event.keyCode + " was pressed.");
     if (parseInt(event.keyCode, 10) == 40) { //down
@@ -75,9 +106,12 @@ function printKeyCode(event) {//TODO handle multiple keys at a time.
     display.draw();
 }
 registerEventHandler(document, "keydown", printKeyCode);
+*/
 
-
+function frame (){
 display.draw();
-player.draw();
+}
+
+setInterval(frame, 20);
 
 invalidate();

@@ -5,7 +5,8 @@ Input Library
 //document.createElement("canvas");
 //document.body.appendChild(canvas);
 
-/*var display = {
+/*
+var display = {
     canvas: 0,
     valid: false,
     ctx: 0,
@@ -53,6 +54,16 @@ function getMouse(e) {
     display.mx = x;
     display.my = y;
 }
+
+function registerEventHandler(node, event, handler) {
+    if (typeof node.addEventListener == "function") {
+        node.addEventListener(event, handler, false);
+    }
+    else {
+        node.attachEvent("on" + event, handler);
+    }
+}
+
 
 
 var status = "loaded";
