@@ -7,6 +7,8 @@ function stuffToDraw(){
 	target.draw(display.ctx);
 	player.draw(display.ctx);
 	red.draw(display.ctx);	
+	display.ctx.fillStyle = "#fff";//text
+	display.ctx.fillText("Score:"+score,10,10);
 	}
 	else{
 	display.ctx.fillStyle = "#ff0";//background
