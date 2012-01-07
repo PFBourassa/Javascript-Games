@@ -115,7 +115,7 @@ function frame (){
 	if (game == 0){
 		foo = window.clearInterval(foo);
 		//alert(" Score: "+score);
-		game = 1;
+		//game = 1;
 		display.draw();
 		//reset();
 		
