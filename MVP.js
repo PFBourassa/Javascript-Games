@@ -6,7 +6,7 @@ function stuffToDraw(){
 	//display.valid = true;
 	target.draw(display.ctx);
 	player.draw(display.ctx);
-	//red.draw(display.ctx);	
+	red.draw(display.ctx);	
 }
 
 function Box() {
@@ -48,26 +48,44 @@ var player = addRect(200,150,40,40,'#F02FB6');
 
 var target = addRect(30,30,30,30,'#01fe31');
 
-//var red = addRect((400-30),(300-30),30,30,'#fd1131');
+var red = addRect((400-30),(300-30),30,30,'#fd1131');
 
 
 
 var update = function (modifier){
-	if (38 in keysDown) {  //up
+	//Player movement
+	if (38 in keysDown && player.y > 20) {  //up
 		player.y -=256*modifier;
 	}
-	if (40 in keysDown) {  //down
+	if (40 in keysDown && player.y < 280) {  //down
 		player.y +=256*modifier;
 	}
-	if (37 in keysDown) {  // <-
+	if (37 in keysDown && player.x > 20) {  // <-
 		player.x -=256*modifier;
 	}
-	if (39 in keysDown) {  // ->
+	if (39 in keysDown && player.x < 380) {  // ->
 		player.x +=256*modifier;
 	}
+	//Collecting boxen
 	if (boxCollide(player,target)){
 		score += 1;
 		target = addRect(15+Math.random()*(400-30),15+Math.random()*(300-30),30,30,'#01fe31');
+	}
+	//red movement logic
+	if (player.x > red.x){
+		red.x += 100* modifier;
+	}
+	if (player.x < red.x){
+		red.x -= 100* modifier;
+	}
+	if (player.y > red.y){
+		red.y += 100* modifier;
+	}
+	if (player.y < red.y){
+		red.y -= 100* modifier;
+	}
+	if (boxCollide(player, red)){
+		score = 0;
 	}
 };
 
@@ -80,7 +98,7 @@ function frame (){
 
 	then = now;
 	$("score").innerHTML = score;	
-	//$("debug").innerHTML = slope(player,target);
+	//$("debug").innerHTML = 
 };
 
 var score = 0;
