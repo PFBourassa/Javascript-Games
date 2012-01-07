@@ -6,10 +6,11 @@ function stuffToDraw(){
 	//display.valid = true;
 	target.draw(display.ctx);
 	player.draw(display.ctx);
+	//red.draw(display.ctx);	
 }
 
 function Box() {
-    this.x = 0;
+    this.x = 0;//center points
     this.y = 0;
     this.w = 1;
     this.h = 1;
@@ -32,12 +33,24 @@ function addRect(x, y, w, h, fill) {
 }
 
 function boxCollide(box1,box2){
-	
+	if (
+		box1.x - box1.w/2 <= box2.x + box2.w/2
+		&& box2.x - box2.w/2 <= box1.x + box1.w/2
+		&& box1.y - box1.w/2 <= box2.y + box2.h/2
+		&& box2.y - box2.w/2 <= box1.y + box1.h/2
+	){
+	return true;
+	}
+return false;
 };
 
 var player = addRect(200,150,40,40,'#F02FB6');
 
-var target = addRect(Math.random()*400,Math.random()*300,30,30,'#01fe31');
+var target = addRect(30,30,30,30,'#01fe31');
+
+//var red = addRect((400-30),(300-30),30,30,'#fd1131');
+
+
 
 var update = function (modifier){
 	if (38 in keysDown) {  //up
@@ -52,6 +65,10 @@ var update = function (modifier){
 	if (39 in keysDown) {  // ->
 		player.x +=256*modifier;
 	}
+	if (boxCollide(player,target)){
+		score += 1;
+		target = addRect(15+Math.random()*(400-30),15+Math.random()*(300-30),30,30,'#01fe31');
+	}
 };
 
 function frame (){
@@ -61,10 +78,15 @@ function frame (){
 	update(delta/1000);
 	display.draw();
 
-	then = now;	
+	then = now;
+	$("score").innerHTML = score;	
+	//$("debug").innerHTML = slope(player,target);
 };
 
+var score = 0;
 var then = Date.now();
 setInterval(frame, 1);
+
+
 
 invalidate();

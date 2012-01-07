@@ -57,7 +57,7 @@ function getMouse(e) {
 var keysDown = {};//handles multiple keys
 
 addEventListener("keydown", function (e){
-	document.getElementById("debug").innerHTML = ("Key " + e.keyCode + " was pressed.");
+	//document.getElementById("debug").innerHTML = ("Key " + e.keyCode + " was pressed.");
 	keysDown[e.keyCode] = true;
 	invalidate();
 }, false);
@@ -84,5 +84,9 @@ function registerEventHandler(node, event, handler) {
     }
 }
 */
+
+function slope (p1,p2){
+	return (p2.y-p1.y)/(p2.x-p1.x);
+};
 
 var status = "InputLib loaded";
