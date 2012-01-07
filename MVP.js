@@ -98,7 +98,14 @@ var update = function (modifier){
 	}
 };
 
-
+function myDown(e) {//100, 150, 200, 70
+	getMouse(e);
+	if (display.mx > 100 && display.mx < 300){
+		reset();
+	}
+		
+}
+canvas.onmousedown = myDown;
 
 function frame (){
 	if (game == 1){
@@ -130,8 +137,15 @@ var score = 0;
 var then = Date.now();
 var foo = setInterval(frame, 1);
 
-
-
+function reset(){
+player = addRect(200,150,40,40,'#F02FB6');
+target = addRect(30,30,30,30,'#01fe31');
+red = addRect((400-30),(300-30),30,30,'#fd1131');
+game = 1;// 1 for in-progress, 0 for menu
+score = 0;
+then = Date.now();
+foo = setInterval(frame, 1);
+}
 
 
 invalidate();

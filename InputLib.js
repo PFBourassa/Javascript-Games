@@ -44,6 +44,7 @@ function invalidate() {
 
 
 //Mouse functions
+//TODO move mouseUp, etc. here
 function getMouse(e) {
     var x = Math.floor(e.pageX - $("canvas").getBoundingClientRect().left);
     var y = Math.floor(e.pageY - $("canvas").getBoundingClientRect().top);
