@@ -1,12 +1,19 @@
 //Keyboard.js
 
 function stuffToDraw(){
+	if (game==1){
 	display.ctx.fillStyle = "#11f";
 	display.ctx.fillRect(0, 0, 400, 300);
-	//display.valid = true;
 	target.draw(display.ctx);
 	player.draw(display.ctx);
 	red.draw(display.ctx);	
+	}
+	else{
+	display.ctx.fillStyle = "#ff0";
+	display.ctx.fillRect(50, 50, 300, 200);
+	display.ctx.fillStyle = "#000";
+	display.ctx.fillText("Score:");
+	}
 }
 
 function Box() {
@@ -44,11 +51,7 @@ function boxCollide(box1,box2){
 return false;
 };
 
-var player = addRect(200,150,40,40,'#F02FB6');
 
-var target = addRect(30,30,30,30,'#01fe31');
-
-var red = addRect((400-30),(300-30),30,30,'#fd1131');
 
 
 
@@ -85,25 +88,43 @@ var update = function (modifier){
 		red.y -= 100* modifier;
 	}
 	if (boxCollide(player, red)){
-		score = 0;
+		game = 0;
 	}
 };
 
+
+
 function frame (){
-	var now = Date.now();
-	var delta = now - then;
-
-	update(delta/1000);
-	display.draw();
-
-	then = now;
-	$("score").innerHTML = score;	
-	//$("debug").innerHTML = 
+	if (game == 1){
+		var now = Date.now();
+		var delta = now - then;
+	
+		update(delta/1000);
+		display.draw();
+	
+		then = now;
+		$("score").innerHTML = score;	
+		//$("debug").innerHTML = 
+	}
+	if (game == 0){
+		foo = window.clearInterval(foo);
+		alert(" Score: "+score);
+		game = 1;
+		display.draw();
+		//reset();
+		
+	}
 };
 
+var player = addRect(200,150,40,40,'#F02FB6');
+var target = addRect(30,30,30,30,'#01fe31');
+var red = addRect((400-30),(300-30),30,30,'#fd1131');
+var game = 1;// 1 for in-progress, 0 for menu
 var score = 0;
 var then = Date.now();
-setInterval(frame, 1);
+var foo = setInterval(frame, 1);
+
+
 
 
 
