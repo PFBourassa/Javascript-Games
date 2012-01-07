@@ -5,6 +5,7 @@ Input Library
 //document.createElement("canvas");
 //document.body.appendChild(canvas);
 
+//canvas stuff
 var display = {
     canvas: 0,
     valid: false,
@@ -24,12 +25,12 @@ var display = {
         }
     },
     draw: function() {
-        this.getCtx();
         if (this.ctx) {
             if (this.valid === false) {
                 stuffToDraw();
             }
         }
+	this.getCtx();
     }
 
 };
@@ -40,10 +41,9 @@ function invalidate() {
     display.valid = false;
 }
 
-function $(id){
-    return document.getElementById(id);
-}
 
+
+//Mouse functions
 function getMouse(e) {
     var x = Math.floor(e.pageX - $("canvas").getBoundingClientRect().left);
     var y = Math.floor(e.pageY - $("canvas").getBoundingClientRect().top);
@@ -51,15 +51,9 @@ function getMouse(e) {
     display.my = y;
 }
 
-function registerEventHandler(node, event, handler) {
-    if (typeof node.addEventListener == "function") {
-        node.addEventListener(event, handler, false);
-    }
-    else {
-        node.attachEvent("on" + event, handler);
-    }
-}
 
+
+//Keyboard functions
 var keysDown = {};//handles multiple keys
 
 addEventListener("keydown", function (e){
@@ -74,5 +68,21 @@ addEventListener("keyup", function (e) {
 }, false);
 
 
+
+//Misc. stuff
+function $(id){
+    return document.getElementById(id);
+}
+/*
+function registerEventHandler(node, event, handler) {
+    if (typeof node.addEventListener == "function") {
+
+        node.addEventListener(event, handler, false);
+    }
+    else {
+        node.attachEvent("on" + event, handler);
+    }
+}
+*/
 
 var status = "InputLib loaded";
