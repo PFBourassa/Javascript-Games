@@ -9,10 +9,14 @@ function stuffToDraw(){
 	red.draw(display.ctx);	
 	}
 	else{
-	display.ctx.fillStyle = "#ff0";
+	display.ctx.fillStyle = "#ff0";//background
 	display.ctx.fillRect(50, 50, 300, 200);
-	display.ctx.fillStyle = "#000";
-	display.ctx.fillText("Score:");
+	display.ctx.fillStyle = "#000";//text
+	display.ctx.fillText("Score:"+score,150,100);
+	display.ctx.fillStyle = "#5fc23f";//Button
+	display.ctx.fillRect(100, 150, 200, 70);
+	display.ctx.fillStyle = "#000";//text
+	display.ctx.fillText("Again",200,200);
 	}
 }
 
@@ -108,7 +112,7 @@ function frame (){
 	}
 	if (game == 0){
 		foo = window.clearInterval(foo);
-		alert(" Score: "+score);
+		//alert(" Score: "+score);
 		game = 1;
 		display.draw();
 		//reset();
