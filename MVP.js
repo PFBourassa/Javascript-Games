@@ -4,18 +4,19 @@ function stuffToDraw(){
 	display.ctx.fillStyle = "#11f";
 	display.ctx.fillRect(0, 0, 400, 300);
 	//display.valid = true;
+	target.draw(display.ctx);
 	player.draw(display.ctx);
 }
 
 function Box() {
     this.x = 0;
     this.y = 0;
-    this.h = 1;
     this.w = 1;
+    this.h = 1;
     this.fill = "#444";
     this.draw = function(ctx) {
         display.ctx.fillStyle = this.fill;
-        display.ctx.fillRect(this.x, this.y, this.h, this.w);
+        display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
 
     };
 }
@@ -30,9 +31,13 @@ function addRect(x, y, w, h, fill) {
     return rect;
 }
 
-var player = addRect(200,200,40,40,'#F02FB6');
+function boxCollide(box1,box2){
+	
+};
 
-var target = addRect();
+var player = addRect(200,150,40,40,'#F02FB6');
+
+var target = addRect(Math.random()*400,Math.random()*300,30,30,'#01fe31');
 
 var update = function (modifier){
 	if (38 in keysDown) {  //up
