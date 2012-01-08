@@ -8,7 +8,9 @@ function stuffToDraw(){
 	player.draw(display.ctx);
 	red.draw(display.ctx);	
 	display.ctx.fillStyle = "#fff";//text
-	display.ctx.fillText("Score:"+score,10,10);
+	display.ctx.font = 'bold 15px sans-serif';
+        display.ctx.textAlign = 'center';
+	display.ctx.fillText("Score:"+score,27,12);
 	}
 	else{
 	display.ctx.fillStyle = "#ff0";//background
@@ -17,7 +19,7 @@ function stuffToDraw(){
 	display.ctx.fillRect(100, 150, 200, 70);
 	display.ctx.fillStyle = "#000";//text
 	display.ctx.font = 'bold 50px sans-serif';
-        display.ctx.textAlign = 'center';
+
 	display.ctx.fillText("Again",200,200);
 	display.ctx.fillText("Score:"+score,200,120);
 	}
