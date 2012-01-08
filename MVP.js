@@ -13,12 +13,13 @@ function stuffToDraw(){
 	else{
 	display.ctx.fillStyle = "#ff0";//background
 	display.ctx.fillRect(50, 50, 300, 200);
-	display.ctx.fillStyle = "#000";//text
-	display.ctx.fillText("Score:"+score,150,100);
 	display.ctx.fillStyle = "#5fc23f";//Button
 	display.ctx.fillRect(100, 150, 200, 70);
 	display.ctx.fillStyle = "#000";//text
+	display.ctx.font = 'bold 50px sans-serif';
+        display.ctx.textAlign = 'center';
 	display.ctx.fillText("Again",200,200);
+	display.ctx.fillText("Score:"+score,200,120);
 	}
 }
 
