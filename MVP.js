@@ -20,8 +20,15 @@ function stuffToDraw(){
 		display.ctx.fillStyle = "#000";//text
 		display.ctx.font = 'bold 50px sans-serif';
 		display.ctx.textAlign = 'center';
-		display.ctx.fillText("Again",200,200);
-		display.ctx.fillText("Score:"+score,200,120);
+		if (score == 0){
+			//display.ctx.fillStyle = "#000";//text
+			display.ctx.fillText("Play",200,200);
+			display.ctx.fillText("M.V.P.",200,120);
+		}
+		if (score > 0){
+			display.ctx.fillText("Again",200,200);
+			display.ctx.fillText("Score:"+score,200,120);
+		}
 	}
 }
 
@@ -128,13 +135,13 @@ function frame (){
 	}
 };
 
-var player;
-var target;
-var red ;
-var game;
-var score;
-var then ;
-var foo ;
+var player= addRect(200,150,40,40,'#F02FB6');
+var target = addRect(30,30,30,30,'#01fe31');
+var red = addRect((400-30),(300-30),30,30,'#fd1131');
+var game=0;
+var score = 0;
+var then = Date.now();
+var foo = setInterval(frame, 1);
 
 function reset(){
 	player = addRect(200,150,40,40,'#F02FB6');
@@ -146,4 +153,6 @@ function reset(){
 	foo = setInterval(frame, 1);
 }
 
-reset();
+display.draw();
+//reset();
+
