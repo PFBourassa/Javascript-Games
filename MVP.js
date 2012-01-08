@@ -1,27 +1,27 @@
-//Keyboard.js
+//MVP.js Created by Parker Bourassa
 
 function stuffToDraw(){
 	if (game==1){
-	display.ctx.fillStyle = "#11f";
-	display.ctx.fillRect(0, 0, 400, 300);
-	target.draw(display.ctx);
-	player.draw(display.ctx);
-	red.draw(display.ctx);	
-	display.ctx.fillStyle = "#fff";//text
-	display.ctx.font = 'bold 15px sans-serif';
-        display.ctx.textAlign = 'center';
-	display.ctx.fillText("Score:"+score,27,12);
+		display.ctx.fillStyle = "#11f";
+		display.ctx.fillRect(0, 0, 400, 300);
+		target.draw(display.ctx);
+		player.draw(display.ctx);
+		red.draw(display.ctx);	
+		display.ctx.fillStyle = "#fff";//text
+		display.ctx.font = 'bold 15px sans-serif';
+        	display.ctx.textAlign = 'left';
+		display.ctx.fillText("Score:"+score,2,12);
 	}
 	else{
-	display.ctx.fillStyle = "#ff0";//background
-	display.ctx.fillRect(50, 50, 300, 200);
-	display.ctx.fillStyle = "#5fc23f";//Button
-	display.ctx.fillRect(100, 150, 200, 70);
-	display.ctx.fillStyle = "#000";//text
-	display.ctx.font = 'bold 50px sans-serif';
-
-	display.ctx.fillText("Again",200,200);
-	display.ctx.fillText("Score:"+score,200,120);
+		display.ctx.fillStyle = "#ff0";//background
+		display.ctx.fillRect(50, 50, 300, 200);
+		display.ctx.fillStyle = "#5fc23f";//Button
+		display.ctx.fillRect(100, 150, 200, 70);
+		display.ctx.fillStyle = "#000";//text
+		display.ctx.font = 'bold 50px sans-serif';
+		display.ctx.textAlign = 'center';
+		display.ctx.fillText("Again",200,200);
+		display.ctx.fillText("Score:"+score,200,120);
 	}
 }
 
@@ -59,10 +59,6 @@ function boxCollide(box1,box2){
 	}
 return false;
 };
-
-
-
-
 
 var update = function (modifier){
 	//Player movement
@@ -132,23 +128,22 @@ function frame (){
 	}
 };
 
-var player = addRect(200,150,40,40,'#F02FB6');
-var target = addRect(30,30,30,30,'#01fe31');
-var red = addRect((400-30),(300-30),30,30,'#fd1131');
-var game = 1;// 1 for in-progress, 0 for menu
-var score = 0;
-var then = Date.now();
-var foo = setInterval(frame, 1);
+var player;
+var target;
+var red ;
+var game;
+var score;
+var then ;
+var foo ;
 
 function reset(){
-player = addRect(200,150,40,40,'#F02FB6');
-target = addRect(30,30,30,30,'#01fe31');
-red = addRect((400-30),(300-30),30,30,'#fd1131');
-game = 1;// 1 for in-progress, 0 for menu
-score = 0;
-then = Date.now();
-foo = setInterval(frame, 1);
+	player = addRect(200,150,40,40,'#F02FB6');
+	target = addRect(30,30,30,30,'#01fe31');
+	red = addRect((400-30),(300-30),30,30,'#fd1131');
+	game = 1;// 1 for in-progress, 0 for menu
+	score = 0;
+	then = Date.now();
+	foo = setInterval(frame, 1);
 }
 
-
-invalidate();
+reset();
