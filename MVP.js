@@ -1,11 +1,32 @@
 //MVP.js Created by Parker Bourassa
 
+//Image Stuff
+var bgReady = false;
+var bgImage = new Image();
+bgImage.onload = function () {
+	bgReady = true;
+};
+bgImage.src = "background3.png";
+
+var playerReady = false;
+var playerImage = new Image();
+playerImage.onload = function () {
+	playerReady = true;
+};
+playerImage.src = "ff.png";
+
 function stuffToDraw(){
 	if (game==1){
 		display.ctx.fillStyle = "#11f";
-		display.ctx.fillRect(0, 0, 400, 300);
+		//display.ctx.fillRect(0, 0, 400, 300);
+		if (bgReady) {
+			display.ctx.drawImage(bgImage, 0, 0);
+		}
 		target.draw(display.ctx);
-		player.draw(display.ctx);
+		//player.draw(display.ctx);
+		if (playerReady) {
+			display.ctx.drawImage(playerImage, player.x - player.w/2, player.y-player.h/2);
+		}
 		red.draw(display.ctx);	
 		display.ctx.fillStyle = "#fff";//text
 		display.ctx.font = 'bold 15px sans-serif';
@@ -32,13 +53,7 @@ function stuffToDraw(){
 	}
 }
 
-//Image Stuff
-var bgReady = false;
-var bgImage = new Image();
-bgImage.onload = function () {
-	bgReady = true;
-};
-bgImage.src = "background.png";
+
 
 
 function Box() {
