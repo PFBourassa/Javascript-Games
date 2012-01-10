@@ -32,6 +32,15 @@ function stuffToDraw(){
 	}
 }
 
+//Image Stuff
+var bgReady = false;
+var bgImage = new Image();
+bgImage.onload = function () {
+	bgReady = true;
+};
+bgImage.src = "background.png";
+
+
 function Box() {
     this.x = 0;//center points
     this.y = 0;
