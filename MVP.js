@@ -1,5 +1,32 @@
 //MVP.js Created by Parker Bourassa
 
+
+
+var player= addRect(200,150,40,40,'#F02FB6');
+var target = addRect(30,30,30,30,'#01fe31');
+var red = addRect((400-30),(300-30),30,30,'#fd1131');
+var game=0;
+var score = 0;
+var then = Date.now();
+var foo = setInterval(frame, 1);
+
+
+//MARKET CAFE WORK BEGIN*********************
+
+player.ready = false;
+player.image = new Image();
+player.image2 = new Image();//TODO abstract multiple images
+player.state = 1;//Add properties after creation?
+
+player.image2.onload = function () {
+	player.ready = true;
+};
+player.image.src = "hero.png";
+player.image2.src = "hero2.png";
+
+
+//MARKET CAFE WORK END***********************
+
 //Image Stuff
 var bgReady = false;
 var bgImage = new Image();
@@ -8,16 +35,18 @@ bgImage.onload = function () {
 };
 bgImage.src = "background3.png";
 
+
+//REPLACED 
 var playerReady = false;
 var playerImage = new Image();
 var playerState = 1;
 var playerImage2 = new Image();
 playerImage2.onload = function () {
-
 	playerReady = true;
 };
 playerImage.src = "hero.png";
 playerImage2.src = "hero2.png";
+
 
 function stuffToDraw(){
 	if (game==1){
@@ -29,19 +58,16 @@ function stuffToDraw(){
 		target.draw(display.ctx);
 		//player.draw(display.ctx);
 		if (playerReady) {
-			if(playerState == 1){
+			if(player.state == 1){
 				display.ctx.drawImage(playerImage, player.x - player.w/2, player.y-player.h/2);
+				player.state = 2;
 			}
-			else{
+			else if(player.state == 2){
 				display.ctx.drawImage(playerImage2, player.x - player.w/2, player.y-player.h/2);
+				player.state = 1;
 			}
 		}
-		if(playerState == 1){
-			playerState = 2;
-		}
-		else if(playerState == 2){
-			playerState = 1;
-		}
+		
 		red.draw(display.ctx);	
 		display.ctx.fillStyle = "#fff";//text
 		display.ctx.font = 'bold 15px sans-serif';
@@ -69,6 +95,13 @@ function stuffToDraw(){
 };
 
 function Box() {
+	this.ready = false;
+	this.image = new Image();
+	this.image2 = new Image();
+	this.image.src = "hero.png";
+	this.image2.src = "hero2.png";
+	
+	this.state = 1;
     this.x = 0;//center points
     this.y = 0;
     this.w = 1;
@@ -171,13 +204,6 @@ function frame (){
 	}
 };
 
-var player= addRect(200,150,40,40,'#F02FB6');
-var target = addRect(30,30,30,30,'#01fe31');
-var red = addRect((400-30),(300-30),30,30,'#fd1131');
-var game=0;
-var score = 0;
-var then = Date.now();
-var foo = setInterval(frame, 1);
 
 function reset(){
 	player = addRect(200,150,40,40,'#F02FB6');
