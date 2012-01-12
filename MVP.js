@@ -1,15 +1,14 @@
+//*********************************
 //MVP.js Created by Parker Bourassa
+//*********************************
 
-
-
-var player= addRect(200,150,40,40,'#F02FB6');
+var player = addRect(200,150,40,40,'#F02FB6');
 var target = addRect(30,30,30,30,'#01fe31');
 var red = addRect((400-30),(300-30),30,30,'#fd1131');
 var game=0;
 var score = 0;
 var then = Date.now();
 var foo = setInterval(frame, 1);
-
 
 //MARKET CAFE WORK BEGIN*********************
 
@@ -36,17 +35,20 @@ bgImage.onload = function () {
 bgImage.src = "background3.png";
 
 
-//REPLACED 
-var playerReady = false;
+/*REPLACED INSIDE PLAYER OBJECT
+//var playerReady = false;
 var playerImage = new Image();
 var playerState = 1;
 var playerImage2 = new Image();
 playerImage2.onload = function () {
 	playerReady = true;
+	player.ready = true;
+	//alert(player.ready);
 };
+
 playerImage.src = "hero.png";
 playerImage2.src = "hero2.png";
-
+*/
 
 function stuffToDraw(){
 	if (game==1){
@@ -57,13 +59,15 @@ function stuffToDraw(){
 		}
 		target.draw(display.ctx);
 		//player.draw(display.ctx);
-		if (playerReady) {
+		//player.ready = true;
+		//alert(player.ready);
+		if (player.ready) {
 			if(player.state == 1){
-				display.ctx.drawImage(playerImage, player.x - player.w/2, player.y-player.h/2);
+				display.ctx.drawImage(player.image, player.x - player.w/2, player.y-player.h/2);
 				player.state = 2;
 			}
 			else if(player.state == 2){
-				display.ctx.drawImage(playerImage2, player.x - player.w/2, player.y-player.h/2);
+				display.ctx.drawImage(player.image2, player.x - player.w/2, player.y-player.h/2);
 				player.state = 1;
 			}
 		}
@@ -95,19 +99,19 @@ function stuffToDraw(){
 };
 
 function Box() {
-	this.ready = false;
+	this.ready = true;//should initiate as false
 	this.image = new Image();
 	this.image2 = new Image();
 	this.image.src = "hero.png";
 	this.image2.src = "hero2.png";
 	
 	this.state = 1;
-    this.x = 0;//center points
-    this.y = 0;
-    this.w = 1;
-    this.h = 1;
-    this.fill = "#444";
-    this.draw = function(ctx) {
+	this.x = 0;//center points
+   	this.y = 0;
+   	this.w = 1;
+   	this.h = 1;
+	this.fill = "#444";
+	this.draw = function(ctx) {
         display.ctx.fillStyle = this.fill;
         display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
 
@@ -213,6 +217,9 @@ function reset(){
 	score = 0;
 	then = Date.now();
 	foo = setInterval(frame, 1);
+	bgImage.onload = function () {
+	bgReady = true;
+};
 }
 
 display.draw();
