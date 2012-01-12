@@ -1,11 +1,47 @@
 //MVP.js Created by Parker Bourassa
 
+//Image Stuff
+var bgReady = false;
+var bgImage = new Image();
+bgImage.onload = function () {
+	bgReady = true;
+};
+bgImage.src = "background3.png";
+
+var playerReady = false;
+var playerImage = new Image();
+var playerState = 1;
+var playerImage2 = new Image();
+playerImage2.onload = function () {
+
+	playerReady = true;
+};
+playerImage.src = "hero.png";
+playerImage2.src = "hero2.png";
+
 function stuffToDraw(){
 	if (game==1){
 		display.ctx.fillStyle = "#11f";
-		display.ctx.fillRect(0, 0, 400, 300);
+		//display.ctx.fillRect(0, 0, 400, 300);
+		if (bgReady) {
+			display.ctx.drawImage(bgImage, 0, 0);
+		}
 		target.draw(display.ctx);
-		player.draw(display.ctx);
+		//player.draw(display.ctx);
+		if (playerReady) {
+			if(playerState == 1){
+				display.ctx.drawImage(playerImage, player.x - player.w/2, player.y-player.h/2);
+			}
+			else{
+				display.ctx.drawImage(playerImage2, player.x - player.w/2, player.y-player.h/2);
+			}
+		}
+		if(playerState == 1){
+			playerState = 2;
+		}
+		else if(playerState == 2){
+			playerState = 1;
+		}
 		red.draw(display.ctx);	
 		display.ctx.fillStyle = "#fff";//text
 		display.ctx.font = 'bold 15px sans-serif';
@@ -30,7 +66,7 @@ function stuffToDraw(){
 			display.ctx.fillText("Score:"+score,200,120);
 		}
 	}
-}
+};
 
 function Box() {
     this.x = 0;//center points
