@@ -12,16 +12,20 @@ var foo = setInterval(frame, 1);
 
 //MARKET CAFE WORK BEGIN*********************
 
-player.ready = false;
-player.image = new Image();
-player.image2 = new Image();//TODO abstract multiple images
-player.state = 1;//Add properties after creation?
+//player.ready = false;
+//player.image = new Image();
+//player.image2 = new Image();//TODO abstract multiple images
+//player.state = 1;//Add properties after creation?
 
-player.image2.onload = function () {
+/*player.image2.onload = function () {
 	player.ready = true;
 };
-player.image.src = "hero.png";
-player.image2.src = "hero2.png";
+Box.prototype.foo = function(a) {
+	this.image.src = a;
+}*/
+player.foo("hero2.png");
+//player.image.src = "hero.png";
+//player.image2.src = "hero2.png";
 
 
 //MARKET CAFE WORK END***********************
@@ -35,20 +39,20 @@ bgImage.onload = function () {
 bgImage.src = "background3.png";
 
 
-/*REPLACED INSIDE PLAYER OBJECT
+
 //var playerReady = false;
-var playerImage = new Image();
-var playerState = 1;
-var playerImage2 = new Image();
-playerImage2.onload = function () {
+var image = new Image();
+var image2 = new Image();
+image.src = "hero.png";
+image2.src = "hero2.png";
+image2.onload = function () {
 	playerReady = true;
 	player.ready = true;
 	//alert(player.ready);
 };
 
-playerImage.src = "hero.png";
-playerImage2.src = "hero2.png";
-*/
+
+
 
 function stuffToDraw(){
 	if (game==1){
@@ -102,8 +106,11 @@ function Box() {
 	this.ready = true;//should initiate as false
 	this.image = new Image();
 	this.image2 = new Image();
-	this.image.src = "hero.png";
+	this.image.src;//= "hero.png";
 	this.image2.src = "hero2.png";
+	this.foo = function(a) {
+		this.image.src = a;
+	}
 	
 	this.state = 1;
 	this.x = 0;//center points
