@@ -10,25 +10,7 @@ var score = 0;
 var then = Date.now();
 var foo = setInterval(frame, 1);
 
-//MARKET CAFE WORK BEGIN*********************
 
-//player.ready = false;
-//player.image = new Image();
-//player.image2 = new Image();//TODO abstract multiple images
-//player.state = 1;//Add properties after creation?
-
-/*player.image2.onload = function () {
-	player.ready = true;
-};
-Box.prototype.foo = function(a) {
-	this.image.src = a;
-}*/
-player.foo("hero2.png");
-//player.image.src = "hero.png";
-//player.image2.src = "hero2.png";
-
-
-//MARKET CAFE WORK END***********************
 
 //Image Stuff
 var bgReady = false;
@@ -40,15 +22,13 @@ bgImage.src = "background3.png";
 
 
 
-//var playerReady = false;
+
 var image = new Image();
 var image2 = new Image();
 image.src = "hero.png";
 image2.src = "hero2.png";
 image2.onload = function () {
-	playerReady = true;
 	player.ready = true;
-	//alert(player.ready);
 };
 
 
@@ -67,11 +47,11 @@ function stuffToDraw(){
 		//alert(player.ready);
 		if (player.ready) {
 			if(player.state == 1){
-				display.ctx.drawImage(player.image, player.x - player.w/2, player.y-player.h/2);
+				display.ctx.drawImage(player.picture, player.x - player.w/2, player.y-player.h/2);
 				player.state = 2;
 			}
 			else if(player.state == 2){
-				display.ctx.drawImage(player.image2, player.x - player.w/2, player.y-player.h/2);
+				display.ctx.drawImage(player.picture2, player.x - player.w/2, player.y-player.h/2);
 				player.state = 1;
 			}
 		}
@@ -104,14 +84,8 @@ function stuffToDraw(){
 
 function Box() {
 	this.ready = true;//should initiate as false
-	this.image = new Image();
-	this.image2 = new Image();
-	this.image.src;//= "hero.png";
-	this.image2.src = "hero2.png";
-	this.foo = function(a) {
-		this.image.src = a;
-	}
-	
+	this.picture = image;
+	this.picture2 = image2;
 	this.state = 1;
 	this.x = 0;//center points
    	this.y = 0;
