@@ -10,8 +10,6 @@ var score = 0;
 var then = Date.now();
 var foo = setInterval(frame, 1);
 
-
-
 //Image Stuff
 var bgReady = false;
 var bgImage = new Image();
@@ -21,18 +19,17 @@ bgImage.onload = function () {
 bgImage.src = "background3.png";
 
 
-
-
 var image = new Image();
 var image2 = new Image();
 image.src = "hero.png";
 image2.src = "hero2.png";
+
+var pictures = []
+pictures.push(image);
+pictures.push(image2);
 image2.onload = function () {
 	player.ready = true;
 };
-
-
-
 
 function stuffToDraw(){
 	if (game==1){
@@ -47,7 +44,7 @@ function stuffToDraw(){
 		//alert(player.ready);
 		if (player.ready) {
 			if(player.state == 1){
-				display.ctx.drawImage(player.picture, player.x - player.w/2, player.y-player.h/2);
+				display.ctx.drawImage(pictures[0], player.x - player.w/2, player.y-player.h/2);
 				player.state = 2;
 			}
 			else if(player.state == 2){
@@ -189,7 +186,6 @@ function frame (){
 	}
 };
 
-
 function reset(){
 	player = addRect(200,150,40,40,'#F02FB6');
 	target = addRect(30,30,30,30,'#01fe31');
@@ -199,10 +195,9 @@ function reset(){
 	then = Date.now();
 	foo = setInterval(frame, 1);
 	bgImage.onload = function () {
-	bgReady = true;
-};
+		bgReady = true;
+	};
 }
 
 display.draw();
 //reset();
-
