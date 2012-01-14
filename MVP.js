@@ -19,13 +19,22 @@ bgImage.onload = function () {
 bgImage.src = "background3.png";
 
 
-var image = new Image();
+var image = loadPic("hero.png");
 var image2 = new Image();
-image.src = "hero.png";
+//image.src = "hero.png";
 image2.src = "hero2.png";
+
+function loadPic(a){
+	var picture = new Image();
+	picture.src = a;
+	return picture;
+	//pictures.push(picture);
+}
+
 
 var pictures = []
 pictures.push(image);
+//pictures.push(loadPic("hero.png"));
 pictures.push(image2);
 image2.onload = function () {
 	player.ready = true;
