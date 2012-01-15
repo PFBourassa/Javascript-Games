@@ -1,6 +1,6 @@
-//*********************************
+//**********************************
 //MVP.js Created by Parker Bourassa
-//*********************************
+//**********************************
 
 var player = addRect(200,150,40,40,'#F02FB6');
 var target = addRect(30,30,30,30,'#01fe31');
@@ -31,6 +31,7 @@ function loadPic(a){
 var pictures = []
 pictures.push(loadPic("hero.png"));
 pictures.push(loadPic("hero2.png"));
+var links = ["hero.png","hero2.png"];
 
 
 
@@ -72,7 +73,7 @@ function stuffToDraw(){
 };
 
 function Box() {
-	this.ready = false;//should initiate as false
+	this.ready = false;
 	this.pictures = [];
 	this.state = 1;
 	this.x = 0;//center points
