@@ -29,10 +29,11 @@ function loadPic(a){
 
 
 var pictures = []
-pictures.push(loadPic("hero.png"));
-pictures.push(loadPic("hero2.png"));
-var links = ["hero.png","hero2.png"];
+//pictures.push(loadPic("hero.png"));
+//pictures.push(loadPic("hero2.png"));
 
+var links = ["hero.png","hero2.png"];
+player.load(links);
 
 
 function stuffToDraw(){
@@ -45,7 +46,6 @@ function stuffToDraw(){
 		target.draw(display.ctx);
 		player.draw(display.ctx);
 		player.ready = true;//TODO this should mean something
-		//alert(player.ready);
 		red.draw(display.ctx);	
 		display.ctx.fillStyle = "#fff";//text
 		display.ctx.font = 'bold 15px sans-serif';
@@ -81,6 +81,12 @@ function Box() {
    	this.w = 1;
    	this.h = 1;
 	this.fill = "#444";
+	this.load = function(links){
+		for(var i = 0; i < links.length; i++){
+			pictures.push(loadPic(links[i]));
+			this.pics = pictures;
+		}
+	}
 	
 	this.draw = function(ctx) {
 		if (this.ready) {
