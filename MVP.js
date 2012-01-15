@@ -58,7 +58,7 @@ function stuffToDraw(){
 				player.state = 2;
 			}
 			else if(player.state == 2){
-				display.ctx.drawImage(player.picture2, player.x - player.w/2, player.y-player.h/2);
+				display.ctx.drawImage(pictures[1], player.x - player.w/2, player.y-player.h/2);
 				player.state = 1;
 			}
 		}
