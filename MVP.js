@@ -19,27 +19,20 @@ bgImage.onload = function () {
 bgImage.src = "background3.png";
 
 
-var image ;//= loadPic("hero.png");
-//var image2 = new Image();
-//image.src = "hero.png";
-//image2.src = "hero2.png";
+var image ;
 
 function loadPic(a){
 	image = new Image();
 	image.src = a;
 	return image;
-	//pictures.push(picture);
 }
 
 
 var pictures = []
-//pictures.push(image);
 pictures.push(loadPic("hero.png"));
 pictures.push(loadPic("hero2.png"));
-/*pictures.push(image2);
-image2.onload = function () {
-	player.ready = true;
-};*/
+
+
 
 function stuffToDraw(){
 	if (game==1){
@@ -49,20 +42,9 @@ function stuffToDraw(){
 			display.ctx.drawImage(bgImage, 0, 0);
 		}
 		target.draw(display.ctx);
-		//player.draw(display.ctx);
-		//player.ready = true;
+		player.draw(display.ctx);
+		player.ready = true;//TODO this should mean something
 		//alert(player.ready);
-		if (player.ready) {
-			if(player.state == 1){
-				display.ctx.drawImage(pictures[0], player.x - player.w/2, player.y-player.h/2);
-				player.state = 2;
-			}
-			else if(player.state == 2){
-				display.ctx.drawImage(pictures[1], player.x - player.w/2, player.y-player.h/2);
-				player.state = 1;
-			}
-		}
-		
 		red.draw(display.ctx);	
 		display.ctx.fillStyle = "#fff";//text
 		display.ctx.font = 'bold 15px sans-serif';
@@ -90,18 +72,30 @@ function stuffToDraw(){
 };
 
 function Box() {
-	this.ready = true;//should initiate as false
-	//this.picture = image;
-	//this.picture2 = image2;
+	this.ready = false;//should initiate as false
+	this.pictures = [];
 	this.state = 1;
 	this.x = 0;//center points
    	this.y = 0;
    	this.w = 1;
    	this.h = 1;
 	this.fill = "#444";
+	
 	this.draw = function(ctx) {
-        display.ctx.fillStyle = this.fill;
-        display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
+		if (this.ready) {
+			if(this.state == 1){
+				display.ctx.drawImage(pictures[0], player.x - player.w/2, player.y-player.h/2);
+				this.state = 2;
+			}
+			else if(this.state == 2){
+				display.ctx.drawImage(pictures[1], player.x - player.w/2, player.y-player.h/2);
+				this.state = 1;
+			}
+		}
+		else{
+        	display.ctx.fillStyle = this.fill;
+        	display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
+	}
 
     };
 }
