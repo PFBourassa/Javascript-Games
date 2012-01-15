@@ -94,11 +94,11 @@ function Box() {
 			}
 		}
 		else{
-        	display.ctx.fillStyle = this.fill;
-        	display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
-	}
-
-    };
+        		display.ctx.fillStyle = this.fill;
+        		display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
+		
+		}
+	};
 }
 
 function addRect(x, y, w, h, fill) {
