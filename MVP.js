@@ -20,9 +20,9 @@ bgImage.src = "background3.png";
 
 
 var image ;//= loadPic("hero.png");
-var image2 = new Image();
+//var image2 = new Image();
 //image.src = "hero.png";
-image2.src = "hero2.png";
+//image2.src = "hero2.png";
 
 function loadPic(a){
 	image = new Image();
@@ -36,10 +36,10 @@ var pictures = []
 //pictures.push(image);
 pictures.push(loadPic("hero.png"));
 pictures.push(loadPic("hero2.png"));
-pictures.push(image2);
+/*pictures.push(image2);
 image2.onload = function () {
 	player.ready = true;
-};
+};*/
 
 function stuffToDraw(){
 	if (game==1){
@@ -91,8 +91,8 @@ function stuffToDraw(){
 
 function Box() {
 	this.ready = true;//should initiate as false
-	this.picture = image;
-	this.picture2 = image2;
+	//this.picture = image;
+	//this.picture2 = image2;
 	this.state = 1;
 	this.x = 0;//center points
    	this.y = 0;
