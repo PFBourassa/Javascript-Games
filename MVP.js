@@ -167,7 +167,7 @@ var update = function (modifier){
 
 function myDown(e) {//100, 150, 200, 70
 	getMouse(e);
-	if (display.mx > 100 && display.mx < 300){
+	if ((display.my > 150 && display.my < 230 && display.mx>100 && display.mx < 300) && game==0){
 		reset();
 	}
 		
