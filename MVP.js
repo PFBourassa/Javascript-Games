@@ -74,7 +74,7 @@ function stuffToDraw(){
 
 function Box() {
 	this.ready = false;
-	this.pictures = [];
+	this.pics = pictures;
 	this.state = 1;
 	this.x = 0;//center points
    	this.y = 0;
@@ -85,11 +85,11 @@ function Box() {
 	this.draw = function(ctx) {
 		if (this.ready) {
 			if(this.state == 1){
-				display.ctx.drawImage(pictures[0], player.x - player.w/2, player.y-player.h/2);
+				display.ctx.drawImage(this.pics[0], player.x - player.w/2, player.y-player.h/2);
 				this.state = 2;
 			}
 			else if(this.state == 2){
-				display.ctx.drawImage(pictures[1], player.x - player.w/2, player.y-player.h/2);
+				display.ctx.drawImage(this.pics[1], player.x - player.w/2, player.y-player.h/2);
 				this.state = 1;
 			}
 		}
