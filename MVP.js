@@ -28,12 +28,14 @@ function loadPic(a){
 }
 
 
-var pictures = []
+var pictures =[];
 //pictures.push(loadPic("hero.png"));
 //pictures.push(loadPic("hero2.png"));
-
+var coinLinks = ["coin1.png","coin2.png","coin3.png","coin4.png"];
 var links = ["hero.png","hero2.png"];
+
 player.load(links);
+target.load(coinLinks);
 
 
 function stuffToDraw(){
@@ -46,6 +48,7 @@ function stuffToDraw(){
 		target.draw(display.ctx);
 		player.draw(display.ctx);
 		player.ready = true;//TODO this should mean something
+		target.ready = true;
 		red.draw(display.ctx);	
 		display.ctx.fillStyle = "#fff";//text
 		display.ctx.font = 'bold 15px sans-serif';
@@ -82,6 +85,7 @@ function Box() {
    	this.h = 1;
 	this.fill = "#444";
 	this.load = function(links){
+		pictures = [];
 		for(var i = 0; i < links.length; i++){
 			pictures.push(loadPic(links[i]));
 			this.pics = pictures;
@@ -90,11 +94,11 @@ function Box() {
 	this.draw = function(ctx) {
 		if (this.ready) {
 			if(this.state < this.pics.length){
-				display.ctx.drawImage(this.pics[this.state], player.x - player.w/2, player.y-player.h/2);
+				display.ctx.drawImage(this.pics[this.state], this.x - this.w/2, this.y-this.h/2);
 				this.state += 1;
 			}
 			else{
-				display.ctx.drawImage(this.pics[this.state-1], player.x - player.w/2, player.y-player.h/2);
+				display.ctx.drawImage(this.pics[this.state-1], this.x - this.w/2, this.y-this.h/2);
 				this.state = 0;
 			}
 		}
