@@ -28,7 +28,7 @@ function loadPic(a){
 	return foo;
 }
 
-var pictures;
+//var pictures;
 //pictures.push(loadPic("hero.png"));
 //pictures.push(loadPic("hero2.png"));
 var coinLinks = ["coin1.png","coin2.png","coin3.png","coin4.png"];
@@ -40,16 +40,15 @@ player.load(links);
 function stuffToDraw(){
 	if (game == 1){
 		display.ctx.fillStyle = "#11f";
-		//display.ctx.fillRect(0, 0, 400, 300);
 		if (bgReady) {
 			display.ctx.drawImage(bgImage, 0, 0);
+		}
+		else{
+			display.ctx.fillRect(0, 0, 400, 300);
 		}
 		target.draw(display.ctx);
 		red.draw(display.ctx);	
 		player.draw(display.ctx);
-		player.ready = true;//TODO this should mean something
-		target.ready = true;
-		
 		display.ctx.fillStyle = "#fff";//text
 		display.ctx.font = 'bold 15px sans-serif';
         	display.ctx.textAlign = 'left';
@@ -83,18 +82,15 @@ function Box() {
    	this.y = 0;
    	this.w = 1;
    	this.h = 1;
-	//this.that = this;
 	this.fill = "#444";
 	var $this = this;
 	this.load = function(array){
 		var foo = [];
-		//pictures = [];
 		for(var i = 0; i < array.length; i++){
-			//pictures.push(loadPic(array[i]));
 			foo.push(loadPic(array[i]));
 		}
-		//this.pics = pictures;
 		$this.pics = foo;
+		$this.ready = true;
 	}
 	this.draw = function(ctx) {
 		if (this.ready) {
@@ -154,8 +150,8 @@ var update = function (modifier){
 	//Collecting boxen
 	if (boxCollide(player,target)){
 		score += 1;
-		target = addRect(15+Math.random()*(400-30),15+Math.random()*(300-30),30,30,'#01fe31');
-		target.load(coinLinks);//TODO reposition box
+		target.x = (15+Math.random()*(400-30));
+		target.y = (15+Math.random()*(300-30));
 	}
 	//red movement logic
 	if (player.x > red.x){
