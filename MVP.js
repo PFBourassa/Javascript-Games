@@ -155,7 +155,7 @@ var update = function (modifier){
 	if (boxCollide(player,target)){
 		score += 1;
 		target = addRect(15+Math.random()*(400-30),15+Math.random()*(300-30),30,30,'#01fe31');
-		target.load(coinLinks);
+		target.load(coinLinks);//TODO reposition box
 	}
 	//red movement logic
 	if (player.x > red.x){
