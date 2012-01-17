@@ -77,20 +77,20 @@ function stuffToDraw(){
 
 function Box() {
 	this.ready = false;
-	this.pics = pictures;//[];
+	this.pics = [];
 	this.state = 0;
 	this.x = 0;
    	this.y = 0;
    	this.w = 1;
    	this.h = 1;
-	this.that = this;
+	//this.that = this;
 	this.fill = "#444";
 	var $this = this;
 	this.load = function(array){
 		var foo = [];
-		pictures = [];
+		//pictures = [];
 		for(var i = 0; i < array.length; i++){
-			pictures.push(loadPic(array[i]));
+			//pictures.push(loadPic(array[i]));
 			foo.push(loadPic(array[i]));
 		}
 		//this.pics = pictures;
