@@ -8,7 +8,7 @@ var red = addRect((400-30),(300-30),30,30,'#fd1131');
 var game = 0;
 var score = 0;
 var then = Date.now();
-var foo = setInterval(frame, 1);
+var foo = setInterval(frame, 1);//this doesn't effect framrate, only init.
 
 //Image Stuff
 var bgReady = false;
@@ -28,10 +28,9 @@ function loadPic(a){
 	return foo;
 }
 
-//var pictures;
-//pictures.push(loadPic("hero.png"));
-//pictures.push(loadPic("hero2.png"));
+
 var coinLinks = ["coin1.png","coin2.png","coin3.png","coin4.png"];
+//var coinLinks = ["fish1.png"];
 var links = ["hero.png","hero2.png"];
 
 target.load(coinLinks);
@@ -209,7 +208,7 @@ function reset(){
 	game = 1;// 1 for in-progress, 0 for menu
 	score = 0;
 	then = Date.now();
-	foo = setInterval(frame, 1);
+	foo = setInterval(frame, 50);//framerate
 	bgImage.onload = function () {
 		bgReady = true;
 	};
