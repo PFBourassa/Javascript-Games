@@ -18,9 +18,6 @@ bgImage.onload = function () {
 };
 bgImage.src = "background3.png";
 
-
-//var image;
-
 function loadPic(a){
 	var foo;
 	foo = new Image();
@@ -28,10 +25,10 @@ function loadPic(a){
 	return foo;
 }
 
-
 var coinLinks = ["coin1.png","coin2.png","coin3.png","coin4.png"];
-//var coinLinks = ["fish1.png"];
+var fishLeft = ["fish1.png"];
 var links = ["hero.png","hero2.png"];
+
 
 target.load(coinLinks);
 player.load(links);
@@ -50,7 +47,7 @@ function stuffToDraw(){
 		player.draw(display.ctx);
 		display.ctx.fillStyle = "#fff";//text
 		display.ctx.font = 'bold 15px sans-serif';
-        	display.ctx.textAlign = 'left';
+        display.ctx.textAlign = 'left';
 		display.ctx.fillText("Score:"+score,2,12);
 	}
 	else{
@@ -75,7 +72,7 @@ function stuffToDraw(){
 
 function Box() {
 	this.ready = false;
-	this.pics = [];
+	this.pics = {};
 	this.state = 0;
 	this.x = 0;
    	this.y = 0;
@@ -83,7 +80,7 @@ function Box() {
    	this.h = 1;
 	this.fill = "#444";
 	var $this = this;
-	this.load = function(array){
+	this.load = function(array,name){
 		var foo = [];
 		for(var i = 0; i < array.length; i++){
 			foo.push(loadPic(array[i]));
@@ -139,6 +136,7 @@ var update = function (modifier){
 	}
 	if (40 in keysDown && player.y < 280) {  //down
 		player.y +=256*modifier;
+		return false;
 	}
 	if (37 in keysDown && player.x > 20) {  // <-
 		player.x -=256*modifier;
@@ -169,6 +167,13 @@ var update = function (modifier){
 		game = 0;
 	}
 };
+
+document.onkeydown = function(e) {
+    var k = e.keyCode;
+    if(k >= 37 && k <= 40) {
+        return false;
+    }
+}
 
 function myDown(e) {//100, 150, 200, 70
 	getMouse(e);
