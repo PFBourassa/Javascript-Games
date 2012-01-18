@@ -26,7 +26,7 @@ function loadPic(a){
 }
 
 var coinLinks = ["coin1.png","coin2.png","coin3.png","coin4.png"];
-var fishLeft = ["fish1.png"];
+//var fishLeft = ["fish1.png"];
 var links = ["hero.png","hero2.png"];
 
 
@@ -72,7 +72,7 @@ function stuffToDraw(){
 
 function Box() {
 	this.ready = false;
-	this.pics = {};
+	this.pics = [];
 	this.state = 0;
 	this.x = 0;
    	this.y = 0;
@@ -80,7 +80,7 @@ function Box() {
    	this.h = 1;
 	this.fill = "#444";
 	var $this = this;
-	this.load = function(array,name){
+	this.load = function(array){
 		var foo = [];
 		for(var i = 0; i < array.length; i++){
 			foo.push(loadPic(array[i]));
@@ -136,7 +136,6 @@ var update = function (modifier){
 	}
 	if (40 in keysDown && player.y < 280) {  //down
 		player.y +=256*modifier;
-		return false;
 	}
 	if (37 in keysDown && player.x > 20) {  // <-
 		player.x -=256*modifier;
@@ -168,13 +167,14 @@ var update = function (modifier){
 	}
 };
 
+/*
 document.onkeydown = function(e) {
     var k = e.keyCode;
     if(k >= 37 && k <= 40) {
         return false;
     }
 }
-
+*/
 function myDown(e) {//100, 150, 200, 70
 	getMouse(e);
 	if ((display.my > 150 && display.my < 230 && display.mx>100 && display.mx < 300) && game==0){
