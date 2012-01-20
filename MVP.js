@@ -16,7 +16,7 @@ var bgImage = new Image();
 bgImage.onload = function () {
 	bgReady = true;
 };
-bgImage.src = "background3.png";
+bgImage.src = "STAGE.png";
 
 function loadPic(a){
 	var foo;
@@ -25,13 +25,14 @@ function loadPic(a){
 	return foo;
 }
 
-var coinLinks = ["coin1.png","coin2.png","coin3.png","coin4.png"];
+var coinLinks = ["collectable.png"];
 //var fishLeft = ["fish1.png"];
-var links = ["hero.png","hero2.png"];
-
+var links = ["player.png"];
+var badLinks = ["enemy.png"];
 
 target.load(coinLinks);
 player.load(links);
+red.load(badLinks);
 
 function stuffToDraw(){
 	if (game == 1){
@@ -219,6 +220,7 @@ function reset(){
 	};
 	target.load(coinLinks);
 	player.load(links);
+	red.load(badLinks);
 }
 
 display.draw();
