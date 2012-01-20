@@ -57,10 +57,12 @@ function getMouse(e) {
 //Keyboard functions
 var keysDown = {};//handles multiple keys
 
-addEventListener("keydown", function (e){
+window.addEventListener("keydown", function (e){
 	//document.getElementById("debug").innerHTML = ("Key " + e.keyCode + " was pressed.");
 	keysDown[e.keyCode] = true;
 	invalidate();
+	//return false;
+	e.preventDefault();
 }, false);
 
 addEventListener("keyup", function (e) {
