@@ -46,7 +46,7 @@ function stuffToDraw(){
 		target.draw(display.ctx);
 		red.draw(display.ctx);	
 		player.draw(display.ctx);
-		display.ctx.fillStyle = "#fff";//text
+		display.ctx.fillStyle = "#000";//text
 		display.ctx.font = 'bold 15px sans-serif';
         display.ctx.textAlign = 'left';
 		display.ctx.fillText("Score:"+score,2,12);
