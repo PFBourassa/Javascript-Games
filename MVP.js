@@ -1,15 +1,53 @@
+//**********************************
 //MVP.js Created by Parker Bourassa
+//**********************************
+
+var player = addRect(200,150,40,40,'#F02FB6');
+var target = addRect(30,30,30,30,'#01fe31');
+var red = addRect((400-30),(300-30),30,30,'#fd1131');
+var game = 0;
+var score = 0;
+var then = Date.now();
+var foo = setInterval(frame, 1);//this doesn't effect framrate, only init.
+
+//Image Stuff
+var bgReady = false;
+var bgImage = new Image();
+bgImage.onload = function () {
+	bgReady = true;
+};
+bgImage.src = "background3.png";
+
+function loadPic(a){
+	var foo;
+	foo = new Image();
+	foo.src = a;
+	return foo;
+}
+
+var coinLinks = ["coin1.png","coin2.png","coin3.png","coin4.png"];
+var fishLeft = ["fish1.png"];
+var links = ["hero.png","hero2.png"];
+
+
+target.load(coinLinks);
+player.load(links);
 
 function stuffToDraw(){
-	if (game==1){
+	if (game == 1){
 		display.ctx.fillStyle = "#11f";
-		display.ctx.fillRect(0, 0, 400, 300);
+		if (bgReady) {
+			display.ctx.drawImage(bgImage, 0, 0);
+		}
+		else{
+			display.ctx.fillRect(0, 0, 400, 300);
+		}
 		target.draw(display.ctx);
-		player.draw(display.ctx);
 		red.draw(display.ctx);	
+		player.draw(display.ctx);
 		display.ctx.fillStyle = "#fff";//text
 		display.ctx.font = 'bold 15px sans-serif';
-        	display.ctx.textAlign = 'left';
+        display.ctx.textAlign = 'left';
 		display.ctx.fillText("Score:"+score,2,12);
 	}
 	else{
@@ -30,19 +68,43 @@ function stuffToDraw(){
 			display.ctx.fillText("Score:"+score,200,120);
 		}
 	}
-}
+};
 
 function Box() {
-    this.x = 0;//center points
-    this.y = 0;
-    this.w = 1;
-    this.h = 1;
-    this.fill = "#444";
-    this.draw = function(ctx) {
-        display.ctx.fillStyle = this.fill;
-        display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
-
-    };
+	this.ready = false;
+	this.pics = {};
+	this.state = 0;
+	this.x = 0;
+   	this.y = 0;
+   	this.w = 1;
+   	this.h = 1;
+	this.fill = "#444";
+	var $this = this;
+	this.load = function(array,name){
+		var foo = [];
+		for(var i = 0; i < array.length; i++){
+			foo.push(loadPic(array[i]));
+		}
+		$this.pics = foo;
+		$this.ready = true;
+	}
+	this.draw = function(ctx) {
+		if (this.ready) {
+			if(this.state < this.pics.length){
+				display.ctx.drawImage(this.pics[this.state], this.x - this.w/2, this.y-this.h/2);
+				this.state += 1;
+			}
+			else{
+				display.ctx.drawImage(this.pics[this.state-1], this.x - this.w/2, this.y-this.h/2);
+				this.state = 0;
+			}
+		}
+		else{
+        		display.ctx.fillStyle = this.fill;
+        		display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
+		
+		}
+	};
 }
 
 function addRect(x, y, w, h, fill) {
@@ -74,6 +136,7 @@ var update = function (modifier){
 	}
 	if (40 in keysDown && player.y < 280) {  //down
 		player.y +=256*modifier;
+		return false;
 	}
 	if (37 in keysDown && player.x > 20) {  // <-
 		player.x -=256*modifier;
@@ -84,7 +147,8 @@ var update = function (modifier){
 	//Collecting boxen
 	if (boxCollide(player,target)){
 		score += 1;
-		target = addRect(15+Math.random()*(400-30),15+Math.random()*(300-30),30,30,'#01fe31');
+		target.x = (15+Math.random()*(400-30));
+		target.y = (15+Math.random()*(300-30));
 	}
 	//red movement logic
 	if (player.x > red.x){
@@ -104,14 +168,21 @@ var update = function (modifier){
 	}
 };
 
+document.onkeydown = function(e) {
+    var k = e.keyCode;
+    if(k >= 37 && k <= 40) {
+        return false;
+    }
+}
+
 function myDown(e) {//100, 150, 200, 70
 	getMouse(e);
-	if (display.mx > 100 && display.mx < 300){
+	if ((display.my > 150 && display.my < 230 && display.mx>100 && display.mx < 300) && game==0){
 		reset();
 	}
 		
 }
-canvas.onmousedown = myDown;
+$("canvas").onmousedown = myDown;
 
 function frame (){
 	if (game == 1){
@@ -122,7 +193,7 @@ function frame (){
 		display.draw();
 	
 		then = now;
-		$("score").innerHTML = score;	
+		//$("score").innerHTML = score;	
 		//$("debug").innerHTML = 
 	}
 	if (game == 0){
@@ -135,14 +206,6 @@ function frame (){
 	}
 };
 
-var player= addRect(200,150,40,40,'#F02FB6');
-var target = addRect(30,30,30,30,'#01fe31');
-var red = addRect((400-30),(300-30),30,30,'#fd1131');
-var game=0;
-var score = 0;
-var then = Date.now();
-var foo = setInterval(frame, 1);
-
 function reset(){
 	player = addRect(200,150,40,40,'#F02FB6');
 	target = addRect(30,30,30,30,'#01fe31');
@@ -150,9 +213,13 @@ function reset(){
 	game = 1;// 1 for in-progress, 0 for menu
 	score = 0;
 	then = Date.now();
-	foo = setInterval(frame, 1);
+	foo = setInterval(frame, 50);//framerate
+	bgImage.onload = function () {
+		bgReady = true;
+	};
+	target.load(coinLinks);
+	player.load(links);
 }
 
 display.draw();
 //reset();
-
