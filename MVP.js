@@ -10,14 +10,6 @@ var score = 0;
 var then = Date.now();
 var foo = setInterval(frame, 1);//this doesn't effect framrate, only init.
 
-//Image Stuff
-var bgReady = false;
-var bgImage = new Image();
-bgImage.onload = function () {
-	bgReady = true;
-};
-bgImage.src = "STAGE.png";
-
 function loadPic(a){
 	var foo;
 	foo = new Image();
@@ -25,8 +17,10 @@ function loadPic(a){
 	return foo;
 }
 
+//Image Stuff
+var bgReady = false;
+var bgImage = loadPic("STAGE.png");
 var coinLinks = ["collectable.png"];
-//var fishLeft = ["fish1.png"];
 var links = ["player.png"];
 var badLinks = ["enemy.png"];
 
@@ -37,6 +31,7 @@ red.load(badLinks);
 function stuffToDraw(){
 	if (game == 1){
 		display.ctx.fillStyle = "#11f";
+		bgReady=true;
 		if (bgReady) {
 			display.ctx.drawImage(bgImage, 0, 0);
 		}
