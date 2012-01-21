@@ -139,6 +139,18 @@ var update = function (modifier){
 	if (39 in keysDown && player.x < 380) {  // ->
 		player.x +=256*modifier;
 	}
+	if (player.y < 20) {  //up
+		player.y =20;
+	}
+	if (player.y > 280) {  //down
+		player.y =280;
+	}
+	if (player.x < 20) {  // <-
+		player.x =20;
+	}
+	if (player.x > 380) {  // ->
+		player.x =380;
+	}
 	//Collecting boxen
 	if (boxCollide(player,target)){
 		score += 1;
