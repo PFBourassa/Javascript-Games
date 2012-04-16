@@ -1,6 +1,13 @@
 <!DOCTYPE HTML>
 <head>
 <script type="text/javascript" src="InputLib.js"></script>
+<style type="text/css">
+#game {background: #fff;
+  margin: 0 auto;
+  width: 400px;
+  padding: 100px;
+  text-align: center;}
+</style>
 
 </head>
 <body>
@@ -19,11 +26,13 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 </div>
 
-<canvas id="canvas" width="400" height="300">
+<div id="game">
+<canvas id="canvas" width="400" height="300" style="margin:0 auto;padding:0;">
     This text is displayed if your browser does not support HTML5 Canvas.
 </canvas>
 <p>Minumun Viable Product</p>
 <p>Arrow keys to move. Avoid the red block.</p>
+</div>
 
 <span id="debug"></span>
 <script type="text/javascript" src="MVP.js"></script>

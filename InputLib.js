@@ -1,5 +1,5 @@
 /****************************
-Input Library
+Input Library V.1
 ****************************/
 
 //document.createElement("canvas");

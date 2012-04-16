@@ -47,7 +47,7 @@ function stuffToDraw(){
 		display.ctx.fillText("Score:"+score,2,12);
 	}
 	else{
-		display.ctx.fillStyle = "#ff0";//background
+		display.ctx.fillStyle = "#f00";//background
 		display.ctx.fillRect(50, 50, 300, 200);
 		display.ctx.fillStyle = "#5fc23f";//Button
 		display.ctx.fillRect(100, 150, 200, 70);
@@ -55,7 +55,6 @@ function stuffToDraw(){
 		display.ctx.font = 'bold 50px sans-serif';
 		display.ctx.textAlign = 'center';
 		if (score == 0){
-			//display.ctx.fillStyle = "#000";//text
 			display.ctx.fillText("Play",200,200);
 			display.ctx.fillText("M.V.P.",200,120);
 		}
@@ -139,7 +138,7 @@ var update = function (modifier){
 	if (39 in keysDown && player.x < 380) {  // ->
 		player.x +=256*modifier;
 	}
-	if (player.y < 20) {  //up
+	if (player.y < 20) {  //prevent jumping off screen
 		player.y =20;
 	}
 	if (player.y > 280) {  //down
@@ -158,31 +157,25 @@ var update = function (modifier){
 		target.y = (15+Math.random()*(300-30));
 	}
 	//red movement logic
-	if (player.x > red.x){
-		red.x += 100* modifier;
-	}
-	if (player.x < red.x){
-		red.x -= 100* modifier;
-	}
-	if (player.y > red.y){
-		red.y += 100* modifier;
-	}
-	if (player.y < red.y){
-		red.y -= 100* modifier;
-	}
-	if (boxCollide(player, red)){
-		game = 0;
-	}
+	
+		if (player.x > red.x){
+			red.x += 100* modifier;
+		}
+		if (player.x < red.x){
+			red.x -= 100* modifier;
+		}
+		if (player.y > red.y){
+			red.y += 100* modifier;
+		}
+		if (player.y < red.y){
+			red.y -= 100* modifier;
+		}
+		if (boxCollide(player, red)){
+			game = 0;
+		}
+	
 };
 
-/*
-document.onkeydown = function(e) {
-    var k = e.keyCode;
-    if(k >= 37 && k <= 40) {
-        return false;
-    }
-}
-*/
 function myDown(e) {//100, 150, 200, 70
 	getMouse(e);
 	if ((display.my > 150 && display.my < 230 && display.mx>100 && display.mx < 300) && game==0){
