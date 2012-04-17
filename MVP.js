@@ -47,7 +47,7 @@ function stuffToDraw(){
 		display.ctx.fillText("Score:"+score,2,12);
 	}
 	else{
-		display.ctx.fillStyle = "#f00";//background
+		display.ctx.fillStyle = "#f70";//background
 		display.ctx.fillRect(50, 50, 300, 200);
 		display.ctx.fillStyle = "#5fc23f";//Button
 		display.ctx.fillRect(100, 150, 200, 70);
