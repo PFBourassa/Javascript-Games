@@ -1,26 +1,32 @@
-function slope(p1,p2){
-	var a = p1.y - p2.y;
-	var b = p1.x - p2.x;
-	var slope = arctan(a/b);
+function angleOf(p1,p2){
+    var a = p2.y - p1.y;
+	var b = p2.x - p1.x;
+	var s = Math.atan(a/b)*180/Math.PI;
+    //return s;
 	if (a > 0){
-		if (b > 0){//I
-			return slope;
+        if (b > 0){//I
+			return s;
 		}
-		if (b < 0){//II
-			return -1*slope;
-				}
-		else{//straight up or down
-			return undefined;
-		}
-	if (a < 0 ){
-		if (b > 0 ){//IV
-			return -1*slope;
-		}
-		if (b < 0){//III
-			return slope;
-		}
-		else{
-			return 0;
+		else if (b < 0){//II
+			return 90-s;
 		}
 	}
+	if (a < 0 ){
+        if (b > 0 ){//IV
+			return 270+s;
+		}
+		else if (b < 0){//III
+			return 180+s;
+		}
+	}
+    if (a===0){
+        return 0;
+    }
 }
+
+function midpoint(p1,p2){
+    var a = p2.y - p1.y;
+    var b = p2.x - p1.x;
+    return Math.sqrt(a*a+b*b);
+}
+
