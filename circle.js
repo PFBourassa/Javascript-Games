@@ -12,7 +12,7 @@ function Box() {
     this.fill = "#444";
     this.draw = function(ctx) {
         display.ctx.fillStyle = this.fill;
-        display.ctx.fillRect(this.x, this.y, this.h, this.w);
+        display.ctx.fillRect(this.x-10, this.y-10, this.h, this.w);
 
     };
 }
@@ -66,7 +66,7 @@ var display = {
                 if (display.mySel != null) {
                     this.ctx.strokeStyle = "#f00";
                     this.ctx.lineWidth = 3;
-                    this.ctx.strokeRect(display.mySel.x,display.mySel.y,display.mySel.w,display.mySel.h);
+                    this.ctx.strokeRect(display.mySel.x-10,display.mySel.y-10,display.mySel.w,display.mySel.h);
                 }
                 this.valid = true;
             }
@@ -79,7 +79,7 @@ function myDown(e) {
     getMouse(e);
     var l = boxes.length;
     for (var i = l - 1; i >= 0; i--) {
-        if ((display.mx > boxes[i].x && display.mx < boxes[i].x + boxes[i].w)&&(display.my > boxes[i].y && display.my < boxes[i].y + boxes[i].h)) {
+        if ((display.mx > boxes[i].x-10 && display.mx < boxes[i].x-10 + boxes[i].w)&&(display.my > boxes[i].y && display.my < boxes[i].y + boxes[i].h)) {
             display.mySel = boxes[i];
             display.offsetx = display.mx - display.mySel.x;
             display.offsety = display.my - display.mySel.y;
