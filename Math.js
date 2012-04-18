@@ -43,7 +43,7 @@ function midpoint(p1,p2){
 }
 
 function cross(y1,m1,x1,y2,m2,x2){
-    var a = (((m2)*(x2-x1+(y1/m1))-y2)/((m2/m1)-1));//(m2(x2-x1+(y1/m1))-y2)/((m2/m1)-1);
+    var a = (((m2)*(x2-x1+(y1/m1))-y2)/((m2/m1)-1));
 	var b = ((a-y1)/m1)+x1;
     return {x:a,y:b,r:30};
 }
