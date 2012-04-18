@@ -112,6 +112,7 @@ function myMove(e){
 	var midAB = midpoint(boxes[0],boxes[1]);//{x:1,y:3}
 	var BC = (-1/slopeOf(boxes[1],boxes[2]));
 	var midBC = midpoint(boxes[1],boxes[2]);
+	//var rad = distance(boxes[0],center);
 	center = cross(midAB.y, AB, midAB.x, midBC.y, BC, midBC.x);//{x:75,y:75,r:20};
     // something is changing position so we better invalidate the canvas!
     invalidate();
