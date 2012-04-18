@@ -24,14 +24,26 @@ function angleOf(p1,p2){
     }
 }
 
-function midpoint(p1,p2){
+function slopeOf(p1,p2){//y-intercept
+    var a = p2.y - p1.y;
+	var b = p2.x - p1.x;
+	return a/b;
+}
+
+function distance(p1,p2){
     var a = p2.y - p1.y;
     var b = p2.x - p1.x;
     return Math.sqrt(a*a+b*b);
 }
 
-function cross(m1,b1,m2,b2){
-    var x = (b2-b1)/(m1-m2);
-    var y = m1*x +b1;
-    return x+","+y;
+function midpoint(p1,p2){
+    var a = (p2.y + p1.y)/2;
+    var b = (p2.x + p1.x)/2;
+	return {x:a,y:b};
+}
+
+function cross(y1,m1,x1,y2,m2,x2){
+    var a = (((m2)*(x2-x1+(y1/m1))-y2)/((m2/m1)-1));//(m2(x2-x1+(y1/m1))-y2)/((m2/m1)-1);
+	var b = ((a-y1)/m1)+x1;
+    return {x:a,y:b,r:30};
 }
