@@ -30,3 +30,8 @@ function midpoint(p1,p2){
     return Math.sqrt(a*a+b*b);
 }
 
+function cross(m1,b1,m2,b2){
+    var x = (b2-b1)/(m1-m2);
+    var y = m1*x +b1;
+    return x+","+y;
+}
