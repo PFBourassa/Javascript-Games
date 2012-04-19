@@ -28,52 +28,28 @@ function addRect(x, y, w, h, fill) {
     invalidate();
 }
 
-var display = {
-    canvas: 0,
-    valid: false,
-    ctx: 0,
-    width: 0,
-    height: 0,
-    isDrag: false,
-    mx: 0,
-    my: 0,
-    mySel: null,
-    offsetx: 0,
-    offsety: 0,
-    getCtx: function() {
-        var elemt = document.getElementById('canvas');
-        if (elemt && elemt.getContext) {
-            this.ctx = elemt.getContext('2d');
-        }
-    },
-    draw: function() {
-        this.getCtx();
-        if (this.ctx) {
-            if (this.valid === false) {
-                this.ctx.fillStyle = "#11f";
-                this.ctx.fillRect(0, 0, 400, 300);
-				
-				this.ctx.fillStyle = "#000";
-				this.ctx.beginPath();
-				this.ctx.arc( center.x, center.y, center.r, 0, Math.PI*2, true);
-				this.ctx.closePath();
-				this.ctx.fill();
-				
-                var l = boxes.length;
-                for (var i = 0; i < l; i++) {
-                    boxes[i].draw(this.ctx);
-                }
-                if (display.mySel != null) {
-                    this.ctx.strokeStyle = "#f00";
-                    this.ctx.lineWidth = 3;
-                    this.ctx.strokeRect(display.mySel.x-10,display.mySel.y-10,display.mySel.w,display.mySel.h);
-                }
-                this.valid = true;
-            }
-        }
+
+function stuffToDraw() {
+    display.ctx.fillStyle = "#11f";
+    display.ctx.fillRect(0, 0, 400, 300);
+	display.ctx.fillStyle = "#000";
+	display.ctx.beginPath();
+	display.ctx.arc( center.x, center.y, center.r, 0, Math.PI*2, true);
+	display.ctx.closePath();
+	display.ctx.fill();	
+	var l = boxes.length;
+    for (var i = 0; i < l; i++) {
+        boxes[i].draw(display.ctx);
+    }
+    if (display.mySel != null) {
+        display.ctx.strokeStyle = "#f00";
+        display.ctx.lineWidth = 3;
+        display.ctx.strokeRect(display.mySel.x-10,display.mySel.y-10,display.mySel.w,display.mySel.h);
+    }
+    display.valid = true;
     }
 
-};
+
 
 function myDown(e) {
     getMouse(e);
