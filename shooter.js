@@ -1,5 +1,5 @@
 //**********************************
-//MVP.js Created by Parker Bourassa
+//Shooter.js Created by Parker Bourassa
 //**********************************
 
 var player = addRect(200,150,40,40,'#F02FB6');
@@ -9,6 +9,8 @@ var game = 0;
 var score = 0;
 var then = Date.now();
 var foo = setInterval(frame, 1);//this doesn't effect framrate, only init.
+var height = $("canvas").height;
+var width = $("canvas").width;
 
 function loadPic(a){
 	var foo;
@@ -32,11 +34,11 @@ function stuffToDraw(){
 	if (game == 1){
 		display.ctx.fillStyle = "#11f";
 		bgReady=true;
-		if (bgReady) {
+		if (false) {
 			display.ctx.drawImage(bgImage, 0, 0);
 		}
 		else{
-			display.ctx.fillRect(0, 0, 400, 300);
+			display.ctx.fillRect(0, 0, width, height);
 		}
 		target.draw(display.ctx);
 		red.draw(display.ctx);	
@@ -56,7 +58,7 @@ function stuffToDraw(){
 		display.ctx.textAlign = 'center';
 		if (score == 0){
 			display.ctx.fillText("Play",200,200);
-			display.ctx.fillText("M.V.P.",200,120);
+			display.ctx.fillText("Shooter",200,120);
 		}
 		if (score > 0){
 			display.ctx.fillText("Again",200,200);
