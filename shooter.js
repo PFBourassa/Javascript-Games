@@ -42,7 +42,7 @@ function stuffToDraw(){
 			display.ctx.fillRect(0, 0, display.width, display.height);
 		}
 		target.draw(display.ctx);
-		red.draw(display.ctx);	
+		//red.draw(display.ctx);	
 		player.draw(display.ctx);
 		display.ctx.fillStyle = "#000";//text
 		display.ctx.font = 'bold 15px sans-serif';
@@ -129,35 +129,35 @@ return false;
 
 var update = function (modifier){
 	//Player movement
-	if (38 in keysDown && player.y > 20) {  //up
+	if (38 in keysDown && player.y > player.h/2) {  //up
 		player.y -=256*modifier;
 	}
-	if (40 in keysDown && player.y < display.height-20) {  //down
+	if (40 in keysDown && player.y < display.height-player.h/2) {  //down
 		player.y +=256*modifier;
 	}
-	if (37 in keysDown && player.x > 20) {  // <-
+	if (37 in keysDown && player.x > player.w/2) {  // <-
 		player.x -=256*modifier;
 	}
-	if (39 in keysDown && player.x < display.width-20) {  // ->
+	if (39 in keysDown && player.x < display.width-player.w/2) {  // ->
 		player.x +=256*modifier;
 	}
-	if (player.y < 20) {  //prevent jumping off screen
-		player.y =20;
+	if (player.y < player.h/2) {  //prevent jumping off screen
+		player.y =player.h/2;
 	}
-	if (player.y > display.height-20) {  //down
-		player.y = display.height-20;
+	if (player.y > display.height-player.h/2) {  //down
+		player.y = display.height-player.h/2;
 	}
-	if (player.x < 20) {  // <-
-		player.x =20;
+	if (player.x < player.w/2) {  // <-
+		player.x =player.w/2;
 	}
-	if (player.x > display.width-20) {  // ->
-		player.x = display.width-20;
+	if (player.x > display.width-player.w/2) {  // ->
+		player.x = display.width-player.w/2;
 	}
 	//Collecting boxen
 	if (boxCollide(player,target)){
 		score += 1;
-		target.x = (15+Math.random()*(400-30));
-		target.y = (15+Math.random()*(300-30));
+		target.x = (415+Math.random()*(400-30));
+		target.y = (15+Math.random()*(600-30));
 	}
 	//red movement logic
 	/*
@@ -210,7 +210,7 @@ function frame (){
 	}
 };
 
-function reset(){
+function reset(){ //TODO fix this by abstracting from global
 	player = addRect(200,150,64,64,'#F02FB6');
 	target = addRect(30,30,30,30,'#01fe31');
 	red = addRect((400-30),(300-30),30,30,'#fd1131');
