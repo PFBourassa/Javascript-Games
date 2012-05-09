@@ -31,8 +31,11 @@ var display = {
             }
         }
 	this.getCtx();
-    }
-
+    },
+	init: function() {
+		this.width = $("canvas").width;
+		this.height = $("canvas").height;
+	}
 };
 
 //TODO init function for canvas x,y size.

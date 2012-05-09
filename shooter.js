@@ -2,8 +2,8 @@
 //Shooter.js Created by Parker Bourassa
 //**********************************
 
-var player = addRect(200,150,40,40,'#F02FB6');
-var target = addRect(30,30,30,30,'#01fe31');
+var player = addRect(200, 200, 64, 64, '#FFC02B');
+var target = addRect(30,30,64,64,'#01fe31');
 var red = addRect((400-30),(300-30),30,30,'#fd1131');
 var game = 0;
 var score = 0;
@@ -11,6 +11,7 @@ var then = Date.now();
 var foo = setInterval(frame, 1);//this doesn't effect framrate, only init.
 var height = $("canvas").height;
 var width = $("canvas").width;
+display.init();
 
 function loadPic(a){
 	var foo;
@@ -20,15 +21,15 @@ function loadPic(a){
 }
 
 //Image Stuff
-var bgReady = false;
-var bgImage = loadPic("STAGE.png");
-var coinLinks = ["collectable.png"];
-var links = ["player.png"];
-var badLinks = ["enemy.png"];
+//var bgReady = false;
+//var bgImage = loadPic("STAGE.png");
+//var coinLinks = ["collectable.png"];
+//var links = ["player.png"];
+//var badLinks = ["enemy.png"];
 
-target.load(coinLinks);
-player.load(links);
-red.load(badLinks);
+//target.load(coinLinks);
+//player.load(links);
+//red.load(badLinks);
 
 function stuffToDraw(){
 	if (game == 1){
@@ -38,7 +39,7 @@ function stuffToDraw(){
 			display.ctx.drawImage(bgImage, 0, 0);
 		}
 		else{
-			display.ctx.fillRect(0, 0, width, height);
+			display.ctx.fillRect(0, 0, display.width, display.height);
 		}
 		target.draw(display.ctx);
 		red.draw(display.ctx);	
@@ -57,7 +58,7 @@ function stuffToDraw(){
 		display.ctx.font = 'bold 50px sans-serif';
 		display.ctx.textAlign = 'center';
 		if (score == 0){
-			display.ctx.fillText("Play",200,200);
+			display.ctx.fillText("Poop",200,200);
 			display.ctx.fillText("Shooter",200,120);
 		}
 		if (score > 0){
@@ -84,9 +85,9 @@ function Box() {
 		}
 		$this.pics = foo;
 		$this.ready = true;
-	}
+	};//NEW COMMENT
 	this.draw = function(ctx) {
-		if (this.ready) {
+		if ($this.ready) {
 			if(this.state < this.pics.length){
 				display.ctx.drawImage(this.pics[this.state], this.x - this.w/2, this.y-this.h/2);
 				this.state += 1;
@@ -97,8 +98,8 @@ function Box() {
 			}
 		}
 		else{
-        		display.ctx.fillStyle = this.fill;
-        		display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
+        		display.ctx.fillStyle = $this.fill;
+        		display.ctx.fillRect($this.x-$this.w/2, $this.y-$this.h/2, $this.h, $this.w);
 		
 		}
 	};
@@ -131,26 +132,26 @@ var update = function (modifier){
 	if (38 in keysDown && player.y > 20) {  //up
 		player.y -=256*modifier;
 	}
-	if (40 in keysDown && player.y < 280) {  //down
+	if (40 in keysDown && player.y < display.height-20) {  //down
 		player.y +=256*modifier;
 	}
 	if (37 in keysDown && player.x > 20) {  // <-
 		player.x -=256*modifier;
 	}
-	if (39 in keysDown && player.x < 380) {  // ->
+	if (39 in keysDown && player.x < display.width-20) {  // ->
 		player.x +=256*modifier;
 	}
 	if (player.y < 20) {  //prevent jumping off screen
 		player.y =20;
 	}
-	if (player.y > 280) {  //down
-		player.y =280;
+	if (player.y > display.height-20) {  //down
+		player.y = display.height-20;
 	}
 	if (player.x < 20) {  // <-
 		player.x =20;
 	}
-	if (player.x > 380) {  // ->
-		player.x =380;
+	if (player.x > display.width-20) {  // ->
+		player.x = display.width-20;
 	}
 	//Collecting boxen
 	if (boxCollide(player,target)){
@@ -159,7 +160,7 @@ var update = function (modifier){
 		target.y = (15+Math.random()*(300-30));
 	}
 	//red movement logic
-	
+	/*
 		if (player.x > red.x){
 			red.x += 100* modifier;
 		}
@@ -175,7 +176,7 @@ var update = function (modifier){
 		if (boxCollide(player, red)){
 			game = 0;
 		}
-	
+	*/
 };
 
 function myDown(e) {//100, 150, 200, 70
@@ -210,7 +211,7 @@ function frame (){
 };
 
 function reset(){
-	player = addRect(200,150,40,40,'#F02FB6');
+	player = addRect(200,150,64,64,'#F02FB6');
 	target = addRect(30,30,30,30,'#01fe31');
 	red = addRect((400-30),(300-30),30,30,'#fd1131');
 	game = 1;// 1 for in-progress, 0 for menu
