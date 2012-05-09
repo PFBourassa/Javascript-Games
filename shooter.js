@@ -2,16 +2,13 @@
 //Shooter.js Created by Parker Bourassa
 //**********************************
 
-var player = addRect(200, 200, 64, 64, '#FFC02B');
-var target = addRect(30,30,64,64,'#01fe31');
-var red = addRect((400-30),(300-30),30,30,'#fd1131');
+var player;// = addRect(200, 200, 64, 64, '#FFC02B');
+var target;// = addRect(30,30,64,64,'#01fe31');
+var red ;//= addRect((400-30),(300-30),30,30,'#fd1131');
 var game = 0;
-var score = 0;
-var then = Date.now();
-var foo = setInterval(frame, 1);//this doesn't effect framrate, only init.
-var height = $("canvas").height;
-var width = $("canvas").width;
-display.init();
+var score ;//= 0;
+var then ;//= Date.now();
+
 
 function loadPic(a){
 	var foo;
@@ -226,5 +223,7 @@ function reset(){ //TODO fix this by abstracting from global
 	red.load(badLinks);
 }
 
+var foo = setInterval(frame, 1);//this doesn't effect framrate, only init.
+display.init();
 display.draw();
-//reset();
+reset();
