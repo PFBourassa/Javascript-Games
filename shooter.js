@@ -25,7 +25,7 @@ function shoot(x,y){
  return foo;
 }
 Bullet.prototype = new Box();
-bullet = shoot(1,2);//new Bullet(100,100);//Why is this neccessary?
+//bullet = new Box;//shoot(1,2);//new Bullet(100,100);//Why is this neccessary?
 
 function loadPic(a){
 	var foo;
@@ -174,12 +174,12 @@ var update = function (modifier){
 		player.x = display.width-player.w/2;
 	}
 	//Collecting boxen
-	if (bullet.x &&boxCollide(bullet,target)){
+	if (bullet instanceof Box && boxCollide(bullet,target)){//bullet.x && boxCollide(bullet,target)){
 		score += 1;
 		target.x = (415+Math.random()*(400-30));
 		target.y = (15+Math.random()*(600-30));
 	}
-	if(bullet.move){
+	if(bullet instanceof Box){
 		bullet.move();
 	}
 	//red movement logic
