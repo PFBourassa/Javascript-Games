@@ -9,7 +9,7 @@ var red ;//= addRect((400-30),(300-30),30,30,'#fd1131');
 var score ;//= 0;
 var then ;//= Date.now();
 
-var bullet;
+var bullet=[];
 
 function Bullet(){
 	var speed = 10;
@@ -25,7 +25,7 @@ function shoot(x,y){
  return foo;
 }
 Bullet.prototype = new Box();
-//bullet = new Box;//shoot(1,2);//new Bullet(100,100);//Why is this neccessary?
+//bullet[0] = new Box;//shoot(1,2);//new Bullet(100,100);//Why is this neccessary?
 
 function loadPic(a){
 	var foo;
@@ -58,8 +58,8 @@ function stuffToDraw(){
 		target.draw(display.ctx);
 		//red.draw(display.ctx);	
 		player.draw(display.ctx);
-		if (true){
-			bullet.draw(display.ctx);
+		if (bullet[0] instanceof Box){
+			bullet[0].draw(display.ctx);
 		}
 		display.ctx.fillStyle = "#000";//text
 		display.ctx.font = 'bold 15px sans-serif';
@@ -159,7 +159,7 @@ var update = function (modifier){
 		player.x +=256*modifier;
 	}
 	if (32 in keysDown) {  // Space Bar
-		bullet = shoot(player.x,player.y);//Make discrete
+		bullet[0] = shoot(player.x,player.y);//Make discrete
 	}
 	if (player.y < player.h/2) {  //prevent jumping off screen
 		player.y =player.h/2;
@@ -174,13 +174,13 @@ var update = function (modifier){
 		player.x = display.width-player.w/2;
 	}
 	//Collecting boxen
-	if (bullet instanceof Box && boxCollide(bullet,target)){//bullet.x && boxCollide(bullet,target)){
+	if (bullet[0] instanceof Box && boxCollide(bullet[0],target)){//bullet[0].x && boxCollide(bullet[0],target)){
 		score += 1;
 		target.x = (415+Math.random()*(400-30));
 		target.y = (15+Math.random()*(600-30));
 	}
-	if(bullet instanceof Box){
-		bullet.move();
+	if(bullet[0] instanceof Box){
+		bullet[0].move();
 	}
 	//red movement logic
 	/*
@@ -253,4 +253,4 @@ var foo = setInterval(frame, 1);//this doesn't effect framrate, only init.
 display.init();
 display.draw();
 reset();
-//document.getElementById("debug").innerHTML = (bullet instanceof Box);
+//document.getElementById("debug").innerHTML = (bullet[0] instanceof Box);
