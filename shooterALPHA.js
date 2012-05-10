@@ -25,7 +25,7 @@ function shoot(x,y){
  return foo;
 }
 Bullet.prototype = new Box();
-bullet = shoot(1,2);//new Bullet(100,100);//Why is this neccessary?
+bullet = new Bullet(100,100);//Why is this neccessary?
 
 function loadPic(a){
 	var foo;
@@ -48,17 +48,17 @@ function loadPic(a){
 function stuffToDraw(){
 	if (game == 1){
 		display.ctx.fillStyle = "#11f";
-		//bgReady=true;
+		bgReady=true;
 		if (false) {
 			display.ctx.drawImage(bgImage, 0, 0);
 		}
-		if (true) {
+		else{
 			display.ctx.fillRect(0, 0, display.width, display.height);
 		}
 		target.draw(display.ctx);
 		//red.draw(display.ctx);	
 		player.draw(display.ctx);
-		if (true){
+		if (bullet.fill){
 			bullet.draw(display.ctx);
 		}
 		display.ctx.fillStyle = "#000";//text
@@ -174,14 +174,12 @@ var update = function (modifier){
 		player.x = display.width-player.w/2;
 	}
 	//Collecting boxen
-	if (bullet.x &&boxCollide(bullet,target)){
+	if (boxCollide(bullet,target)){
 		score += 1;
 		target.x = (415+Math.random()*(400-30));
 		target.y = (15+Math.random()*(600-30));
 	}
-	if(bullet.move){
-		bullet.move();
-	}
+	bullet.move();
 	//red movement logic
 	/*
 		if (player.x > red.x){
