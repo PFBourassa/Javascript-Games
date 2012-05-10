@@ -5,10 +5,27 @@
 var player;// = addRect(200, 200, 64, 64, '#FFC02B');
 var target;// = addRect(30,30,64,64,'#01fe31');
 var red ;//= addRect((400-30),(300-30),30,30,'#fd1131');
-var game = 0;
+
 var score ;//= 0;
 var then ;//= Date.now();
 
+var bullet;
+
+function Bullet(){
+	var speed = 10;
+	this.move = function(){
+		this.x += speed;
+	};
+}
+
+function shoot(x,y){
+ var foo = new Bullet();
+ foo.x = x;
+ foo.y = y;
+ return foo;
+}
+Bullet.prototype = new Box();
+bullet = new Bullet(100,100);//Why is this neccessary?
 
 function loadPic(a){
 	var foo;
@@ -41,12 +58,15 @@ function stuffToDraw(){
 		target.draw(display.ctx);
 		//red.draw(display.ctx);	
 		player.draw(display.ctx);
+		if (bullet.fill){
+			bullet.draw(display.ctx);
+		}
 		display.ctx.fillStyle = "#000";//text
 		display.ctx.font = 'bold 15px sans-serif';
         display.ctx.textAlign = 'left';
 		display.ctx.fillText("Score:"+score,2,12);
 	}
-	else{
+	if (game ===0){
 		display.ctx.fillStyle = "#f70";//background
 		display.ctx.fillRect(50, 50, 300, 200);
 		display.ctx.fillStyle = "#5fc23f";//Button
@@ -55,7 +75,7 @@ function stuffToDraw(){
 		display.ctx.font = 'bold 50px sans-serif';
 		display.ctx.textAlign = 'center';
 		if (score == 0){
-			display.ctx.fillText("Poop",200,200);
+			display.ctx.fillText("Play",200,200);
 			display.ctx.fillText("Shooter",200,120);
 		}
 		if (score > 0){
@@ -71,9 +91,9 @@ function Box() {
 	this.state = 0;
 	this.x = 0;
    	this.y = 0;
-   	this.w = 1;
-   	this.h = 1;
-	this.fill = "#444";
+   	this.w = 10;
+   	this.h = 10;
+	this.fill = "#fff";
 	var $this = this;
 	this.load = function(array){
 		var foo = [];
@@ -84,7 +104,7 @@ function Box() {
 		$this.ready = true;
 	};//NEW COMMENT
 	this.draw = function(ctx) {
-		if ($this.ready) {
+		if (this.ready) {
 			if(this.state < this.pics.length){
 				display.ctx.drawImage(this.pics[this.state], this.x - this.w/2, this.y-this.h/2);
 				this.state += 1;
@@ -95,8 +115,8 @@ function Box() {
 			}
 		}
 		else{
-        		display.ctx.fillStyle = $this.fill;
-        		display.ctx.fillRect($this.x-$this.w/2, $this.y-$this.h/2, $this.h, $this.w);
+        		display.ctx.fillStyle = this.fill;
+        		display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
 		
 		}
 	};
@@ -138,6 +158,9 @@ var update = function (modifier){
 	if (39 in keysDown && player.x < display.width-player.w/2) {  // ->
 		player.x +=256*modifier;
 	}
+	if (32 in keysDown) {  // Space Bar
+		bullet = shoot(player.x,player.y);//Make discrete
+	}
 	if (player.y < player.h/2) {  //prevent jumping off screen
 		player.y =player.h/2;
 	}
@@ -151,11 +174,12 @@ var update = function (modifier){
 		player.x = display.width-player.w/2;
 	}
 	//Collecting boxen
-	if (boxCollide(player,target)){
+	if (boxCollide(bullet,target)){
 		score += 1;
 		target.x = (415+Math.random()*(400-30));
 		target.y = (15+Math.random()*(600-30));
 	}
+	bullet.move();
 	//red movement logic
 	/*
 		if (player.x > red.x){
@@ -209,8 +233,8 @@ function frame (){
 
 function reset(){ //TODO fix this by abstracting from global
 	player = addRect(200,150,64,64,'#F02FB6');
-	target = addRect(30,30,30,30,'#01fe31');
-	red = addRect((400-30),(300-30),30,30,'#fd1131');
+	target = addRect(330,220,30,30,'#01fe31');
+	//red = addRect((400-30),(300-30),30,30,'#fd1131');
 	game = 1;// 1 for in-progress, 0 for menu
 	score = 0;
 	then = Date.now();
@@ -222,8 +246,9 @@ function reset(){ //TODO fix this by abstracting from global
 	player.load(links);
 	red.load(badLinks);
 }
-
+var game = 0;
 var foo = setInterval(frame, 1);//this doesn't effect framrate, only init.
 display.init();
 display.draw();
 reset();
+//document.getElementById("debug").innerHTML = (bullet instanceof Box);
