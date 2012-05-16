@@ -8,6 +8,7 @@ var red ;//= addRect((400-30),(300-30),30,30,'#fd1131');
 
 var score ;//= 0;
 var then ;//= Date.now();
+var start = Date.now();
 
 var bullet=[];
 
@@ -204,6 +205,9 @@ var update = function (modifier){
 			game = 0;
 		}
 	*/
+	var now = Date.now();
+	if (true){
+	}
 };
 
 function myDown(e) {//100, 150, 200, 70
