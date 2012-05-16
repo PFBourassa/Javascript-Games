@@ -1,3 +1,15 @@
+function Point(x,y){
+	this.x = x;
+	this.y = y;
+}
+
+function addPoints(p1,p2){
+	var p3;
+	p3.x = p1.x+p2.x;
+	p3.y = p1.y+p2.y;
+	return p3;
+}
+
 function angleOf(p1,p2){
     var a = p2.y - p1.y;
 	var b = p2.x - p1.x;

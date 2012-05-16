@@ -47,7 +47,7 @@ function stuffToDraw() {
         display.ctx.strokeRect(display.mySel.x-10,display.mySel.y-10,display.mySel.w,display.mySel.h);
     }
     display.valid = true;
-    }
+}
 
 
 
@@ -105,12 +105,10 @@ function poop(){
     display.draw();
 }
 
-
-
 setInterval(poop, 20);
-addRect(200, 200, 20, 20, '#FFC02B');
-addRect(100, 200, 20, 20, '#C0FF2B');
-addRect(200, 100, 20, 20, '#FF2BC0');
+addRect(200, 200, 64, 64, '#FFC02B');
+addRect(100, 200, 16, 16, '#C0FF2B');
+addRect(200, 100, 32, 32, '#FF2BC0');
 
 canvas.onmousedown = myDown;
 canvas.onmouseup = myUp;
