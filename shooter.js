@@ -206,7 +206,9 @@ var update = function (modifier){
 		}
 	*/
 	var now = Date.now();
-	if (true){
+	var clock = (Math.round((Date.now - start)/1000));
+	if (now > then){
+	$("debug").innerHTML = (Math.round((now - start)/1000));
 	}
 };
 
