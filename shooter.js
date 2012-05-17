@@ -18,6 +18,17 @@ function Bullet(){
 		this.x += speed;
 	};
 }
+Bullet.prototype = new Box();
+
+function Ship(){
+	var wait;
+	var position;
+	var xFreq;
+	var xAmp;
+	var yFreq;
+	var yAmp;
+}
+Ship.prototype = new Box();
 
 function shoot(x,y){
  var foo = new Bullet();
@@ -25,7 +36,7 @@ function shoot(x,y){
  foo.y = y;
  return foo;
 }
-Bullet.prototype = new Box();
+
 //bullet[0] = new Box;//shoot(1,2);//new Bullet(100,100);//Why is this neccessary?
 
 function loadPic(a){
