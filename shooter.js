@@ -1,7 +1,9 @@
 //**********************************
 //Shooter.js Created by Parker Bourassa
 //**********************************
+//TODO privatize more variables.
 
+//var static{//Change these to not be global 
 var player;// = addRect(200, 200, 64, 64, '#FFC02B');
 var target;// = addRect(30,30,64,64,'#01fe31');
 var red ;//= addRect((400-30),(300-30),30,30,'#fd1131');
@@ -9,8 +11,8 @@ var red ;//= addRect((400-30),(300-30),30,30,'#fd1131');
 var score ;//= 0;
 var then ;//= Date.now();
 var start = Date.now();
-
 var bullet=[];
+var enemy = [];
 
 function Box() {
 	this.ready = false;
@@ -57,13 +59,22 @@ function Bullet(){
 }
 Bullet.prototype = new Box();
 
-function Ship(){
+//addRect(330,220,30,30,'#01fe31');
+function Ship(x,y,w,h){
+	this.x = 0;
+   	this.y = 0;
+   	this.w = 10;
+   	this.h = 10;
+	this.fill = "#000";
 	var wait;
-	var position;//(x,y)
+	var position;
 	var xFreq;
 	var xAmp;
 	var yFreq;
 	var yAmp;
+	this.kill = function(){
+		
+	}
 }
 Ship.prototype = new Box();
 
@@ -104,7 +115,12 @@ function stuffToDraw(){
 		if (true) {
 			display.ctx.fillRect(0, 0, display.width, display.height);
 		}
-		target.draw(display.ctx);
+		//target.draw(display.ctx);
+		for (i=0;i<enemy.length;i++){
+			if (enemy[i] instanceof Box){
+				enemy[i].draw(display.ctx);
+			}
+		}
 		//red.draw(display.ctx);	
 		player.draw(display.ctx);
 		for (i=0;i<bullet.length;i++){
@@ -127,7 +143,7 @@ function stuffToDraw(){
 		display.ctx.textAlign = 'center';
 		if (score == 0){
 			display.ctx.fillText("Play",200,200);
-			display.ctx.fillText("Shooter",200,120);
+			display.ctx.fillText("Shooter",200,120);//make these boxes
 		}
 		if (score > 0){
 			display.ctx.fillText("Again",200,200);
@@ -189,33 +205,14 @@ var update = function (modifier){
 	}
 	//Collecting boxen
 	for (i=0;i<bullet.length;i++){
-	if (bullet[i] instanceof Box && boxCollide(bullet[i],target)){//bullet[0].x && boxCollide(bullet[0],target)){
-		score += 1;
-		target.x = (415+Math.random()*(400-30));
-		target.y = (15+Math.random()*(600-30));
+		if (bullet[i] instanceof Box && boxCollide(bullet[i],enemy[0])){//create new target when one gets hit
+			score += 1;
+			//enemy[0].kill;
+		}
+		if(bullet[i] instanceof Box){
+			bullet[i].move();
+		}
 	}
-	if(bullet[i] instanceof Box){
-		bullet[i].move();
-	}
-	}
-	//red movement logic
-	/*
-		if (player.x > red.x){
-			red.x += 100* modifier;
-		}
-		if (player.x < red.x){
-			red.x -= 100* modifier;
-		}
-		if (player.y > red.y){
-			red.y += 100* modifier;
-		}
-		if (player.y < red.y){
-			red.y -= 100* modifier;
-		}
-		if (boxCollide(player, red)){
-			game = 0;
-		}
-	*/
 	var now = Date.now();
 	var clock = (Math.round((Date.now - start)/1000));
 	if (now > then){
@@ -254,7 +251,7 @@ function frame (){
 function reset(){ //TODO fix this by abstracting from global
 	player = addRect(200,150,64,64,'#F02FB6');
 	target = addRect(330,220,30,30,'#01fe31');
-	//red = addRect((400-30),(300-30),30,30,'#fd1131');
+	enemy[0] = addRect(330,220,30,30,'#01fe31');//new Ship(430,320,30,30);
 	game = 1;// 1 for in-progress, 0 for menu
 	score = 0;
 	then = Date.now();
