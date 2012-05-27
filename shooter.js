@@ -222,7 +222,9 @@ var update = function (modifier){
 	}
 	//Collecting boxen
 	
-	if (enemy[0].wait <= clock){
+	var now = Date.now();
+	var clock = parseInt(Math.round((now - start)/1000));//Math.round((Date.now - start)/1000);	
+	if (1 < clock){
 		enemy[0].update();
 	}
 	for (i=0;i<bullet.length;i++){
@@ -234,8 +236,7 @@ var update = function (modifier){
 			bullet[i].move();
 		}
 	}
-	var now = Date.now();
-	var clock = parseInt(Math.round((now - start)/1000));//Math.round((Date.now - start)/1000);
+
 	if (now > then){
 		$("debug").innerHTML = clock;//(Math.round((now - start)/1000));
 	}
