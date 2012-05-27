@@ -61,7 +61,7 @@ function getMouse(e) {
 var keysDown = {};//handles multiple keys
 
 window.addEventListener("keydown", function (e){
-	//document.getElementById("debug").innerHTML = ("Key " + e.keyCode + " was pressed.");
+	//$("debug").innerHTML = ("Key " + e.keyCode + " was pressed.");
 	keysDown[e.keyCode] = true;
 	invalidate();
 	//return false;

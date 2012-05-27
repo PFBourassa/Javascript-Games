@@ -12,6 +12,43 @@ var start = Date.now();
 
 var bullet=[];
 
+function Box() {
+	this.ready = false;
+	this.pics = [];
+	this.state = 0;
+	this.x = 0;
+   	this.y = 0;
+   	this.w = 10;
+   	this.h = 10;
+	this.fill = "#fff";
+	var $this = this;
+	this.load = function(array){
+		var foo = [];
+		for(var i = 0; i < array.length; i++){
+			foo.push(loadPic(array[i]));
+		}
+		$this.pics = foo;
+		$this.ready = true;
+	};//NEW COMMENT
+	this.draw = function(ctx) {
+		if (this.ready) {
+			if(this.state < this.pics.length){
+				display.ctx.drawImage(this.pics[this.state], this.x - this.w/2, this.y-this.h/2);
+				this.state += 1;
+			}
+			else{
+				display.ctx.drawImage(this.pics[this.state-1], this.x - this.w/2, this.y-this.h/2);
+				this.state = 0;
+			}
+		}
+		else{
+        		display.ctx.fillStyle = this.fill;
+        		display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
+		
+		}
+	};
+}
+
 function Bullet(){
 	var speed = 10;
 	this.move = function(){
@@ -22,7 +59,7 @@ Bullet.prototype = new Box();
 
 function Ship(){
 	var wait;
-	var position;
+	var position;//(x,y)
 	var xFreq;
 	var xAmp;
 	var yFreq;
@@ -98,43 +135,6 @@ function stuffToDraw(){
 		}
 	}
 };
-
-function Box() {
-	this.ready = false;
-	this.pics = [];
-	this.state = 0;
-	this.x = 0;
-   	this.y = 0;
-   	this.w = 10;
-   	this.h = 10;
-	this.fill = "#fff";
-	var $this = this;
-	this.load = function(array){
-		var foo = [];
-		for(var i = 0; i < array.length; i++){
-			foo.push(loadPic(array[i]));
-		}
-		$this.pics = foo;
-		$this.ready = true;
-	};//NEW COMMENT
-	this.draw = function(ctx) {
-		if (this.ready) {
-			if(this.state < this.pics.length){
-				display.ctx.drawImage(this.pics[this.state], this.x - this.w/2, this.y-this.h/2);
-				this.state += 1;
-			}
-			else{
-				display.ctx.drawImage(this.pics[this.state-1], this.x - this.w/2, this.y-this.h/2);
-				this.state = 0;
-			}
-		}
-		else{
-        		display.ctx.fillStyle = this.fill;
-        		display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
-		
-		}
-	};
-}
 
 function addRect(x, y, w, h, fill) {
     var rect = new Box();
@@ -236,12 +236,9 @@ function frame (){
 	if (game == 1){
 		var now = Date.now();
 		var delta = now - then;
-	
 		update(delta/1000);
 		display.draw();
-	
 		then = now;
-		//$("score").innerHTML = score;	
 		//$("debug").innerHTML = 
 	}
 	if (game == 0){
