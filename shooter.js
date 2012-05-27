@@ -66,7 +66,7 @@ function Ship(x,y,w,h){
    	this.w = w;
    	this.h = h;
 	this.fill = "#fff";
-	this.wait = 1;
+	this.wait = 5;
 	var position = {x:430,y:320};
 	var xFreq = 1;//decimals?
 	var xAmp = 60;
@@ -224,17 +224,20 @@ var update = function (modifier){
 	
 	var now = Date.now();
 	var clock = parseInt(Math.round((now - start)/1000));//Math.round((Date.now - start)/1000);	
-	if (1 < clock){
-		enemy[0].update();
+	
+	for (i=0;i<enemy.length;i++){
+	if (enemy[i].wait <= clock){
+		enemy[i].update();
 	}
 	for (i=0;i<bullet.length;i++){
-		if (bullet[i] instanceof Box && boxCollide(bullet[i],enemy[0])){//create new target when one gets hit
+		if (bullet[i] instanceof Box && boxCollide(bullet[i],enemy[i])){//create new target when one gets hit
 			score += 1;
 			//enemy[0].kill;
 		}
 		if(bullet[i] instanceof Box){
 			bullet[i].move();
 		}
+	}
 	}
 
 	if (now > then){
