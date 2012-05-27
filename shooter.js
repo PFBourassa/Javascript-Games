@@ -60,18 +60,18 @@ function Bullet(){
 Bullet.prototype = new Box();
 
 //new Ship(430,320,30,30);
-function Ship(x,y,w,h){
+function Ship(x,y,w,h,wait,position,xFreq,xAmp,yFreq,yAmp){
 	this.x = x;
    	this.y = y;
    	this.w = w;
    	this.h = h;
 	this.fill = "#fff";
-	this.wait = 5;
-	var position = {x:430,y:320};
-	var xFreq = 1;//decimals?
-	var xAmp = 60;
-	var yFreq = 1;
-	var yAmp = 60;
+	this.wait = wait;
+	var position = position;
+	var xFreq = xFreq;//decimals?
+	var xAmp = xAmp;
+	var yFreq = yFreq;
+	var yAmp = yAmp;
 	var action = {x:xFreq, y:yFreq};
 	this.update = function(){
 		if (this.x < position.x -xAmp){
@@ -209,7 +209,7 @@ var update = function (modifier){
 		bullet.push(shoot(player.x,player.y));//Make discrete
 	}
 	if (player.y < player.h/2) {  //prevent jumping off screen
-		player.y =player.h/2;
+		player.y = player.h/2;
 	}
 	if (player.y > display.height-player.h/2) {  //down
 		player.y = display.height-player.h/2;
@@ -226,18 +226,18 @@ var update = function (modifier){
 	var clock = parseInt(Math.round((now - start)/1000));//Math.round((Date.now - start)/1000);	
 	
 	for (i=0;i<enemy.length;i++){
-	if (enemy[i].wait <= clock){
-		enemy[i].update();
-	}
-	for (i=0;i<bullet.length;i++){
-		if (bullet[i] instanceof Box && boxCollide(bullet[i],enemy[i])){//create new target when one gets hit
-			score += 1;
-			//enemy[0].kill;
+		if (enemy[i].wait <= clock){
+			enemy[i].update();
 		}
-		if(bullet[i] instanceof Box){
-			bullet[i].move();
+		for (i=0;i<bullet.length;i++){
+			if (bullet[i] instanceof Box && boxCollide(bullet[i],enemy[i])){//create new target when one gets hit
+				score += 1;
+				//enemy[0].kill;
+			}
+			if(bullet[i] instanceof Box){
+				bullet[i].move();
+			}
 		}
-	}
 	}
 
 	if (now > then){
@@ -276,7 +276,10 @@ function frame (){
 function reset(){ //TODO fix this by abstracting from global
 	player = addRect(200,150,64,64,'#F02FB6');
 	target = addRect(330,220,30,30,'#01fe31');
-	enemy[0] = new Ship(800,600,30,30);
+	enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
+	//level();
+	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
+	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
 	game = 1;// 1 for in-progress, 0 for menu
 	score = 0;
 	then = Date.now();
