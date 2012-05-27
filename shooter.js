@@ -66,9 +66,9 @@ function Ship(x,y,w,h){
    	this.w = w;
    	this.h = h;
 	this.fill = "#fff";
-	var wait;
+	this.wait = 1;
 	var position = {x:430,y:320};
-	var xFreq = 1;
+	var xFreq = 1;//decimals?
 	var xAmp = 60;
 	var yFreq = 1;
 	var yAmp = 60;
@@ -221,7 +221,10 @@ var update = function (modifier){
 		player.x = display.width-player.w/2;
 	}
 	//Collecting boxen
-	enemy[0].update();
+	
+	if (enemy[0].wait <= clock){
+		enemy[0].update();
+	}
 	for (i=0;i<bullet.length;i++){
 		if (bullet[i] instanceof Box && boxCollide(bullet[i],enemy[0])){//create new target when one gets hit
 			score += 1;
@@ -232,9 +235,9 @@ var update = function (modifier){
 		}
 	}
 	var now = Date.now();
-	var clock = (Math.round((Date.now - start)/1000));
+	var clock = parseInt(Math.round((now - start)/1000));//Math.round((Date.now - start)/1000);
 	if (now > then){
-	$("debug").innerHTML = (Math.round((now - start)/1000));
+		$("debug").innerHTML = clock;//(Math.round((now - start)/1000));
 	}
 };
 
@@ -269,7 +272,7 @@ function frame (){
 function reset(){ //TODO fix this by abstracting from global
 	player = addRect(200,150,64,64,'#F02FB6');
 	target = addRect(330,220,30,30,'#01fe31');
-	enemy[0] = new Ship(430,320,30,30);
+	enemy[0] = new Ship(800,600,30,30);
 	game = 1;// 1 for in-progress, 0 for menu
 	score = 0;
 	then = Date.now();
