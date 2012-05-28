@@ -93,17 +93,18 @@ function Ship(x,y,w,h,wait,position,xFreq,xAmp,yFreq,yAmp){
 	this.yAmp = yAmp;
 	var action = {x:xFreq, y:yFreq};
 	this.update = function(){
-		if (this.x < position.x -xAmp){
-			action.x = xFreq;
+		//action = {x:this.xFreq, y:this.yFreq};
+		if (this.x < this.position.x -this.xAmp){
+			action.x = this.xFreq;
 		}
-		if (this.x > position.x +xAmp){
-			action.x = -xFreq;
+		if (this.x > this.position.x +this.xAmp){
+			action.x = -this.xFreq;
 		}
-		if (this.y < position.y -yAmp){
-			action.y = yFreq;
+		if (this.y < this.position.y -this.yAmp){
+			action.y = this.yFreq;
 		}
-		if (this.y > position.y +yAmp){
-			action.y = -yFreq;
+		if (this.y > this.position.y +this.yAmp){
+			action.y = -this.yFreq;
 		}
 		this.y += action.y;
 		this.x += action.x;
@@ -244,7 +245,7 @@ var update = function (modifier){
 	var clock = parseInt(Math.round((now - start)/1000));//Math.round((Date.now - start)/1000);	
 	
 	for (i=0;i<enemy.length;i++){
-		if (enemy[i].wait <= clock){
+		if (enemy[i] instanceof Box && enemy[i].wait <= clock){
 			enemy[i].update();
 		}
 		for (i=0;i<bullet.length;i++){
@@ -294,7 +295,7 @@ function frame (){
 function reset(){ //TODO fix this by abstracting from global
 	player = addRect(200,150,64,64,'#F02FB6');
 	target = addRect(330,220,30,30,'#01fe31');
-	enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
+	enemy.push(new Ship(800,600,30,30,1,{x:430,y:320},1,60,1,60));
 	//level();
 	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
 	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
