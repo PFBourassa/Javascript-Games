@@ -14,6 +14,7 @@ var start = Date.now();
 var bullet = [];
 var enemy = [];
 
+//BOX STUFF
 function Box() {
 	this.ready = false;
 	this.pics = [];
@@ -51,6 +52,17 @@ function Box() {
 	};
 }
 
+function addRect(x, y, w, h, fill) {
+    var rect = new Box();
+    rect.x = x;
+    rect.y = y;
+    rect.w = w;
+    rect.h = h;
+    rect.fill = fill;
+    return rect;
+}
+
+//BULLET STUFF
 function Bullet(){
 	var speed = 10;
 	this.move = function(){
@@ -59,7 +71,14 @@ function Bullet(){
 }
 Bullet.prototype = new Box();
 
-//new Ship(430,320,30,30);
+function shoot(x,y){
+ var foo = new Bullet();
+ foo.x = x;
+ foo.y = y;
+ return foo;
+}
+
+//ENEMY STUFF
 function Ship(x,y,w,h,wait,position,xFreq,xAmp,yFreq,yAmp){
 	this.x = x;
    	this.y = y;
@@ -67,11 +86,11 @@ function Ship(x,y,w,h,wait,position,xFreq,xAmp,yFreq,yAmp){
    	this.h = h;
 	this.fill = "#fff";
 	this.wait = wait;
-	var position = position;
-	var xFreq = xFreq;//decimals?
-	var xAmp = xAmp;
-	var yFreq = yFreq;
-	var yAmp = yAmp;
+	this.position = position;
+	this.xFreq = xFreq;//decimals?
+	this.xAmp = xAmp;
+	this.yFreq = yFreq;
+	this.yAmp = yAmp;
 	var action = {x:xFreq, y:yFreq};
 	this.update = function(){
 		if (this.x < position.x -xAmp){
@@ -95,11 +114,18 @@ function Ship(x,y,w,h,wait,position,xFreq,xAmp,yFreq,yAmp){
 }
 Ship.prototype = new Box();
 
-function shoot(x,y){
- var foo = new Bullet();
- foo.x = x;
- foo.y = y;
- return foo;
+function createShip(x,y,w,h,wait,position,xFreq,xAmp,yFreq,yAmp){
+	var foo = new Ship();
+	foo.x = x;
+   	foo.y = y;
+   	foo.w = w;
+   	foo.h = h;
+	foo.wait = wait;
+	foo.xFreq = xFreq;//decimals?
+	foo.xAmp = xAmp;
+	foo.yFreq = yFreq;
+	foo.yAmp = yAmp;
+	return foo;
 }
 
 //bullet[0] = new Box;//shoot(1,2);//new Bullet(100,100);//Why is this neccessary?
@@ -132,14 +158,14 @@ function stuffToDraw(){
 		if (true) {
 			display.ctx.fillRect(0, 0, display.width, display.height);
 		}
-		//target.draw(display.ctx);
+		//ENEMIES
 		for (i=0;i<enemy.length;i++){
 			if (enemy[i] instanceof Box){
 				enemy[i].draw(display.ctx);
 			}
-		}
-		//red.draw(display.ctx);	
+		}	
 		player.draw(display.ctx);
+		//BULLETS
 		for (i=0;i<bullet.length;i++){
 			if (bullet[i] instanceof Box){
 				bullet[i].draw(display.ctx);
@@ -169,15 +195,7 @@ function stuffToDraw(){
 	}
 };
 
-function addRect(x, y, w, h, fill) {
-    var rect = new Box();
-    rect.x = x;
-    rect.y = y;
-    rect.w = w;
-    rect.h = h;
-    rect.fill = fill;
-    return rect;
-}
+
 
 function boxCollide(box1,box2){
 	if (
