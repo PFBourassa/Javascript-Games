@@ -78,32 +78,32 @@ function shoot(x,y){
 }
 
 //ENEMY STUFF
-function Ship(x,y,w,h,wait,position,xFreq,xAmp,yFreq,yAmp){
+function Ship(){//Why are these needed?
 	//this.x = x;//TODO no need for xywh, they are in Box prototype
    	//this.y = y;
    	//this.w = w;
    	//this.h = h;
-	this.fill = "#fff";
-	this.wait = wait;
-	this.position = position;
+	this.fill = "#666";
+	this.wait = 1;
+	this.position = {x:430,y:320};
 	this.xFreq = 1;//decimals?
 	this.xAmp = 60;
 	this.yFreq = 1;
 	this.yAmp = 60;
-	var action = {x:xFreq, y:yFreq};
+	this.action = {x:this.xFreq, y:this.yFreq};
 	this.update = function(){
 		//action = {x:this.xFreq, y:this.yFreq};
 		if (this.x < this.position.x -this.xAmp){
-			action.x = this.xFreq;
+			this.action.x = this.xFreq;
 		}
 		if (this.x > this.position.x +this.xAmp){
-			action.x = -this.xFreq;
+			this.action.x = -this.xFreq;
 		}
 		if (this.y < this.position.y -this.yAmp){
-			action.y = this.yFreq;
+			this.action.y = this.yFreq;
 		}
 		if (this.y > this.position.y +this.yAmp){
-			action.y = -this.yFreq;
+			this.action.y = -this.yFreq;
 		}
 		this.y += action.y;
 		this.x += action.x;
@@ -244,22 +244,22 @@ var update = function (modifier){
 	
 	for (i=0;i<enemy.length;i++){
 		if (enemy[i] instanceof Box && enemy[i].wait <= clock){
-			enemy[i].update();
+			//enemy[i].update();
 		}
-		for (i=0;i<bullet.length;i++){
-			if (bullet[i] instanceof Box && boxCollide(bullet[i],enemy[i])){
+		for (n=0;n<bullet.length;n++){
+			if (bullet[n] instanceof Box && boxCollide(bullet[n],enemy[i])){
 				score += 1;
 				//enemy[0].kill;
 			}
-			if(bullet[i] instanceof Box){
-				bullet[i].move();
+			if(bullet[n] instanceof Box){
+				bullet[n].move();
 			}
 		}
 	}
 
-	if (now > then){
+	//if (now > then){
 		$("debug").innerHTML = clock;//(Math.round((now - start)/1000));
-	}
+	//}
 };
 
 function myDown(e) {//100, 150, 200, 70
@@ -293,7 +293,7 @@ function frame (){
 function reset(){ //TODO fix this by abstracting from global
 	player = addRect(200,150,64,64,'#F02FB6');
 	target = addRect(330,220,30,30,'#01fe31');
-	enemy.push(createShip(80,60,30,30,1,{x:430,y:320},1,60,1,60));
+	enemy.push(createShip(80,60,30,30,5,{x:430,y:320},1,60,1,60));
 	//level();
 	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
 	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
