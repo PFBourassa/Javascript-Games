@@ -5,8 +5,8 @@
 
 //var static{//Change these to not be global 
 var player;// = addRect(200, 200, 64, 64, '#FFC02B');
-var target;// = addRect(30,30,64,64,'#01fe31');
-var red ;//= addRect((400-30),(300-30),30,30,'#fd1131');
+//var target;// = addRect(30,30,64,64,'#01fe31');
+//var red ;//= addRect((400-30),(300-30),30,30,'#fd1131');
 
 var score ;//= 0;
 var then ;//= Date.now();
