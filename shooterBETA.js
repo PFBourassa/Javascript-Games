@@ -287,13 +287,11 @@ function frame (){
 	}
 };
 
-
-
 function reset(){ //TODO fix this by abstracting from global
 	player = addRect(200,150,64,64,'#F02FB6');
 	target = addRect(330,220,30,30,'#01fe31');
-	enemy.push(createShip(380,60,30,30,1,{x:430,y:320},1,60,1,60));
-	//enemy.push(createShip(380,160,30,30,5,{x:430,y:320},1,60,1,60));
+	enemy.push(createShip(800,60,30,30,5,{x:430,y:320},1,60,1,60));
+	enemy.push(createShip(800,260,30,30,1,{x:430,y:320},1,60,1,60));
 	//level();
 	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
 	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
