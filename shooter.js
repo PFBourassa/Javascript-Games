@@ -5,12 +5,10 @@
 
 //var static{//Change these to not be global 
 var player;// = addRect(200, 200, 64, 64, '#FFC02B');
-//var target;// = addRect(30,30,64,64,'#01fe31');
-//var red ;//= addRect((400-30),(300-30),30,30,'#fd1131');
-
 var score ;//= 0;
 var then ;//= Date.now();
 var start = Date.now();
+
 var bullet = [];
 var enemy = [];
 
@@ -117,6 +115,7 @@ function createShip(x,y,w,h,wait,position,xFreq,xAmp,yFreq,yAmp){
    	foo.w = w;
    	foo.h = h;
 	foo.wait = wait;
+	foo.position = position;
 	foo.xFreq = xFreq;//decimals?
 	foo.xAmp = xAmp;
 	foo.yFreq = yFreq;
@@ -124,8 +123,6 @@ function createShip(x,y,w,h,wait,position,xFreq,xAmp,yFreq,yAmp){
 	foo.action = {x:xFreq, y:yFreq};
 	return foo;
 }
-
-//bullet[0] = new Box;//shoot(1,2);//new Bullet(100,100);//Why is this neccessary?
 
 function loadPic(a){
 	var foo;
@@ -302,9 +299,8 @@ function frame (){
 function reset(){ //TODO fix this by abstracting from global
 	player = addRect(200,150,64,64,'#F02FB6');
 	target = addRect(330,220,30,30,'#01fe31');
-	enemy.push(createShip(380,60,30,30,1,{x:430,y:320},1,60,1,60));
-	enemy.push(createShip(380,160,30,30,5,{x:430,y:320},1,60,1,60));
-	//level();
+	//enemy.push(createShip(380,60,30,30,1,{x:430,y:320},1,60,1,60));
+	level();
 	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
 	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
 	game = 1;// 1 for in-progress, 0 for menu
