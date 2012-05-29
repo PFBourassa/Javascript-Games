@@ -79,10 +79,10 @@ function shoot(x,y){
 
 //ENEMY STUFF
 function Ship(x,y,w,h,wait,position,xFreq,xAmp,yFreq,yAmp){
-	//this.x = x;//TODO no need for xywh, they are in Box prototype
-   	//this.y = y;
-   	//this.w = w;
-   	//this.h = h;
+	this.x = x;
+   	this.y = y;
+   	this.w = w;
+   	this.h = h;
 	this.fill = "#fff";
 	this.wait = wait;
 	this.position = position;
@@ -125,7 +125,6 @@ function createShip(x,y,w,h,wait,position,xFreq,xAmp,yFreq,yAmp){
 	foo.xAmp = xAmp;
 	foo.yFreq = yFreq;
 	foo.yAmp = yAmp;
-	foo.action = {x:xFreq, y:yFreq};
 	return foo;
 }
 
@@ -293,7 +292,7 @@ function frame (){
 function reset(){ //TODO fix this by abstracting from global
 	player = addRect(200,150,64,64,'#F02FB6');
 	target = addRect(330,220,30,30,'#01fe31');
-	enemy.push(createShip(80,60,30,30,1,{x:430,y:320},1,60,1,60));
+	enemy.push(new Ship(800,600,30,30,1,{x:430,y:320},1,60,1,60));
 	//level();
 	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
 	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
