@@ -242,14 +242,13 @@ var update = function (modifier){
 	var now = Date.now();
 	var clock = parseInt(Math.round((now - start)/1000));//Math.round((Date.now - start)/1000);	
 	
-	for (i=0;i<enemy.length;i++){//if no enemies, game crashes
+	for (i=0;i<enemy.length;i++){
 		if (enemy[i] instanceof Box && enemy[i].wait <= clock){
 			enemy[i].update();
 		}
 		for (n=0;n<bullet.length;n++){
 			if (bullet[n] instanceof Box && boxCollide(bullet[n],enemy[i])){
 				score += 1;
-				//enemy[0].kill;
 				enemy.remove(i);
 			}
 		}
@@ -258,8 +257,10 @@ var update = function (modifier){
 	for (n=0;n<bullet.length;n++){
 		if(bullet[n] instanceof Box){//bullets speed is multiplied by number of enemies
 			bullet[n].move();
-			//TODO kill offscreen bullets
 		}
+		if (bullet[n].x >= 800 - bullet[n].w/2){
+				bullet.remove(n);
+			}
 	}
 	//if (now > then){
 		$("debug").innerHTML = clock;//(Math.round((now - start)/1000));

@@ -5,12 +5,10 @@
 
 //var static{//Change these to not be global 
 var player;// = addRect(200, 200, 64, 64, '#FFC02B');
-var target;// = addRect(30,30,64,64,'#01fe31');
-var red ;//= addRect((400-30),(300-30),30,30,'#fd1131');
-
 var score ;//= 0;
 var then ;//= Date.now();
 var start = Date.now();
+
 var bullet = [];
 var enemy = [];
 
@@ -117,6 +115,7 @@ function createShip(x,y,w,h,wait,position,xFreq,xAmp,yFreq,yAmp){
    	foo.w = w;
    	foo.h = h;
 	foo.wait = wait;
+	foo.position = position;
 	foo.xFreq = xFreq;//decimals?
 	foo.xAmp = xAmp;
 	foo.yFreq = yFreq;
@@ -124,8 +123,6 @@ function createShip(x,y,w,h,wait,position,xFreq,xAmp,yFreq,yAmp){
 	foo.action = {x:xFreq, y:yFreq};
 	return foo;
 }
-
-//bullet[0] = new Box;//shoot(1,2);//new Bullet(100,100);//Why is this neccessary?
 
 function loadPic(a){
 	var foo;
@@ -206,6 +203,13 @@ function boxCollide(box1,box2){
 return false;
 };
 
+// Array Remove - By John Resig (MIT Licensed)
+Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};
+
 var update = function (modifier){
 	//Player movement
 	if (38 in keysDown && player.y > player.h/2) {  //up
@@ -238,7 +242,7 @@ var update = function (modifier){
 	var now = Date.now();
 	var clock = parseInt(Math.round((now - start)/1000));//Math.round((Date.now - start)/1000);	
 	
-	for (i=0;i<enemy.length;i++){
+	for (i=0;i<enemy.length;i++){//if no enemies, game crashes
 		if (enemy[i] instanceof Box && enemy[i].wait <= clock){
 			enemy[i].update();
 		}
@@ -246,14 +250,17 @@ var update = function (modifier){
 			if (bullet[n] instanceof Box && boxCollide(bullet[n],enemy[i])){
 				score += 1;
 				//enemy[0].kill;
-			}
-			if(bullet[n] instanceof Box){
-				bullet[n].move();
-				//TODO kill offscreen bullets
+				enemy.remove(i);
 			}
 		}
-	}
 
+	}
+	for (n=0;n<bullet.length;n++){
+		if(bullet[n] instanceof Box){//bullets speed is multiplied by number of enemies
+			bullet[n].move();
+			//TODO kill offscreen bullets
+		}
+	}
 	//if (now > then){
 		$("debug").innerHTML = clock;//(Math.round((now - start)/1000));
 	//}
@@ -287,12 +294,13 @@ function frame (){
 	}
 };
 
+
+
 function reset(){ //TODO fix this by abstracting from global
 	player = addRect(200,150,64,64,'#F02FB6');
 	target = addRect(330,220,30,30,'#01fe31');
-	enemy.push(createShip(800,60,30,30,5,{x:430,y:320},1,60,1,60));
-	enemy.push(createShip(800,260,30,30,1,{x:430,y:320},1,60,1,60));
-	//level();
+	//enemy.push(createShip(380,60,30,30,1,{x:430,y:320},1,60,1,60));
+	level();
 	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
 	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
 	game = 1;// 1 for in-progress, 0 for menu
