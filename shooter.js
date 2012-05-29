@@ -206,6 +206,13 @@ function boxCollide(box1,box2){
 return false;
 };
 
+// Array Remove - By John Resig (MIT Licensed)
+Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};
+
 var update = function (modifier){
 	//Player movement
 	if (38 in keysDown && player.y > player.h/2) {  //up
@@ -238,7 +245,7 @@ var update = function (modifier){
 	var now = Date.now();
 	var clock = parseInt(Math.round((now - start)/1000));//Math.round((Date.now - start)/1000);	
 	
-	for (i=0;i<enemy.length;i++){
+	for (i=0;i<enemy.length;i++){//if no enemies, game crashes
 		if (enemy[i] instanceof Box && enemy[i].wait <= clock){
 			enemy[i].update();
 		}
@@ -246,14 +253,17 @@ var update = function (modifier){
 			if (bullet[n] instanceof Box && boxCollide(bullet[n],enemy[i])){
 				score += 1;
 				//enemy[0].kill;
-			}
-			if(bullet[n] instanceof Box){
-				bullet[n].move();
-				//TODO kill offscreen bullets
+				enemy.remove(i);
 			}
 		}
-	}
 
+	}
+	for (n=0;n<bullet.length;n++){
+		if(bullet[n] instanceof Box){//bullets speed is multiplied by number of enemies
+			bullet[n].move();
+			//TODO kill offscreen bullets
+		}
+	}
 	//if (now > then){
 		$("debug").innerHTML = clock;//(Math.round((now - start)/1000));
 	//}
@@ -293,7 +303,7 @@ function reset(){ //TODO fix this by abstracting from global
 	player = addRect(200,150,64,64,'#F02FB6');
 	target = addRect(330,220,30,30,'#01fe31');
 	enemy.push(createShip(380,60,30,30,1,{x:430,y:320},1,60,1,60));
-	//enemy.push(createShip(380,160,30,30,5,{x:430,y:320},1,60,1,60));
+	enemy.push(createShip(380,160,30,30,5,{x:430,y:320},1,60,1,60));
 	//level();
 	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
 	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
