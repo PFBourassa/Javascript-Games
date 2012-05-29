@@ -77,6 +77,8 @@ function shoot(x,y){
 
 //ENEMY STUFF
 function Ship(){
+	this.w = 30;
+	this.h = 30; 
 	this.fill = "#666";
 	this.wait = 1;
 	this.position = {x:430,y:320};
@@ -108,12 +110,12 @@ function Ship(){
 }
 Ship.prototype = new Box();
 
-function createShip(x,y,w,h,wait,position,xFreq,xAmp,yFreq,yAmp){
+function createShip(x,y,wait,position,xFreq,xAmp,yFreq,yAmp){
 	var foo = new Ship();
 	foo.x = x;
    	foo.y = y;
-   	foo.w = w;
-   	foo.h = h;
+   	//foo.w = w;
+   	//foo.h = h;
 	foo.wait = wait;
 	foo.position = position;
 	foo.xFreq = xFreq;//decimals?
@@ -243,6 +245,9 @@ var update = function (modifier){
 	var clock = parseInt(Math.round((now - start)/1000));//Math.round((Date.now - start)/1000);	
 	
 	for (i=0;i<enemy.length;i++){
+		if (boxCollide(enemy[i],player)){
+			//alert("game over");
+		}
 		if (enemy[i] instanceof Box && enemy[i].wait <= clock){
 			enemy[i].update();
 		}
