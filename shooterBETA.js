@@ -77,6 +77,8 @@ function shoot(x,y){
 
 //ENEMY STUFF
 function Ship(){
+	this.w = 30;
+	this.h = 30; 
 	this.fill = "#666";
 	this.wait = 1;
 	this.position = {x:430,y:320};
@@ -108,12 +110,12 @@ function Ship(){
 }
 Ship.prototype = new Box();
 
-function createShip(x,y,w,h,wait,position,xFreq,xAmp,yFreq,yAmp){
+function createShip(x,y,wait,position,xFreq,xAmp,yFreq,yAmp){
 	var foo = new Ship();
 	foo.x = x;
    	foo.y = y;
-   	foo.w = w;
-   	foo.h = h;
+   	//foo.w = w;
+   	//foo.h = h;
 	foo.wait = wait;
 	foo.position = position;
 	foo.xFreq = xFreq;//decimals?
@@ -242,14 +244,16 @@ var update = function (modifier){
 	var now = Date.now();
 	var clock = parseInt(Math.round((now - start)/1000));//Math.round((Date.now - start)/1000);	
 	
-	for (i=0;i<enemy.length;i++){//if no enemies, game crashes
+	for (i=0;i<enemy.length;i++){
+		if (boxCollide(enemy[i],player)){
+			//alert("game over");
+		}
 		if (enemy[i] instanceof Box && enemy[i].wait <= clock){
 			enemy[i].update();
 		}
 		for (n=0;n<bullet.length;n++){
 			if (bullet[n] instanceof Box && boxCollide(bullet[n],enemy[i])){
 				score += 1;
-				//enemy[0].kill;
 				enemy.remove(i);
 			}
 		}
@@ -258,8 +262,10 @@ var update = function (modifier){
 	for (n=0;n<bullet.length;n++){
 		if(bullet[n] instanceof Box){//bullets speed is multiplied by number of enemies
 			bullet[n].move();
-			//TODO kill offscreen bullets
 		}
+		if (bullet[n].x >= 800 - bullet[n].w/2){
+				bullet.remove(n);
+			}
 	}
 	//if (now > then){
 		$("debug").innerHTML = clock;//(Math.round((now - start)/1000));
