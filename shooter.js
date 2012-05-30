@@ -137,7 +137,7 @@ function loadPic(a){
 //var bgReady = false;
 //var bgImage = loadPic("STAGE.png");
 //var coinLinks = ["collectable.png"];
-//var links = ["player.png"];
+var links = ["playercraft.png"];
 //var badLinks = ["enemy.png"];
 
 //target.load(coinLinks);
@@ -311,8 +311,10 @@ function frame (){
 
 
 function reset(){ //TODO fix this by abstracting from global
+
 	player = addRect(200,150,64,64,'#F02FB6');
 	target = addRect(330,220,30,30,'#01fe31');
+	player.load(links);
 	//enemy.push(createShip(380,60,30,30,1,{x:430,y:320},1,60,1,60));
 	level();
 	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
@@ -324,9 +326,9 @@ function reset(){ //TODO fix this by abstracting from global
 	bgImage.onload = function () {
 		bgReady = true;
 	};
-	target.load(coinLinks);
-	player.load(links);
-	red.load(badLinks);
+	//target.load(coinLinks);
+
+	//red.load(badLinks);
 }
 var game = 0;
 var foo = setInterval(frame, 1);//this doesn't effect framrate, only init.
