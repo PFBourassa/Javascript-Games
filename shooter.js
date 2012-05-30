@@ -227,7 +227,9 @@ var update = function (modifier){
 		player.x +=256*modifier;
 	}
 	if (32 in keysDown) {  // Space Bar
+		if(bullet.length === 0){
 		bullet.push(shoot(player.x,player.y));//Make discrete
+		}
 	}
 	if (player.y < player.h/2) {  //prevent jumping off screen
 		player.y = player.h/2;
