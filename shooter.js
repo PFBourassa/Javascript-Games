@@ -212,6 +212,7 @@ Array.prototype.remove = function(from, to) {
   return this.push.apply(this, rest);
 };
 
+var fired = false;
 var update = function (modifier){
 	//Player movement
 	if (38 in keysDown && player.y > player.h/2) {  //up
@@ -226,10 +227,14 @@ var update = function (modifier){
 	if (39 in keysDown && player.x < display.width-player.w/2) {  // ->
 		player.x +=256*modifier;
 	}
-	if (32 in keysDown) {  // Space Bar
-		if(bullet.length === 0){
+	if(!(32 in keysDown)){
+		fired = false
+	}
+	if (32 in keysDown && fired==false) {  // Space Bar
+		//if(bullet.length === 0){
 		bullet.push(shoot(player.x,player.y));//Make discrete
-		}
+		fired = true;
+		//}
 	}
 	if (player.y < player.h/2) {  //prevent jumping off screen
 		player.y = player.h/2;
