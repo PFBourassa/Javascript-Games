@@ -261,6 +261,7 @@ var update = function (modifier){
 		for (n=0;n<bullet.length;n++){
 			if (bullet[n] instanceof Box && boxCollide(bullet[n],enemy[i])){
 				score += 1;
+				bullet.remove(n);
 				enemy.remove(i);
 			}
 		}
