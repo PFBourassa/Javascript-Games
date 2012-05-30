@@ -1,4 +1,6 @@
-//          function Ship( x , y,wait,position,xFreq,xAmp,yFreq,yAmp)
+//                       ( x , y,wait,position,xFreq,xAmp,yFreq,yAmp)
+//              screen is(800 X 600)
+//           top left is (0,0)
 
 function level(){
 	enemy.push(createShip(815,160,5,{x:600,y:100},1,80,1,80));
