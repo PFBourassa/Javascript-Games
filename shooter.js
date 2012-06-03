@@ -295,11 +295,18 @@ function frame (){
 	}
 };
 
+function playerCreate(){
+	player = addRect(200,150,64,64,'#F02FB6');
+	player.draw = function(ctx){
+		display.ctx.fillStyle = this.fill;
+        	display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
+	}
+}
 
 
 function reset(){ //TODO fix this by abstracting from global
-	player = addRect(200,150,64,64,'#F02FB6');
-	target = addRect(330,220,30,30,'#01fe31');
+	//player = addRect(200,150,64,64,'#F02FB6');
+	playerCreate();
 	player.load(links);
 	level();
 	game = 1;// 1 for in-progress, 0 for menu
@@ -309,13 +316,10 @@ function reset(){ //TODO fix this by abstracting from global
 	bgImage.onload = function () {
 		bgReady = true;
 	};
-	//target.load(coinLinks);
-
-	//red.load(badLinks);
 }
 var game = 0;
 var foo = setInterval(frame, 1);//this doesn't effect framrate, only init.
 display.init();
 display.draw();
 reset();
-//document.getElementById("debug").innerHTML = (bullet[0] instanceof Box);
+//document.getElementById("debug").innerHTML = ();
