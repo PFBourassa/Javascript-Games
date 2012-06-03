@@ -32,20 +32,10 @@ function Box() {
 		$this.ready = true;
 	};
 	this.draw = function(ctx) {
-		if (this.ready) {
-			if(this.state < this.pics.length){
-				display.ctx.drawImage(this.pics[this.state], this.x - this.w/2, this.y-this.h/2);
-				this.state += 1;
-			}
-			else{
-				display.ctx.drawImage(this.pics[this.state-1], this.x - this.w/2, this.y-this.h/2);
-				this.state = 0;
-			}
-		}
-		else{
+		
         		display.ctx.fillStyle = this.fill;
         		display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
-		}
+		
 	};
 }
 

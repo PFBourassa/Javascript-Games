@@ -32,7 +32,6 @@ function Box() {
 		$this.ready = true;
 	};
 	this.draw = function(ctx) {
-		
         		display.ctx.fillStyle = this.fill;
         		display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
 		
