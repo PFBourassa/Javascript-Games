@@ -4,11 +4,11 @@
 //TODO privatize more variables.
 
 //var static{//Change these to not be global 
-var player;// = addRect(200, 200, 64, 64, '#FFC02B');
 var score ;//= 0;
 var then ;//= Date.now();
 var start = Date.now();
 
+var player;// = addRect(200, 200, 64, 64, '#FFC02B');
 var bullet = [];
 var enemy = [];
 
@@ -32,20 +32,10 @@ function Box() {
 		$this.ready = true;
 	};
 	this.draw = function(ctx) {
-		if (this.ready) {
-			if(this.state < this.pics.length){
-				display.ctx.drawImage(this.pics[this.state], this.x - this.w/2, this.y-this.h/2);
-				this.state += 1;
-			}
-			else{
-				display.ctx.drawImage(this.pics[this.state-1], this.x - this.w/2, this.y-this.h/2);
-				this.state = 0;
-			}
-		}
-		else{
+		
         		display.ctx.fillStyle = this.fill;
         		display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
-		}
+		
 	};
 }
 
@@ -114,8 +104,6 @@ function createShip(x,y,wait,position,xFreq,xAmp,yFreq,yAmp){
 	var foo = new Ship();
 	foo.x = x;
    	foo.y = y;
-   	//foo.w = w;
-   	//foo.h = h;
 	foo.wait = wait;
 	foo.position = position;
 	foo.xFreq = xFreq;//decimals?
@@ -311,14 +299,10 @@ function frame (){
 
 
 function reset(){ //TODO fix this by abstracting from global
-
 	player = addRect(200,150,64,64,'#F02FB6');
 	target = addRect(330,220,30,30,'#01fe31');
 	player.load(links);
-	//enemy.push(createShip(380,60,30,30,1,{x:430,y:320},1,60,1,60));
 	level();
-	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
-	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
 	game = 1;// 1 for in-progress, 0 for menu
 	score = 0;
 	then = Date.now();

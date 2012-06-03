@@ -4,13 +4,11 @@
 //TODO privatize more variables.
 
 //var static{//Change these to not be global 
-var player;// = addRect(200, 200, 64, 64, '#FFC02B');
-var target;// = addRect(30,30,64,64,'#01fe31');
-var red ;//= addRect((400-30),(300-30),30,30,'#fd1131');
-
 var score ;//= 0;
 var then ;//= Date.now();
 var start = Date.now();
+
+var player;// = addRect(200, 200, 64, 64, '#FFC02B');
 var bullet = [];
 var enemy = [];
 
@@ -78,35 +76,33 @@ function shoot(x,y){
 }
 
 //ENEMY STUFF
-function Ship(x,y,w,h,wait,position,xFreq,xAmp,yFreq,yAmp){
-	this.x = x;
-   	this.y = y;
-   	this.w = w;
-   	this.h = h;
-	this.fill = "#fff";
-	this.wait = wait;
-	this.position = position;
+function Ship(){
+	this.w = 30;
+	this.h = 30; 
+	this.fill = "#666";
+	this.wait = 1;
+	this.position = {x:430,y:320};
 	this.xFreq = 1;//decimals?
 	this.xAmp = 60;
 	this.yFreq = 1;
 	this.yAmp = 60;
-	var action = {x:xFreq, y:yFreq};
+	this.action = {x:this.xFreq, y:this.yFreq};
 	this.update = function(){
 		//action = {x:this.xFreq, y:this.yFreq};
 		if (this.x < this.position.x -this.xAmp){
-			action.x = this.xFreq;
+			this.action.x = this.xFreq;
 		}
 		if (this.x > this.position.x +this.xAmp){
-			action.x = -this.xFreq;
+			this.action.x = -this.xFreq;
 		}
 		if (this.y < this.position.y -this.yAmp){
-			action.y = this.yFreq;
+			this.action.y = this.yFreq;
 		}
 		if (this.y > this.position.y +this.yAmp){
-			action.y = -this.yFreq;
+			this.action.y = -this.yFreq;
 		}
-		this.y += action.y;
-		this.x += action.x;
+		this.y += this.action.y;
+		this.x += this.action.x;
 	};
 	this.kill = function(){
 		
@@ -114,21 +110,19 @@ function Ship(x,y,w,h,wait,position,xFreq,xAmp,yFreq,yAmp){
 }
 Ship.prototype = new Box();
 
-function createShip(x,y,w,h,wait,position,xFreq,xAmp,yFreq,yAmp){
+function createShip(x,y,wait,position,xFreq,xAmp,yFreq,yAmp){
 	var foo = new Ship();
 	foo.x = x;
    	foo.y = y;
-   	foo.w = w;
-   	foo.h = h;
 	foo.wait = wait;
+	foo.position = position;
 	foo.xFreq = xFreq;//decimals?
 	foo.xAmp = xAmp;
 	foo.yFreq = yFreq;
 	foo.yAmp = yAmp;
+	foo.action = {x:xFreq, y:yFreq};
 	return foo;
 }
-
-//bullet[0] = new Box;//shoot(1,2);//new Bullet(100,100);//Why is this neccessary?
 
 function loadPic(a){
 	var foo;
@@ -141,7 +135,7 @@ function loadPic(a){
 //var bgReady = false;
 //var bgImage = loadPic("STAGE.png");
 //var coinLinks = ["collectable.png"];
-//var links = ["player.png"];
+var links = ["playercraft.png"];
 //var badLinks = ["enemy.png"];
 
 //target.load(coinLinks);
@@ -209,6 +203,14 @@ function boxCollide(box1,box2){
 return false;
 };
 
+// Array Remove - By John Resig (MIT Licensed)
+Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};
+
+var fired = false;
 var update = function (modifier){
 	//Player movement
 	if (38 in keysDown && player.y > player.h/2) {  //up
@@ -223,8 +225,14 @@ var update = function (modifier){
 	if (39 in keysDown && player.x < display.width-player.w/2) {  // ->
 		player.x +=256*modifier;
 	}
-	if (32 in keysDown) {  // Space Bar
+	if(!(32 in keysDown)){
+		fired = false
+	}
+	if (32 in keysDown && fired==false) {  // Space Bar
+		//if(bullet.length === 0){
 		bullet.push(shoot(player.x,player.y));//Make discrete
+		fired = true;
+		//}
 	}
 	if (player.y < player.h/2) {  //prevent jumping off screen
 		player.y = player.h/2;
@@ -242,23 +250,32 @@ var update = function (modifier){
 	var clock = parseInt(Math.round((now - start)/1000));//Math.round((Date.now - start)/1000);	
 	
 	for (i=0;i<enemy.length;i++){
+		if (boxCollide(enemy[i],player)){
+			//alert("game over");
+		}
 		if (enemy[i] instanceof Box && enemy[i].wait <= clock){
 			enemy[i].update();
 		}
-		for (i=0;i<bullet.length;i++){
-			if (bullet[i] instanceof Box && boxCollide(bullet[i],enemy[i])){
+		for (n=0;n<bullet.length;n++){
+			if (bullet[n] instanceof Box && boxCollide(bullet[n],enemy[i])){
 				score += 1;
-				//enemy[0].kill;
-			}
-			if(bullet[i] instanceof Box){
-				bullet[i].move();
+				bullet.remove(n);
+				enemy.remove(i);
 			}
 		}
-	}
 
-	if (now > then){
-		$("debug").innerHTML = clock;//(Math.round((now - start)/1000));
 	}
+	for (n=0;n<bullet.length;n++){
+		if(bullet[n] instanceof Box){//bullets speed is multiplied by number of enemies
+			bullet[n].move();
+		}
+		if (bullet[n].x >= 800 - bullet[n].w/2){
+				bullet.remove(n);
+			}
+	}
+	//if (now > then){
+		$("debug").innerHTML = clock;//(Math.round((now - start)/1000));
+	//}
 };
 
 function myDown(e) {//100, 150, 200, 70
@@ -289,13 +306,13 @@ function frame (){
 	}
 };
 
+
+
 function reset(){ //TODO fix this by abstracting from global
 	player = addRect(200,150,64,64,'#F02FB6');
 	target = addRect(330,220,30,30,'#01fe31');
-	enemy.push(new Ship(800,600,30,30,1,{x:430,y:320},1,60,1,60));
-	//level();
-	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
-	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
+	player.load(links);
+	level();
 	game = 1;// 1 for in-progress, 0 for menu
 	score = 0;
 	then = Date.now();
@@ -303,9 +320,9 @@ function reset(){ //TODO fix this by abstracting from global
 	bgImage.onload = function () {
 		bgReady = true;
 	};
-	target.load(coinLinks);
-	player.load(links);
-	red.load(badLinks);
+	//target.load(coinLinks);
+
+	//red.load(badLinks);
 }
 var game = 0;
 var foo = setInterval(frame, 1);//this doesn't effect framrate, only init.
