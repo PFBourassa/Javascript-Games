@@ -12,8 +12,8 @@ var player;// = addRect(200, 200, 64, 64, '#FFC02B');
 var bullet = [];
 var enemy = [];
 
-/*
-function Sequence() {//Why does this not work?
+
+function Seq() {//Why does this not work?
     var image = [];
     var step = 0;
     this.get = function(){
@@ -27,8 +27,8 @@ function Sequence() {//Why does this not work?
     };
     this.load = function(image){
         //copy and paste LoadImage()
-    }
-}​*/
+    };
+}
 
 //BOX STUFF
 function Box() {
