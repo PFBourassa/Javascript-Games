@@ -12,6 +12,24 @@ var player;// = addRect(200, 200, 64, 64, '#FFC02B');
 var bullet = [];
 var enemy = [];
 
+/*
+function Sequence() {
+    var image = [];
+    var step = 0;
+    this.get = function(){
+        if (step >= image.length){
+            step = 0;
+        }
+        if (step < image.length){
+            step++;
+        }
+        return image[step];
+    };
+    this.load = function(image){
+        //copy and paste LoadImage()
+    }
+}​*/
+
 //BOX STUFF
 function Box() {
 	this.ready = false;
@@ -23,7 +41,7 @@ function Box() {
    	this.h = 10;
 	this.fill = "#fff";
 	var $this = this;
-	this.load = function(array){
+	this.load = function(array) {
 		var foo = [];
 		for(var i = 0; i < array.length; i++){
 			foo.push(loadPic(array[i]));
