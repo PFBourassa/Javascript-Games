@@ -13,7 +13,7 @@ var bullet = [];
 var enemy = [];
 
 
-function Seq() {//Why does this not work?
+/*function Sequence() {//Why does this not work?
     var image = [];
     var step = 0;
     this.get = function(){
@@ -25,10 +25,14 @@ function Seq() {//Why does this not work?
         }
         return image[step];
     };
-    this.load = function(image){
-        //copy and paste LoadImage()
+    this.load = function(array){
+    	var foo = [];
+	for (var i = 0; i < array.length; i++){
+		foo.push(loadPic(array[i]));
+	}
+	this.image = foo;
     };
-}
+}*/
 
 //BOX STUFF
 function Box() {
@@ -83,9 +87,9 @@ function shoot(x,y){
 }
 
 //ENEMY STUFF
-function Ship(){
-	this.w = 30;
-	this.h = 30; 
+function Ship(){//TODO Make them shoot
+	this.w = 32;
+	this.h = 32; 
 	this.fill = "#666";
 	this.wait = 1;
 	this.position = {x:430,y:320};
@@ -112,7 +116,7 @@ function Ship(){
 		this.x += this.action.x;
 	};
 	this.kill = function(){
-		
+
 	};
 }
 Ship.prototype = new Box();
