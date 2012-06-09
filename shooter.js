@@ -11,10 +11,11 @@ var start = Date.now();
 var player;// = addRect(200, 200, 64, 64, '#FFC02B');
 var bullet = [];
 var enemy = [];
+var links = ["collectable.png"];
 
 
-/*function Sequence() {//Why does this not work?
-    var image = [];
+function Sequence() {
+    var image = [];//list of images
     var step = 0;
     this.get = function(){
         if (step >= image.length){
@@ -32,13 +33,12 @@ var enemy = [];
 	}
 	this.image = foo;
     };
-}*/
+}
 
 //BOX STUFF
 function Box() {
 	this.ready = false;
-	this.pics = [];
-	this.state = 0;
+	this.sequence = new Sequence();
 	this.x = 0;
    	this.y = 0;
    	this.w = 10;
@@ -46,17 +46,19 @@ function Box() {
 	this.fill = "#fff";
 	var $this = this;
 	this.load = function(array) {
-		var foo = [];
-		for(var i = 0; i < array.length; i++){
-			foo.push(loadPic(array[i]));
+		this.sequence.load(array);
+		if (this.sequence.image.length > 0) {
+			$this.ready = true;
 		}
-		$this.pics = foo;
-		$this.ready = true;
 	};
 	this.draw = function(ctx) {
+		if (this.ready == true){
+			display.ctx.drawImage("collectable.png",this.x-this.w/2,this.y-this.h/2);		
+		}
+		else{
         		display.ctx.fillStyle = this.fill;
         		display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
-		
+		}
 	};
 }
 
@@ -146,7 +148,7 @@ function loadPic(a){
 //var bgReady = false;
 //var bgImage = loadPic("STAGE.png");
 //var coinLinks = ["collectable.png"];
-var links = ["playercraft.png"];
+//var links = ["playercraft.png"];
 //var badLinks = ["enemy.png"];
 
 //target.load(coinLinks);
