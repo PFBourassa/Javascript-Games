@@ -12,23 +12,25 @@ var player;// = addRect(200, 200, 64, 64, '#FFC02B');
 var bullet = [];
 var enemy = [];
 var links = ["collectable.png"];
+var drone = new Sequence();
+drone.load(["collectable.png"]);
 
 
 function Sequence() {
     var image = [];//list of images
     var step = 0;
     this.get = function(){
-        if (step >= image.length){
+        if (step > image.length){
             step = 0;
         }
-        if (step < image.length){
+        if (step <= image.length){
             step++;
         }
         return image[step];
     };
     this.load = function(array){
     	var foo = [];
-	for (var i = 0; i < array.length; i++){
+	for (var i = 0; i <= array.length; i++){
 		foo.push(loadPic(array[i]));
 	}
 	this.image = foo;
@@ -90,6 +92,7 @@ function shoot(x,y){
 
 //ENEMY STUFF
 function Ship(){//TODO Make them shoot
+	this.sequence = drone;
 	this.w = 32;
 	this.h = 32; 
 	this.fill = "#666";
