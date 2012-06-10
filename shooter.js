@@ -11,7 +11,7 @@ var start = Date.now();
 var player;// = addRect(200, 200, 64, 64, '#FFC02B');
 var bullet = [];
 var enemy = [];
-var links = ["collectable.png"];
+//var links = ["playerCraft.png"];
 var bgImage = new Sequence//loadPic("images/600X800.png");
 bgImage.load(["images/600X800.png"]);
 
@@ -51,7 +51,17 @@ function Sequence() {
 }
 
 var drone = new Sequence();
+//*************************************************
+//RUSS! This is where the images for the enemies 
+//are referenced. (Drones specifically)
+
+//If you make your own images, you can change 
+//this section to point to them, and it won't
+//break anything.
+
 drone.load(["images/32.png","images/32(2).png"]);
+//**************************************************
+
 
 //BOX STUFF
 function Box() {
@@ -342,7 +352,8 @@ function playerCreate(){
 function reset(){ //TODO fix this by abstracting from global
 	//player = addRect(200,150,64,64,'#F02FB6');
 	playerCreate();
-	player.sequence.load(links);
+	player.sequence.load(["playercraft.png"]);
+	player.ready = true;
 	level();
 	game = 1;// 1 for in-progress, 0 for menu
 	score = 0;
