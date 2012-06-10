@@ -12,6 +12,8 @@ var player;// = addRect(200, 200, 64, 64, '#FFC02B');
 var bullet = [];
 var enemy = [];
 var links = ["collectable.png"];
+var bgImage = new Sequence//loadPic("images/600X800.png");
+bgImage.load(["images/600X800.png"]);
 
 function loadPic(a){
 	var foo;
@@ -21,28 +23,30 @@ function loadPic(a){
 }
 
 function Sequence() {
-    var image = [];//list of images
-    var step = 0;
-    this.get = function () {
-        if (step < image.length) {
-            step += 1;
-        }
-        if (step >= image.length) {
-            step = 0;
-        }
-        return image[step];
-    };
-    this.load = function (array) {
-	var foo = [];
-	for (i = 0; i <= array.length; i++){
-		foo.push(loadPic(array[i]));
-	}
-	this.image = foo;
-    };
+	var image = [];//list of images
+	var i = 0;
+	this.get = function () {
+		return image[i];
+	};
+	this.update = function () {
+		if (i < image.length && image.length>1) {
+			i += 1;
+		}
+		else if (i >= image.length) {
+			i = 0;
+		}
+	};
+	this.load = function (array) {
+		//var foo = [];
+		for (i = 0; i <= array.length; i++) {
+			image.push(loadPic(array[i]));
+		}
+		//this.image = foo;
+	};
 }
 
 var drone = new Sequence();
-drone.load(["collectable.png","collectable.png"]);
+drone.load(["images/32.png"]);//,"images/32(2).png"]);
 
 //BOX STUFF
 function Box() {
@@ -62,7 +66,7 @@ function Box() {
 	};
 	this.draw = function(ctx) {
 		if (this.ready == true){
-			display.ctx.drawImage(this.sequence.get,this.x-this.w/2,this.y-this.h/2);		
+			display.ctx.drawImage(this.sequence.get(),this.x-this.w/2,this.y-this.h/2);		
 		}
 		else{
         		display.ctx.fillStyle = this.fill;
@@ -100,7 +104,7 @@ function shoot(x,y){
 //ENEMY STUFF
 function Ship(){//TODO Make them shoot
 	this.sequence = drone;
-	this.ready = true;
+	this.ready = true;//why does this break the game?
 	this.w = 32;
 	this.h = 32; 
 	this.fill = "#666";
@@ -136,6 +140,7 @@ Ship.prototype = new Box();
 
 function createShip(x,y,wait,position,xFreq,xAmp,yFreq,yAmp){
 	var foo = new Ship();
+	//foo.ready = true;
 	foo.x = x;
    	foo.y = y;
 	foo.wait = wait;
@@ -165,10 +170,10 @@ function stuffToDraw(){
 	if (game == 1){
 		display.ctx.fillStyle = "#11f";
 		//bgReady=true;
-		if (false) {
-			display.ctx.drawImage(bgImage, 0, 0);
-		}
 		if (true) {
+			display.ctx.drawImage(bgImage.get(), 0, 0);
+		}
+		if (false) {
 			display.ctx.fillRect(0, 0, display.width, display.height);
 		}
 		//ENEMIES
@@ -292,9 +297,7 @@ var update = function (modifier){
 				bullet.remove(n);
 			}
 	}
-	//if (now > then){
-		$("debug").innerHTML = clock;//(Math.round((now - start)/1000));
-	//}
+	$("debug").innerHTML = clock;//(Math.round((now - start)/1000));
 };
 
 function myDown(e) {//100, 150, 200, 70
@@ -311,6 +314,7 @@ function frame (){
 		var now = Date.now();
 		var delta = now - then;
 		update(delta/1000);
+		drone.update();
 		display.draw();
 		then = now;
 		//$("debug").innerHTML = 
