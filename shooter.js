@@ -26,27 +26,27 @@ function Sequence() {
 	var image = [];//list of images
 	var i = 0;
 	this.get = function () {
-		return image[0];
+		return image[i];
 	};
 	this.update = function () {
-		if (i < image.length && image.length>1) {
-			i += 1;
-		}
-		else if (i >= image.length) {
+		if (image.length == 1 || i >= image.length-1) {
 			i = 0;
+		}
+		else if (image.length > 1 && i < image.length) {
+			i += 1;
 		}
 	};
 	this.load = function (array) {
 		//var foo = [];
-		for (i = 0; i <= array.length; i++) {
-			image.push(loadPic(array[i]));
+		for (n = 0; n <= array.length; n++) {
+			image.push(loadPic(array[n]));
 		}
 		//this.image = foo;
 	};
 }
 
 var drone = new Sequence();
-drone.load(["images/32.png"]);//,"images/32(2).png"]);
+drone.load(["images/32.png","images/32(2).png"]);
 
 //BOX STUFF
 function Box() {
