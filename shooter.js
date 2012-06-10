@@ -12,8 +12,22 @@ var player;// = addRect(200, 200, 64, 64, '#FFC02B');
 var bullet = [];
 var enemy = [];
 //var links = ["playerCraft.png"];
-var bgImage = new Sequence//loadPic("images/600X800.png");
-bgImage.load(["images/600X800.png"]);
+//var bgImage = new Sequence//loadPic("images/600X800.png");
+//bgImage.load(["images/600X800.png"]);
+var Bg = function () {
+	var offset = 0;
+	this.update = function () {
+		offset -= 1;
+	}
+	this.sequence = new Sequence();
+	this.draw = function (ctx) {
+		display.ctx.drawImage(this.sequence.get(), offset % 800,0);
+		display.ctx.drawImage(this.sequence.get(), (offset % 800)+800,0);
+		
+	};
+}
+var background = new Bg;
+background.sequence.load(["images/600X800.png"]);
 
 function loadPic(a){
 	var foo;
@@ -51,16 +65,16 @@ function Sequence() {
 }
 
 var drone = new Sequence();
-//*************************************************
+//************************************************* RUSS
 //RUSS! This is where the images for the enemies 
 //are referenced. (Drones specifically)
 
 //If you make your own images, you can change 
-//this section to point to them, and it won't
+//the things in the quotes, and it won't
 //break anything.
 
-drone.load(["images/32.png","images/32(2).png"]);
-//**************************************************
+drone.load(["images/32.png","images/32(2).png","images/32(3).png"]);
+//************************************************** RUSS
 
 
 //BOX STUFF
@@ -186,7 +200,8 @@ function stuffToDraw(){
 		display.ctx.fillStyle = "#11f";
 		//bgReady=true;
 		if (true) {
-			display.ctx.drawImage(bgImage.get(), 0, 0);
+			//display.ctx.drawImage(bgImage.get(), 0, 0);
+			background.draw();
 		}
 		if (false) {
 			display.ctx.fillRect(0, 0, display.width, display.height);
@@ -325,27 +340,44 @@ function myDown(e) {//100, 150, 200, 70
 $("canvas").onmousedown = myDown;
 
 function frame (){
-	if (game == 1){
+	if (game == 1){//Playing
 		var now = Date.now();
 		var delta = now - then;
 		update(delta/1000);
 		drone.update();
+		background.update();
 		display.draw();
 		then = now;
 		//$("debug").innerHTML = 
 	}
 	if (game == 0){
 		foo = window.clearInterval(foo);
-		//alert(" Score: "+score);
-		//game = 1;
 		display.draw();
-		//reset();
-		
 	}
 };
 
 function playerCreate(){
 	player = addRect(200,150,64,64,'#F02FB6');
+	var img = loadPic("images/playercraft.png");//*********RUSS******************RUSS********
+	var imgup = loadPic("images/playerup.png");//These are for the player, same deal
+	var imgdown = loadPic("images/playerdown.png");//******************RUSS******************
+	player.draw = function(){
+		if (this.ready == true){
+			if(38 in keysDown){
+				display.ctx.drawImage(imgup,this.x-this.w/2,this.y-this.h/2);
+			}
+			else if(40 in keysDown){
+				display.ctx.drawImage(imgdown,this.x-this.w/2,this.y-this.h/2);
+			}
+			else{
+				display.ctx.drawImage(img,this.x-this.w/2,this.y-this.h/2);
+			}	
+		}
+		else{
+        		display.ctx.fillStyle = this.fill;
+        		display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
+		}
+	}
 }
 
 
