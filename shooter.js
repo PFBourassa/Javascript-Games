@@ -29,11 +29,16 @@ function Sequence() {
 		return image[i];
 	};
 	this.update = function () {
-		if (image.length == 1 || i >= image.length-1) {
+		if (image.length === 1 || i >= image.length-1) {
 			i = 0;
 		}
-		else if (image.length > 1 && i < image.length) {
-			i += 1;
+		else if (image.length > 1) {
+			if ( i < image.length){
+				i += 1;
+			}
+			if ( i >= image.length-1) {
+				i = 0;			
+			}
 		}
 	};
 	this.load = function (array) {
