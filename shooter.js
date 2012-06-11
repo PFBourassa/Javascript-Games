@@ -14,6 +14,9 @@ var enemy = [];
 //var links = ["playerCraft.png"];
 //var bgImage = new Sequence//loadPic("images/600X800.png");
 //bgImage.load(["images/600X800.png"]);
+
+var audio = new Audio();
+
 var Bg = function () {
 	var offset = 0;
 	this.update = function () {

@@ -358,9 +358,9 @@ function frame (){
 
 function playerCreate(){
 	player = addRect(200,150,64,64,'#F02FB6');
-	var img = loadPic("images/playercraft.png");
-	var imgup = loadPic("images/playerup.png");
-	var imgdown = loadPic("images/playerdown.png");
+	var img = loadPic("images/playercraft.png");//*********RUSS******************RUSS********
+	var imgup = loadPic("images/playerup.png");//These are for the player, same deal
+	var imgdown = loadPic("images/playerdown.png");//******************RUSS******************
 	player.draw = function(){
 		if (this.ready == true){
 			if(38 in keysDown){
