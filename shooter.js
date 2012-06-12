@@ -11,9 +11,6 @@ var start = Date.now();
 var player;// = addRect(200, 200, 64, 64, '#FFC02B');
 var bullet = [];
 var enemy = [];
-//var links = ["playerCraft.png"];
-//var bgImage = new Sequence//loadPic("images/600X800.png");
-//bgImage.load(["images/600X800.png"]);
 
 var audio = new Audio();
 
@@ -31,13 +28,6 @@ var Bg = function () {
 }
 var background = new Bg;
 background.sequence.load(["images/600X800.png"]);
-
-function loadPic(a){
-	var foo;
-	foo = new Image();
-	foo.src = a;
-	return foo;
-}
 
 function Sequence() {
 	var image = [];//list of images
@@ -59,11 +49,9 @@ function Sequence() {
 		}
 	};
 	this.load = function (array) {
-		//var foo = [];
 		for (n = 0; n <= array.length; n++) {
 			image.push(loadPic(array[n]));
 		}
-		//this.image = foo;
 	};
 }
 
@@ -78,7 +66,6 @@ var drone = new Sequence();
 
 drone.load(["images/32.png","images/32(2).png","images/32(3).png"]);
 //************************************************** RUSS
-
 
 //BOX STUFF
 function Box() {
@@ -185,25 +172,11 @@ function createShip(x,y,wait,position,xFreq,xAmp,yFreq,yAmp){
 	return foo;
 }
 
-
-
-//Image Stuff
-//var bgReady = false;
-//var bgImage = loadPic("STAGE.png");
-//var coinLinks = ["collectable.png"];
-//var links = ["playercraft.png"];
-//var badLinks = ["enemy.png"];
-
-//target.load(coinLinks);
-//player.load(links);
-//red.load(badLinks);
-
 function stuffToDraw(){
 	if (game == 1){
 		display.ctx.fillStyle = "#11f";
 		//bgReady=true;
 		if (true) {
-			//display.ctx.drawImage(bgImage.get(), 0, 0);
 			background.draw();
 		}
 		if (false) {
@@ -244,27 +217,6 @@ function stuffToDraw(){
 			display.ctx.fillText("Score:"+score,200,120);
 		}
 	}
-};
-
-
-
-function boxCollide(box1,box2){
-	if (
-		box1.x - box1.w/2 <= box2.x + box2.w/2
-		&& box2.x - box2.w/2 <= box1.x + box1.w/2
-		&& box1.y - box1.w/2 <= box2.y + box2.h/2
-		&& box2.y - box2.w/2 <= box1.y + box1.h/2
-	){
-	return true;
-	}
-return false;
-};
-
-// Array Remove - By John Resig (MIT Licensed)
-Array.prototype.remove = function(from, to) {
-  var rest = this.slice((to || from) + 1 || this.length);
-  this.length = from < 0 ? this.length + from : from;
-  return this.push.apply(this, rest);
 };
 
 var fired = false;
@@ -330,17 +282,17 @@ var update = function (modifier){
 				bullet.remove(n);
 			}
 	}
-	$("debug").innerHTML = clock;//(Math.round((now - start)/1000));
+	$("debug").innerHTML = clock;
 };
 
-function myDown(e) {//100, 150, 200, 70
+/*function myDown(e) {//100, 150, 200, 70************************************
 	getMouse(e);
 	if ((display.my > 150 && display.my < 230 && display.mx>100 && display.mx < 300) && game==0){
 		reset();
 	}
 		
 }
-$("canvas").onmousedown = myDown;
+$("canvas").onmousedown = myDown;*///******************************************/
 
 function frame (){
 	if (game == 1){//Playing
@@ -364,15 +316,15 @@ function playerCreate(){
 	var img = loadPic("images/playercraft.png");//*********RUSS******************RUSS********
 	var imgup = loadPic("images/playerup.png");//These are for the player, same deal
 	var imgdown = loadPic("images/playerdown.png");//******************RUSS******************
-	player.draw = function(){
-		if (this.ready == true){
-			if(38 in keysDown){
+	player.draw = function() {
+		if (this.ready == true) {
+			if (38 in keysDown) {
 				display.ctx.drawImage(imgup,this.x-this.w/2,this.y-this.h/2);
 			}
-			else if(40 in keysDown){
+			else if (40 in keysDown) {
 				display.ctx.drawImage(imgdown,this.x-this.w/2,this.y-this.h/2);
 			}
-			else{
+			else {
 				display.ctx.drawImage(img,this.x-this.w/2,this.y-this.h/2);
 			}	
 		}
