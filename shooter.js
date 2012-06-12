@@ -219,7 +219,7 @@ function stuffToDraw(){
 	}
 };
 
-var fired = false;
+//var fired = false;
 var update = function (modifier){
 	//Player movement
 	if (38 in keysDown && player.y > player.h/2) {  //up
@@ -235,12 +235,12 @@ var update = function (modifier){
 		player.x +=256*modifier;
 	}
 	if(!(32 in keysDown)){
-		fired = false
+		player.fired = false
 	}
-	if (32 in keysDown && fired==false) {  // Space Bar
+	if (32 in keysDown && player.fired==false) {  // Space Bar
 		//if(bullet.length === 0){
-		bullet.push(shoot(player.x,player.y));//Make discrete
-		fired = true;
+		bullet.push(shoot(player.x+player.w/2,player.y));
+		player.fired = true;
 		//}
 	}
 	if (player.y < player.h/2) {  //prevent jumping off screen
@@ -256,7 +256,7 @@ var update = function (modifier){
 		player.x = display.width-player.w/2;
 	}
 	var now = Date.now();
-	var clock = parseInt(Math.round((now - start)/1000));//Math.round((Date.now - start)/1000);	
+	var clock = parseInt(Math.round((now - start)/1000));	
 	
 	for (i=0;i<enemy.length;i++){
 		if (boxCollide(enemy[i],player)){
@@ -275,7 +275,7 @@ var update = function (modifier){
 
 	}
 	for (n=0;n<bullet.length;n++){
-		if(bullet[n] instanceof Box){//bullets speed is multiplied by number of enemies
+		if(bullet[n] instanceof Box){
 			bullet[n].move();
 		}
 		if (bullet[n].x >= 800 - bullet[n].w/2){
@@ -312,6 +312,7 @@ function frame (){
 };
 
 function playerCreate(){
+	this.fired = false;
 	player = addRect(200,150,64,64,'#F02FB6');
 	var img = loadPic("images/playercraft.png");//*********RUSS******************RUSS********
 	var imgup = loadPic("images/playerup.png");//These are for the player, same deal
