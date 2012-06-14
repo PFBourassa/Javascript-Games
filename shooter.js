@@ -117,7 +117,7 @@ function shoot(x,y){
 	var foo = new Bullet();
 	foo.x = x;
 	foo.y = y;
-	return foo;
+	bullet.push(foo);
 }
 
 function eShoot(x,y) {
@@ -246,7 +246,7 @@ var update = function (modifier){
 	}
 	if (32 in keysDown && player.fired==false) {  // Space Bar
 		//if(bullet.length === 0){
-		bullet.push(shoot(player.x+player.w/2,player.y));
+		shoot(player.x+player.w/2,player.y);
 		player.fired = true;
 		//}
 	}
@@ -311,6 +311,8 @@ function frame (){
 		display.draw();
 		then = now;
 		//$("debug").innerHTML = 
+		var rand = Math.floor(Math.random()*bullet.length);
+		bullet.push.eShoot(enemy[rand].x,enemy[rand].y);
 	}
 	if (game == 0){
 		foo = window.clearInterval(foo);

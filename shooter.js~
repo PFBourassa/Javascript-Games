@@ -106,7 +106,7 @@ function addRect(x, y, w, h, fill) {
 
 //BULLET STUFF
 function Bullet(){
-	this.speed = 5;
+	this.speed = 7;
 	this.move = function(){
 		this.x += this.speed;
 	};
@@ -117,7 +117,7 @@ function shoot(x,y){
 	var foo = new Bullet();
 	foo.x = x;
 	foo.y = y;
-	return foo;
+	bullet.push(foo);
 }
 
 function eShoot(x,y) {
@@ -311,6 +311,8 @@ function frame (){
 		display.draw();
 		then = now;
 		//$("debug").innerHTML = 
+		var rand = Math.floor(Math.random()*bullet.length);
+		bullet.push.eShoot(enemy[rand].x,enemy[rand].y);
 	}
 	if (game == 0){
 		foo = window.clearInterval(foo);
