@@ -106,7 +106,7 @@ function addRect(x, y, w, h, fill) {
 
 //BULLET STUFF
 function Bullet(){
-	this.speed = 10;
+	this.speed = 7;
 	this.move = function(){
 		this.x += this.speed;
 	};
@@ -118,6 +118,13 @@ function shoot(x,y){
 	foo.x = x;
 	foo.y = y;
 	return foo;
+}
+
+function eShoot(x,y) {
+	var foo = new Bullet();
+	foo.x = x;
+	foo.y = y;
+	foo.speed = -5;
 }
 
 //ENEMY STUFF
