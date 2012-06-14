@@ -106,6 +106,7 @@ function addRect(x, y, w, h, fill) {
 
 //BULLET STUFF
 function Bullet(){
+	//this.prototype = new Box();
 	this.speed = 7;
 	this.move = function(){
 		this.x += this.speed;
@@ -122,9 +123,12 @@ function shoot(x,y){
 
 function eShoot(x,y) {
 	var foo = new Bullet();
-	foo.x = x;
-	foo.y = y;
+	var rand = Math.floor(Math.random()*enemy.length+1);
+	//bullet.push.eShoot(enemy[rand].x,enemy[rand].x;
+	foo.x = enemy[rand].x;
+	foo.y = enemy[rand].y;
 	foo.speed = -5;
+	bullet.push(foo);
 }
 
 //ENEMY STUFF
@@ -207,7 +211,7 @@ function stuffToDraw(){
         display.ctx.textAlign = 'left';
 		display.ctx.fillText("Score:"+score,2,12);
 	}
-	if (game ===0){
+	if (game === 0){
 		display.ctx.fillStyle = "#f70";//background
 		display.ctx.fillRect(50, 50, 300, 200);
 		display.ctx.fillStyle = "#5fc23f";//Button
@@ -215,7 +219,7 @@ function stuffToDraw(){
 		display.ctx.fillStyle = "#000";//text
 		display.ctx.font = 'bold 50px sans-serif';
 		display.ctx.textAlign = 'center';
-		if (score == 0){
+		if (score === 0){
 			display.ctx.fillText("Play",200,200);
 			display.ctx.fillText("Shooter",200,120);//make these boxes
 		}
@@ -310,9 +314,10 @@ function frame (){
 		background.update();
 		display.draw();
 		then = now;
+		eShoot();
 		//$("debug").innerHTML = 
-		var rand = Math.floor(Math.random()*bullet.length);
-		bullet.push.eShoot(enemy[rand].x,enemy[rand].y);
+		//var rand = Math.floor(Math.random()*bullet.length);
+		//bullet.push.eShoot(enemy[rand].x,enemy[rand].y);
 	}
 	if (game == 0){
 		foo = window.clearInterval(foo);

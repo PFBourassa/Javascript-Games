@@ -106,6 +106,7 @@ function addRect(x, y, w, h, fill) {
 
 //BULLET STUFF
 function Bullet(){
+	//this.prototype = new Box();
 	this.speed = 7;
 	this.move = function(){
 		this.x += this.speed;
@@ -122,9 +123,12 @@ function shoot(x,y){
 
 function eShoot(x,y) {
 	var foo = new Bullet();
-	foo.x = x;
-	foo.y = y;
+	var rand = Math.floor(Math.random()*enemy.length+1);
+	//bullet.push.eShoot(enemy[rand].x,enemy[rand].x;
+	foo.x = enemy[rand].x;
+	foo.y = enemy[rand].y;
 	foo.speed = -5;
+	bullet.push(foo);
 }
 
 //ENEMY STUFF
@@ -246,7 +250,7 @@ var update = function (modifier){
 	}
 	if (32 in keysDown && player.fired==false) {  // Space Bar
 		//if(bullet.length === 0){
-		bullet.push(shoot(player.x+player.w/2,player.y));
+		shoot(player.x+player.w/2,player.y);
 		player.fired = true;
 		//}
 	}
@@ -310,9 +314,10 @@ function frame (){
 		background.update();
 		display.draw();
 		then = now;
+		eShoot();
 		//$("debug").innerHTML = 
-		var rand = Math.floor(Math.random()*bullet.length);
-		bullet.push.eShoot(enemy[rand].x,enemy[rand].y);
+		//var rand = Math.floor(Math.random()*bullet.length);
+		//bullet.push.eShoot(enemy[rand].x,enemy[rand].y);
 	}
 	if (game == 0){
 		foo = window.clearInterval(foo);
