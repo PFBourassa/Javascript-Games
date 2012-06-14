@@ -106,9 +106,9 @@ function addRect(x, y, w, h, fill) {
 
 //BULLET STUFF
 function Bullet(){
-	var speed = 10;
+	this.speed = 10;
 	this.move = function(){
-		this.x += speed;
+		this.x += this.speed;
 	};
 }
 Bullet.prototype = new Box();
