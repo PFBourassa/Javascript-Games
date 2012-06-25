@@ -135,6 +135,7 @@ function Ship(){//TODO Make them shoot
 	this.ready = true;//why does this break the game?
 	this.w = 32;
 	this.h = 32; 
+	this.i = 0;
 	this.fill = "#666";
 	this.wait = 1;
 	this.position = {x:430,y:320};
@@ -159,9 +160,16 @@ function Ship(){//TODO Make them shoot
 		}
 		this.y += this.action.y;
 		this.x += this.action.x;
+		for (n=0;n<bullet.length;n++){
+			if (bullet[n] instanceof Box && boxCollide(bullet[n],enemy[i])){
+				this.kill();
+			}
+		}
 	};
 	this.kill = function(){
-
+		score += 1;
+		bullet.remove(n);
+		enemy.remove(i);
 	};
 }
 Ship.prototype = new Box();
@@ -171,6 +179,7 @@ function createShip(x,y,wait,position,xFreq,xAmp,yFreq,yAmp){
 	//foo.ready = true;
 	foo.x = x;
    	foo.y = y;
+	foo.i = enemy.length;
 	foo.wait = wait;
 	foo.position = position;
 	foo.xFreq = xFreq;//decimals?
@@ -277,13 +286,13 @@ var update = function (modifier){
 		if (enemy[i] instanceof Box && enemy[i].wait <= clock){
 			enemy[i].update();
 		}
-		for (n=0;n<bullet.length;n++){
+		/*for (n=0;n<bullet.length;n++){
 			if (bullet[n] instanceof Box && boxCollide(bullet[n],enemy[i])){
 				score += 1;
 				bullet.remove(n);
 				enemy.remove(i);
 			}
-		}
+		}*/
 
 	}
 	for (n=0;n<bullet.length;n++){
