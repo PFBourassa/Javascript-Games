@@ -4,43 +4,88 @@
 //TODO privatize more variables.
 
 //var static{//Change these to not be global 
-var player;// = addRect(200, 200, 64, 64, '#FFC02B');
-var score ;//= 0;
-var then ;//= Date.now();
+var score;//= 0;
+var then;//= Date.now();
 var start = Date.now();
 
+var player;// = addRect(200, 200, 64, 64, '#FFC02B');
 var bullet = [];
 var enemy = [];
+
+//var audio = new Audio();
+
+var Bg = function () {
+	var offset = 0;
+	this.update = function () {
+		offset -= 1;
+	}
+	this.sequence = new Sequence();
+	this.draw = function (ctx) {
+		display.ctx.drawImage(this.sequence.get(), offset % 800,0);
+		display.ctx.drawImage(this.sequence.get(), (offset % 800)+800,0);
+		
+	};
+}
+var background = new Bg;
+background.sequence.load(["images/600X800.png"]);
+
+function Sequence() {
+	var image = [];//list of images
+	var i = 0;
+	this.get = function () {
+		return image[i];
+	};
+	this.update = function () {
+		if (image.length === 1 || i >= image.length-1) {
+			i = 0;
+		}
+		else if (image.length > 1) {
+			if ( i < image.length){
+				i += 1;
+			}
+			if ( i >= image.length-1) {
+				i = 0;			
+			}
+		}
+	};
+	this.load = function (array) {
+		for (n = 0; n <= array.length; n++) {
+			image.push(loadPic(array[n]));
+		}
+	};
+}
+
+var drone = new Sequence();
+//************************************************* RUSS
+//RUSS! This is where the images for the enemies 
+//are referenced. (Drones specifically)
+
+//If you make your own images, you can change 
+//the things in the quotes, and it won't
+//break anything.
+
+drone.load(["images/32.png","images/32(2).png","images/32(3).png"]);
+//************************************************** RUSS
 
 //BOX STUFF
 function Box() {
 	this.ready = false;
-	this.pics = [];
-	this.state = 0;
+	this.sequence = new Sequence();
 	this.x = 0;
    	this.y = 0;
    	this.w = 10;
    	this.h = 10;
 	this.fill = "#fff";
 	var $this = this;
-	this.load = function(array){
-		var foo = [];
-		for(var i = 0; i < array.length; i++){
-			foo.push(loadPic(array[i]));
+	this.load = function(array) {
+		this.sequence.load(array);
+		if (this.sequence.image.length > 0) {
+			$this.ready = true;
 		}
-		$this.pics = foo;
-		$this.ready = true;
 	};
 	this.draw = function(ctx) {
-		if (this.ready) {
-			if(this.state < this.pics.length){
-				display.ctx.drawImage(this.pics[this.state], this.x - this.w/2, this.y-this.h/2);
-				this.state += 1;
-			}
-			else{
-				display.ctx.drawImage(this.pics[this.state-1], this.x - this.w/2, this.y-this.h/2);
-				this.state = 0;
-			}
+		if (this.ready == true){
+			display.ctx.drawImage(this.sequence.get(),this.x-this.w/2,this.y-this.h/2);		
 		}
 		else{
         		display.ctx.fillStyle = this.fill;
@@ -61,9 +106,10 @@ function addRect(x, y, w, h, fill) {
 
 //BULLET STUFF
 function Bullet(){
-	var speed = 10;
+	//this.prototype = new Box();
+	this.speed = 7;
 	this.move = function(){
-		this.x += speed;
+		this.x += this.speed;
 	};
 }
 Bullet.prototype = new Box();
@@ -72,13 +118,25 @@ function shoot(x,y){
 	var foo = new Bullet();
 	foo.x = x;
 	foo.y = y;
-	return foo;
+	bullet.push(foo);
+}
+
+function eShoot(x,y) {
+	var foo = new Bullet();
+	var rand = Math.floor(Math.random()*enemy.length+1);
+	//bullet.push.eShoot(enemy[rand].x,enemy[rand].x;
+	foo.x = enemy[rand].x;
+	foo.y = enemy[rand].y;
+	foo.speed = -5;
+	bullet.push(foo);
 }
 
 //ENEMY STUFF
-function Ship(){
-	this.w = 30;
-	this.h = 30; 
+function Ship(){//TODO Make them shoot
+	this.sequence = drone;
+	this.ready = true;//why does this break the game?
+	this.w = 32;
+	this.h = 32; 
 	this.fill = "#666";
 	this.wait = 1;
 	this.position = {x:430,y:320};
@@ -105,17 +163,16 @@ function Ship(){
 		this.x += this.action.x;
 	};
 	this.kill = function(){
-		
+
 	};
 }
 Ship.prototype = new Box();
 
 function createShip(x,y,wait,position,xFreq,xAmp,yFreq,yAmp){
 	var foo = new Ship();
+	//foo.ready = true;
 	foo.x = x;
    	foo.y = y;
-   	//foo.w = w;
-   	//foo.h = h;
 	foo.wait = wait;
 	foo.position = position;
 	foo.xFreq = xFreq;//decimals?
@@ -126,32 +183,14 @@ function createShip(x,y,wait,position,xFreq,xAmp,yFreq,yAmp){
 	return foo;
 }
 
-function loadPic(a){
-	var foo;
-	foo = new Image();
-	foo.src = a;
-	return foo;
-}
-
-//Image Stuff
-//var bgReady = false;
-//var bgImage = loadPic("STAGE.png");
-//var coinLinks = ["collectable.png"];
-//var links = ["player.png"];
-//var badLinks = ["enemy.png"];
-
-//target.load(coinLinks);
-//player.load(links);
-//red.load(badLinks);
-
 function stuffToDraw(){
 	if (game == 1){
 		display.ctx.fillStyle = "#11f";
 		//bgReady=true;
-		if (false) {
-			display.ctx.drawImage(bgImage, 0, 0);
-		}
 		if (true) {
+			background.draw();
+		}
+		if (false) {
 			display.ctx.fillRect(0, 0, display.width, display.height);
 		}
 		//ENEMIES
@@ -172,7 +211,7 @@ function stuffToDraw(){
         display.ctx.textAlign = 'left';
 		display.ctx.fillText("Score:"+score,2,12);
 	}
-	if (game ===0){
+	if (game === 0){
 		display.ctx.fillStyle = "#f70";//background
 		display.ctx.fillRect(50, 50, 300, 200);
 		display.ctx.fillStyle = "#5fc23f";//Button
@@ -180,7 +219,7 @@ function stuffToDraw(){
 		display.ctx.fillStyle = "#000";//text
 		display.ctx.font = 'bold 50px sans-serif';
 		display.ctx.textAlign = 'center';
-		if (score == 0){
+		if (score === 0){
 			display.ctx.fillText("Play",200,200);
 			display.ctx.fillText("Shooter",200,120);//make these boxes
 		}
@@ -191,28 +230,7 @@ function stuffToDraw(){
 	}
 };
 
-
-
-function boxCollide(box1,box2){
-	if (
-		box1.x - box1.w/2 <= box2.x + box2.w/2
-		&& box2.x - box2.w/2 <= box1.x + box1.w/2
-		&& box1.y - box1.w/2 <= box2.y + box2.h/2
-		&& box2.y - box2.w/2 <= box1.y + box1.h/2
-	){
-	return true;
-	}
-return false;
-};
-
-// Array Remove - By John Resig (MIT Licensed)
-Array.prototype.remove = function(from, to) {
-  var rest = this.slice((to || from) + 1 || this.length);
-  this.length = from < 0 ? this.length + from : from;
-  return this.push.apply(this, rest);
-};
-
-var fired = false;
+//var fired = false;
 var update = function (modifier){
 	//Player movement
 	if (38 in keysDown && player.y > player.h/2) {  //up
@@ -228,12 +246,12 @@ var update = function (modifier){
 		player.x +=256*modifier;
 	}
 	if(!(32 in keysDown)){
-		fired = false
+		player.fired = false
 	}
-	if (32 in keysDown && fired==false) {  // Space Bar
+	if (32 in keysDown && player.fired==false) {  // Space Bar
 		//if(bullet.length === 0){
-		bullet.push(shoot(player.x,player.y));//Make discrete
-		fired = true;
+		shoot(player.x+player.w/2,player.y);
+		player.fired = true;
 		//}
 	}
 	if (player.y < player.h/2) {  //prevent jumping off screen
@@ -249,7 +267,7 @@ var update = function (modifier){
 		player.x = display.width-player.w/2;
 	}
 	var now = Date.now();
-	var clock = parseInt(Math.round((now - start)/1000));//Math.round((Date.now - start)/1000);	
+	var clock = parseInt(Math.round((now - start)/1000));	
 	
 	for (i=0;i<enemy.length;i++){
 		if (boxCollide(enemy[i],player)){
@@ -268,55 +286,77 @@ var update = function (modifier){
 
 	}
 	for (n=0;n<bullet.length;n++){
-		if(bullet[n] instanceof Box){//bullets speed is multiplied by number of enemies
+		if(bullet[n] instanceof Box){
 			bullet[n].move();
 		}
 		if (bullet[n].x >= 800 - bullet[n].w/2){
 				bullet.remove(n);
 			}
 	}
-	//if (now > then){
-		$("debug").innerHTML = clock;//(Math.round((now - start)/1000));
-	//}
+	$("debug").innerHTML = clock;
 };
 
-function myDown(e) {//100, 150, 200, 70
+/*function myDown(e) {//100, 150, 200, 70************************************
 	getMouse(e);
 	if ((display.my > 150 && display.my < 230 && display.mx>100 && display.mx < 300) && game==0){
 		reset();
 	}
 		
 }
-$("canvas").onmousedown = myDown;
+$("canvas").onmousedown = myDown;*///******************************************/
 
 function frame (){
-	if (game == 1){
+	if (game == 1){//Playing
 		var now = Date.now();
 		var delta = now - then;
 		update(delta/1000);
+		drone.update();
+		background.update();
 		display.draw();
 		then = now;
+		//eShoot();
 		//$("debug").innerHTML = 
+		//var rand = Math.floor(Math.random()*bullet.length);
+		//bullet.push.eShoot(enemy[rand].x,enemy[rand].y);
 	}
 	if (game == 0){
 		foo = window.clearInterval(foo);
-		//alert(" Score: "+score);
-		//game = 1;
 		display.draw();
-		//reset();
-		
 	}
 };
 
+function playerCreate(){
+	this.fired = false;
+	player = addRect(200,150,64,64,'#F02FB6');
+	var img = loadPic("images/playercraft.png");//*********RUSS******************RUSS********
+	var imgup = loadPic("images/playerup.png");//These are for the player, same deal
+	var imgdown = loadPic("images/playerdown.png");//******************RUSS******************
+	player.draw = function() {
+		if (this.ready == true) {
+			if (38 in keysDown) {
+				display.ctx.drawImage(imgup,this.x-this.w/2,this.y-this.h/2);
+			}
+			else if (40 in keysDown) {
+				display.ctx.drawImage(imgdown,this.x-this.w/2,this.y-this.h/2);
+			}
+			else {
+				display.ctx.drawImage(img,this.x-this.w/2,this.y-this.h/2);
+			}	
+		}
+		else{
+        		display.ctx.fillStyle = this.fill;
+        		display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
+		}
+	}
+}
 
 
 function reset(){ //TODO fix this by abstracting from global
-	player = addRect(200,150,64,64,'#F02FB6');
-	target = addRect(330,220,30,30,'#01fe31');
-	//enemy.push(createShip(380,60,30,30,1,{x:430,y:320},1,60,1,60));
+	//player = addRect(200,150,64,64,'#F02FB6');
+	playerCreate();
+	player.sequence.load(["playercraft.png"]);
+	player.ready = true;
 	level();
-	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
-	//enemy.push(new Ship(800,600,30,30,5,{x:430,y:320},1,60,1,60));
 	game = 1;// 1 for in-progress, 0 for menu
 	score = 0;
 	then = Date.now();
@@ -324,13 +364,10 @@ function reset(){ //TODO fix this by abstracting from global
 	bgImage.onload = function () {
 		bgReady = true;
 	};
-	target.load(coinLinks);
-	player.load(links);
-	red.load(badLinks);
 }
 var game = 0;
 var foo = setInterval(frame, 1);//this doesn't effect framrate, only init.
 display.init();
 display.draw();
 reset();
-//document.getElementById("debug").innerHTML = (bullet[0] instanceof Box);
+//document.getElementById("debug").innerHTML = ();

@@ -123,10 +123,8 @@ function shoot(x,y){
 
 function eShoot(x,y) {
 	var foo = new Bullet();
-	var rand = Math.floor(Math.random()*enemy.length+1);
-	//bullet.push.eShoot(enemy[rand].x,enemy[rand].x;
-	foo.x = enemy[rand].x;
-	foo.y = enemy[rand].y;
+	foo.x = x;
+	foo.y = y;
 	foo.speed = -5;
 	bullet.push(foo);
 }
@@ -250,10 +248,13 @@ var update = function (modifier){
 	}
 	if (32 in keysDown && player.fired==false) {  // Space Bar
 		//if(bullet.length === 0){
-		shoot(player.x+player.w/2,player.y);
+		var rand = Math.floor(Math.random()*(enemy.length+1))
+		eShoot(enemy[rand].x-30,enemy[rand].y);
+		shoot(player.x+player.w/2+1,player.y);
 		player.fired = true;
 		//}
 	}
+	
 	if (player.y < player.h/2) {  //prevent jumping off screen
 		player.y = player.h/2;
 	}
@@ -289,9 +290,14 @@ var update = function (modifier){
 		if(bullet[n] instanceof Box){
 			bullet[n].move();
 		}
-		if (bullet[n].x >= 800 - bullet[n].w/2){
-				bullet.remove(n);
-			}
+		if (boxCollide(bullet[n],player)){
+			alert("You suck!");
+		}
+		if (bullet[n].x >= 800 - bullet[n].w/2 || bullet[n].y >= 600 - bullet[n].h/2){
+			bullet.remove(n);
+		}
+
+		
 	}
 	$("debug").innerHTML = clock;
 };

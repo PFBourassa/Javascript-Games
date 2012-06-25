@@ -27,3 +27,7 @@ function level(){
 //enemy that breaks into two.
 //variable for vulnerablilty
 
+function Splitter () {
+
+}
+Splitter.prototype = new Ship();
