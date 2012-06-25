@@ -286,14 +286,6 @@ var update = function (modifier){
 		if (enemy[i] instanceof Box && enemy[i].wait <= clock){
 			enemy[i].update();
 		}
-		/*for (n=0;n<bullet.length;n++){
-			if (bullet[n] instanceof Box && boxCollide(bullet[n],enemy[i])){
-				score += 1;
-				bullet.remove(n);
-				enemy.remove(i);
-			}
-		}*/
-
 	}
 	for (n=0;n<bullet.length;n++){
 		if(bullet[n] instanceof Box){
