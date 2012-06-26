@@ -29,24 +29,24 @@ function level(){
 //variable for vulnerablilty
 
 function Splitter () {
-	this.kill() = function (){
+	this.kill = function (){
 		enemy.push(createShip(this.x+30,this.y,{x:this.x,y:this.y},1,0,1,60));
 		enemy.push(createShip(this.x-30,this.y,{x:this.x,y:this.y},1,0,1,60));
-	}
+	};
 }
 Splitter.prototype = new Ship();
 
 function addShip(o,t){
-	if (true){
+	if (t == undefined){
 		var foo = new Ship();
 	}
-	if (false){
+	if (t == 5){
 		var foo = new Splitter();
 	}
 	foo.x = o.x;
    	foo.y = o.y;
 	foo.i = enemy.length;
-	foo.wait = o.w;
+	foo.wait = o.w || 1;
 	foo.position = o.p;
 	foo.xFreq = o.xF || 0;//decimals?
 	foo.xAmp = o.xA || 0;

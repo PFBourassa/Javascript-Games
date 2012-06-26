@@ -22,31 +22,31 @@ function level(){
 	enemy.push(createShip(450,650,25,{x:500,y:350},1,0,1,30));
 	enemy.push(createShip(600,650,25,{x:550,y:350},1,0,1,30));
 	
-	addShip({x:400,y:615,w:1,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60},5);
+	addShip({x:400,y:615,w:1,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60});
 
 }
 //enemy that breaks into two.
 //variable for vulnerablilty
 
 function Splitter () {
-	this.kill() = function (){
+	this.kill = function (){
 		enemy.push(createShip(this.x+30,this.y,{x:this.x,y:this.y},1,0,1,60));
 		enemy.push(createShip(this.x-30,this.y,{x:this.x,y:this.y},1,0,1,60));
-	}
+	};
 }
 Splitter.prototype = new Ship();
 
 function addShip(o,t){
-	if (true){
+	if (t == undefined){
 		var foo = new Ship();
 	}
-	if (fals){
+	if (t == 5){
 		var foo = new Splitter();
 	}
 	foo.x = o.x;
    	foo.y = o.y;
 	foo.i = enemy.length;
-	foo.wait = o.w;
+	foo.wait = o.w || 1;
 	foo.position = o.p;
 	foo.xFreq = o.xF || 0;//decimals?
 	foo.xAmp = o.xA || 0;
