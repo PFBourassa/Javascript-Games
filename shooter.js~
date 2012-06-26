@@ -176,7 +176,6 @@ Ship.prototype = new Box();
 
 function createShip(x,y,wait,position,xFreq,xAmp,yFreq,yAmp){
 	var foo = new Ship();
-	//foo.ready = true;
 	foo.x = x;
    	foo.y = y;
 	foo.i = enemy.length;
@@ -189,6 +188,8 @@ function createShip(x,y,wait,position,xFreq,xAmp,yFreq,yAmp){
 	foo.action = {x:xFreq, y:yFreq};
 	return foo;
 }
+
+
 
 function stuffToDraw(){
 	if (game == 1){
@@ -286,14 +287,6 @@ var update = function (modifier){
 		if (enemy[i] instanceof Box && enemy[i].wait <= clock){
 			enemy[i].update();
 		}
-		/*for (n=0;n<bullet.length;n++){
-			if (bullet[n] instanceof Box && boxCollide(bullet[n],enemy[i])){
-				score += 1;
-				bullet.remove(n);
-				enemy.remove(i);
-			}
-		}*/
-
 	}
 	for (n=0;n<bullet.length;n++){
 		if(bullet[n] instanceof Box){
@@ -301,6 +294,7 @@ var update = function (modifier){
 		}
 		if (boxCollide(bullet[n],player)){
 			alert("You suck!");
+			game = 0;
 		}
 		if (bullet[n].x >= 800 - bullet[n].w/2 || bullet[n].y >= 600 - bullet[n].h/2){
 			bullet.remove(n);

@@ -176,7 +176,6 @@ Ship.prototype = new Box();
 
 function createShip(x,y,wait,position,xFreq,xAmp,yFreq,yAmp){
 	var foo = new Ship();
-	//foo.ready = true;
 	foo.x = x;
    	foo.y = y;
 	foo.i = enemy.length;
@@ -293,6 +292,7 @@ var update = function (modifier){
 		}
 		if (boxCollide(bullet[n],player)){
 			alert("You suck!");
+			game = 0;
 		}
 		if (bullet[n].x >= 800 - bullet[n].w/2 || bullet[n].y >= 600 - bullet[n].h/2){
 			bullet.remove(n);
