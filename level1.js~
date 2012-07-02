@@ -22,26 +22,36 @@ function level(){
 	enemy.push(createShip(450,650,25,{x:500,y:350},1,0,1,30));
 	enemy.push(createShip(600,650,25,{x:550,y:350},1,0,1,30));
 	
-	addShip({x:400,y:615,w:1,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60});
+	addShip({x:400,y:615,w:1,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60},5);
 
 }
 //enemy that breaks into two.
 //variable for vulnerablilty
 
-function Splitter () {
+/*function Splitter () {
 	this.kill = function (){
-		enemy.push(createShip(this.x+30,this.y,{x:this.x,y:this.y},1,0,1,60));
-		enemy.push(createShip(this.x-30,this.y,{x:this.x,y:this.y},1,0,1,60));
+		score += 1;
+		bullet.remove(n);
+		enemy.remove(i);
+		enemy.push(createShip(this.x,this.y-30,{x:this.x,y:this.y},1,0,1,60));
+		enemy.push(createShip(this.x,this.y+30,{x:this.x,y:this.y},1,0,1,60));
 	};
 }
-Splitter.prototype = new Ship();
+Splitter.prototype = new Ship();*/
 
 function addShip(o,t){
 	if (t == undefined){
 		var foo = new Ship();
 	}
-	if (t == 5){
-		var foo = new Splitter();
+	if (t == 5){//Splitter
+		var foo = new Ship();
+		foo.kill  = function (){
+			score += 1;
+			bullet.remove(n);
+			enemy.remove(i);
+			enemy.push(createShip(this.x,this.y+30,{x:this.x,y:this.y},1,0,1,60));
+			enemy.push(createShip(this.x,this.y-30,{x:this.x,y:this.y},1,0,1,60));
+		};
 	}
 	foo.x = o.x;
    	foo.y = o.y;

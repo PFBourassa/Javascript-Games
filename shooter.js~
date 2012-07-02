@@ -189,8 +189,6 @@ function createShip(x,y,wait,position,xFreq,xAmp,yFreq,yAmp){
 	return foo;
 }
 
-
-
 function stuffToDraw(){
 	if (game == 1){
 		display.ctx.fillStyle = "#11f";

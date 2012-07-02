@@ -280,7 +280,8 @@ var update = function (modifier){
 	
 	for (i=0;i<enemy.length;i++){
 		if (boxCollide(enemy[i],player)){
-			//alert("game over");
+			alert("game over");
+			game = 0;
 		}
 		if (enemy[i] instanceof Box && enemy[i].wait <= clock){
 			enemy[i].update();
