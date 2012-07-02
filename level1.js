@@ -49,8 +49,8 @@ function addShip(o,t){
 			score += 1;
 			bullet.remove(n);
 			enemy.remove(i);
-			enemy.push(createShip(this.x,this.y+30,{x:this.x,y:this.y},1,0,1,60));
-			enemy.push(createShip(this.x,this.y-30,{x:this.x,y:this.y},1,0,1,60));
+			enemy.push(createShip(this.x,this.y+30,0,{x:this.x,y:this.y},0,0,1,60));
+			enemy.push(createShip(this.x,this.y-30,0,{x:this.x,y:this.y},0,0,1,60));
 		};
 	}
 	foo.x = o.x;
