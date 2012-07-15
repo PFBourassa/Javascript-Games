@@ -49,7 +49,7 @@ function Sequence() {
 		}
 	};
 	this.load = function (array) {
-		for (n = 0; n <= array.length; n++) {
+		for (n = 0; n < array.length; n++) {
 			image.push(loadPic(array[n]));
 		}
 	};
@@ -257,15 +257,15 @@ var update = function (modifier){
 		player.fired = false
 	}
 	if (32 in keysDown && player.fired==false) {  // Space Bar
-		//if(bullet.length === 0){
+	    //if(bullet.length === 0){
 	    console.log("fired_space");
 	    var rand = Math.floor(Math.random()*(enemy.length+1));
 	    //var e = enemy[2];
-		//eShoot(e.x-30,e.y);
-	    enemy[0].shoot();
-		shoot(player.x+player.w/2+1,player.y);
-		player.fired = true;
-		//}
+	    //eShoot(e.x-30,e.y);
+	    //enemy[0].shoot();
+	    shoot(player.x+player.w/2+1,player.y);
+	    player.fired = true;
+	    //}
 	}
 	
 	if (player.y < player.h/2) {  //prevent jumping off screen
@@ -365,15 +365,15 @@ function playerCreate(){
 function reset(){ //TODO fix this by abstracting from global
 	//player = addRect(200,150,64,64,'#F02FB6');
 	playerCreate();
-	player.sequence.load(["playercraft.png"]);
+	//player.sequence.load(["playercraft.png"]);
 	player.ready = true;
 	//level();
 	game = 1;// 1 for in-progress, 0 for menu
 	score = 0;
 	then = Date.now();
 	foo = setInterval(frame, 50);//framerate
-	bgImage.onload = function () {
-		bgReady = true;
+	background.onload = function () {
+		//bgReady = true;
 	};
 }
 var game = 0;
