@@ -12,7 +12,7 @@ var player;// = addRect(200, 200, 64, 64, '#FFC02B');
 var bullet = [];
 var enemy = [];
 
-var audio = new Audio();
+//var audio = new Audio();
 
 var Bg = function () {
 	var offset = 0;
@@ -171,6 +171,9 @@ function Ship(){//TODO Make them shoot
 		bullet.remove(n);
 		enemy.remove(i);
 	};
+    this.shoot = function(){
+	eshoot(this.x-30,this.y);
+    }
 }
 Ship.prototype = new Box();
 
@@ -255,8 +258,11 @@ var update = function (modifier){
 	}
 	if (32 in keysDown && player.fired==false) {  // Space Bar
 		//if(bullet.length === 0){
-		var rand = Math.floor(Math.random()*(enemy.length+1))
-		eShoot(enemy[rand].x-30,enemy[rand].y);
+	    console.log("fired_space");
+	    var rand = Math.floor(Math.random()*(enemy.length+1));
+	    //var e = enemy[2];
+		//eShoot(e.x-30,e.y);
+	    enemy[0].shoot();
 		shoot(player.x+player.w/2+1,player.y);
 		player.fired = true;
 		//}
@@ -319,7 +325,7 @@ function frame (){
 		background.update();
 		display.draw();
 		then = now;
-		eShoot();
+		//eShoot();
 		//$("debug").innerHTML = 
 		//var rand = Math.floor(Math.random()*bullet.length);
 		//bullet.push.eShoot(enemy[rand].x,enemy[rand].y);
