@@ -235,7 +235,6 @@ function stuffToDraw(){
 		}
 	}
 };
-
 //var fired = false;
 var update = function (modifier){
 	//Player movement
@@ -297,9 +296,7 @@ var update = function (modifier){
 		}
 		if (bullet[n].x >= 800 - bullet[n].w/2 || bullet[n].y >= 600 - bullet[n].h/2 || bullet[n].x < 0){
 			bullet.remove(n);
-		}
-
-		
+		}	
 	}
 	$("debug").innerHTML = clock;
 };
@@ -364,7 +361,7 @@ function reset(){ //TODO fix this by abstracting from global
 	playerCreate();
 	player.sequence.load(["playercraft.png"]);
 	player.ready = true;
-	level();
+	//level();
 	game = 1;// 1 for in-progress, 0 for menu
 	score = 0;
 	then = Date.now();
