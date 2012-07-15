@@ -295,7 +295,7 @@ var update = function (modifier){
 			alert("You suck!");
 			game = 0;
 		}
-		if (bullet[n].x >= 800 - bullet[n].w/2 || bullet[n].y >= 600 - bullet[n].h/2){
+		if (bullet[n].x >= 800 - bullet[n].w/2 || bullet[n].y >= 600 - bullet[n].h/2 || bullet[n].x < 0){
 			bullet.remove(n);
 		}
 

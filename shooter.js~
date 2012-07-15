@@ -276,14 +276,14 @@ var update = function (modifier){
 		player.x = display.width-player.w/2;
 	}
 	var now = Date.now();
-	var clock = parseInt(Math.round((now - start)/1000));	
+	var clock = parseInt(Math.round((now - start)/1000))+400000;	
 	
 	for (i=0;i<enemy.length;i++){
 		if (boxCollide(enemy[i],player)){
 			alert("game over");
 			game = 0;
 		}
-		if (enemy[i] instanceof Box ){
+		if (enemy[i] instanceof Box && enemy[i].wait <= clock){
 			enemy[i].update();
 		}
 	}
@@ -295,7 +295,7 @@ var update = function (modifier){
 			alert("You suck!");
 			game = 0;
 		}
-		if (bullet[n].x >= 800 - bullet[n].w/2 || bullet[n].y >= 600 - bullet[n].h/2){
+		if (bullet[n].x >= 800 - bullet[n].w/2 || bullet[n].y >= 600 - bullet[n].h/2 || bullet[n].x < 0){
 			bullet.remove(n);
 		}
 
