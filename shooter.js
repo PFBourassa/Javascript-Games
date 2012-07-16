@@ -4,11 +4,11 @@
 //TODO privatize more variables.
 
 //var static{//Change these to not be global 
-var score;//= 0;
-var then;//= Date.now();
+//var score;//= 0;
+//var then;//= Date.now();
 var start = Date.now();
 
-var player;// = addRect(200, 200, 64, 64, '#FFC02B');
+//var player;// = addRect(200, 200, 64, 64, '#FFC02B');
 var bullet = [];
 var enemy = [];
 
@@ -132,14 +132,14 @@ function eShoot(x,y) {
 //ENEMY STUFF
 function Ship(){//TODO Make them shoot
 	this.sequence = drone;
-	this.ready = true;//why does this break the game?
+	this.ready = true;
 	this.w = 32;
 	this.h = 32; 
 	this.i = 0;
 	this.fill = "#666";
 	this.wait = 1;
 	this.position = {x:430,y:320};
-	this.xFreq = 1;//decimals?
+	this.xFreq = 1;//decimals
 	this.xAmp = 60;
 	this.yFreq = 1;
 	this.yAmp = 60;
@@ -167,9 +167,10 @@ function Ship(){//TODO Make them shoot
 		}
 	};
 	this.kill = function(){
-		score += 1;
-		bullet.remove(n);
-		enemy.remove(i);
+	    score += 1;
+	    bullet.remove(n);
+	    enemy.remove(i);
+	    console.log("enemy "+i+" killed")
 	};
     this.shoot = function(){
 	eshoot(this.x-30,this.y);
@@ -267,7 +268,6 @@ var update = function (modifier){
 	    player.fired = true;
 	    //}
 	}
-	
 	if (player.y < player.h/2) {  //prevent jumping off screen
 		player.y = player.h/2;
 	}
@@ -285,7 +285,7 @@ var update = function (modifier){
 	
 	for (i=0;i<enemy.length;i++){
 		if (boxCollide(enemy[i],player)){
-			alert("game over");
+		    console.log("Game Over_Enemy collision");
 			game = 0;
 		}
 		if (enemy[i] instanceof Box && enemy[i].wait <= clock){
@@ -297,7 +297,7 @@ var update = function (modifier){
 			bullet[n].move();
 		}
 		if (boxCollide(bullet[n],player)){
-			alert("You suck!");
+		    console.log("Game Over_Bullet colllsion");
 			game = 0;
 		}
 		if (bullet[n].x >= 800 - bullet[n].w/2 || bullet[n].y >= 600 - bullet[n].h/2 || bullet[n].x < 0){
@@ -367,7 +367,7 @@ function reset(){ //TODO fix this by abstracting from global
 	playerCreate();
 	//player.sequence.load(["playercraft.png"]);
 	player.ready = true;
-	//level();
+	level();
 	game = 1;// 1 for in-progress, 0 for menu
 	score = 0;
 	then = Date.now();
