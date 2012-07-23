@@ -121,12 +121,16 @@ function shoot(x,y){
 	bullet.push(foo);
 }
 
-function eShoot(x,y) {
+function eShoot(clock) {
+    var rand = Math.floor(Math.random()*(enemy.length));
+    console.log(rand);
+    if (enemy[rand].wait <= clock ){
 	var foo = new Bullet();
-	foo.x = x;
-	foo.y = y;
+	foo.x = enemy[rand].x - 30;
+	foo.y = enemy[rand].y;
 	foo.speed = -5;
 	bullet.push(foo);
+    }
 }
 
 //ENEMY STUFF
@@ -239,9 +243,11 @@ function stuffToDraw(){
 		}
 	}
 };
-//var fired = false;
+
 var update = function (modifier){
 	//Player movement
+    var now = Date.now();
+    var clock = parseInt(Math.round((now - start)/1000));
 	if (38 in keysDown && player.y > player.h/2) {  //up
 		player.y -=256*modifier;
 	}
@@ -260,9 +266,8 @@ var update = function (modifier){
 	if (32 in keysDown && player.fired==false) {  // Space Bar
 	    //if(bullet.length === 0){
 	    console.log("fired_space");
-	    var rand = Math.floor(Math.random()*(enemy.length+1));
-	    //var e = enemy[2];
-	    //eShoot(e.x-30,e.y);
+
+	    eShoot(clock);
 	    //enemy[0].shoot();
 	    shoot(player.x+player.w/2+1,player.y);
 	    player.fired = true;
@@ -280,9 +285,7 @@ var update = function (modifier){
 	if (player.x > display.width-player.w/2) {  // ->
 		player.x = display.width-player.w/2;
 	}
-	var now = Date.now();
-	var clock = parseInt(Math.round((now - start)/1000));	
-	
+ 
 	for (i=0;i<enemy.length;i++){
 		if (boxCollide(enemy[i],player)){
 		    console.log("Game Over_Enemy collision");
@@ -312,7 +315,6 @@ var update = function (modifier){
 	if ((display.my > 150 && display.my < 230 && display.mx>100 && display.mx < 300) && game==0){
 		reset();
 	}
-		
 }
 $("canvas").onmousedown = myDown;*///******************************************/
 
