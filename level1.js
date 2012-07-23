@@ -65,4 +65,7 @@ function addShip(o,t){
 	foo.action = {x:o.xF, y:o.yF};
 	enemy.push(foo);
 }
+//Guy who gets a little bigger each time you hit him, until he explodes.
+//a REALLY small guy who zooms in and out of the screen really quickly who only shots one quick aimed shot at a time
+
 
