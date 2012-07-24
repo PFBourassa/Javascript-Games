@@ -22,7 +22,7 @@ function level(){
 	enemy.push(createShip(450,650,25,{x:500,y:350},1,0,1,30));
 	enemy.push(createShip(600,650,25,{x:550,y:350},1,0,1,30));
 	
-	addShip({x:400,y:615,w:0,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60},2);
+	addShip({x:600,y:25,w:0,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60},2);
 
 }
 //enemy that breaks into two.
@@ -55,16 +55,23 @@ function addShip(o,t){//(object,type)
     }
     if (t == 2){//*****************Twin Bees
 	var foo = new Ship();
+	foo.yAction = 0;
 	foo.update = function (){
 	    if (player.x < this.x){
 		this.x -= 1;
 	    }
 	    if (player.x >= this.x){
-		if (player.y > this.y){
-		    this.y += 1;
+		if (player.y > this.y && this.yAction === 0){
+		    this.yAction = 1;
 		}
-		if (player.y <= this.y){
-		    this.y -+ 1;
+		if (player.y <= this.y && this.yAction === 0){
+		    this.yAction = -1;
+		}
+		this.y += this.yAction;
+	    }
+	    for (n=0;n<bullet.length;n++){
+		if (bullet[n] instanceof Box && boxCollide(bullet[n],enemy[i])){
+		    this.kill();
 		}
 	    }
 	};
