@@ -188,7 +188,7 @@ function createShip(x,y,wait,position,xFreq,xAmp,yFreq,yAmp){
 	foo.i = enemy.length;
 	foo.wait = wait;
 	foo.position = position;
-	foo.xFreq = xFreq;//decimals?
+	foo.xFreq = xFreq;//decimals work
 	foo.xAmp = xAmp;
 	foo.yFreq = yFreq;
 	foo.yAmp = yAmp;
@@ -283,7 +283,6 @@ var update = function (modifier){
 	if (player.x > display.width-player.w/2) {  // ->
 		player.x = display.width-player.w/2;
 	}
- 
 	for (i=0;i<enemy.length;i++){
 		if (boxCollide(enemy[i],player)){
 		    console.log("Game Over_Enemy collision");
@@ -307,14 +306,6 @@ var update = function (modifier){
 	}
 	$("debug").innerHTML = clock;
 };
-
-/*function myDown(e) {//100, 150, 200, 70************************************
-	getMouse(e);
-	if ((display.my > 150 && display.my < 230 && display.mx>100 && display.mx < 300) && game==0){
-		reset();
-	}
-}
-$("canvas").onmousedown = myDown;*///******************************************/
 
 function frame (){
 	if (game == 1){//Playing
@@ -377,7 +368,7 @@ function reset(){ //TODO fix this by abstracting from global
 	};
 }
 var game = 0;
-var foo = setInterval(frame, 1);//this doesn't effect framrate, only init.
+var foo = setInterval(frame, 1);//this doesn't effect framrate, only init
 display.init();
 display.draw();
 reset();
