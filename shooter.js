@@ -123,7 +123,6 @@ function shoot(x,y){
 
 function eShoot(clock) {
     var rand = Math.floor(Math.random()*(enemy.length));
-    console.log(rand);
     if (enemy[rand].wait <= clock ){
 	var foo = new Bullet();
 	foo.x = enemy[rand].x - 30;
@@ -266,7 +265,6 @@ var update = function (modifier){
 	if (32 in keysDown && player.fired==false) {  // Space Bar
 	    //if(bullet.length === 0){
 	    console.log("fired_space");
-
 	    eShoot(clock);
 	    //enemy[0].shoot();
 	    shoot(player.x+player.w/2+1,player.y);

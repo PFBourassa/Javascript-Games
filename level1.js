@@ -22,7 +22,7 @@ function level(){
 	enemy.push(createShip(450,650,25,{x:500,y:350},1,0,1,30));
 	enemy.push(createShip(600,650,25,{x:550,y:350},1,0,1,30));
 	
-	addShip({x:400,y:615,w:1,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60},1);
+	addShip({x:400,y:615,w:0,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60},2);
 
 }
 //enemy that breaks into two.
@@ -39,31 +39,47 @@ function level(){
 }
 Splitter.prototype = new Ship();*/
 
-function addShip(o,t){
-	if (t == undefined){
-		var foo = new Ship();
-	}
-	if (t == 1){//Splitter
-		var foo = new Ship();
-		foo.kill  = function (){
-			score += 1;
-			bullet.remove(n);
-			enemy.remove(i);
-			enemy.push(createShip(this.x,this.y+30,0,{x:this.x,y:this.y},0,0,1,60));
-			enemy.push(createShip(this.x,this.y-30,0,{x:this.x,y:this.y},0,0,1,60));
-		};
-	}
-	foo.x = o.x;
-   	foo.y = o.y;
-	foo.i = enemy.length;
-	foo.wait = o.w || 1;
-	foo.position = o.p;
-	foo.xFreq = o.xF || 0;//decimals?
-	foo.xAmp = o.xA || 0;
-	foo.yFreq = o.yF || 0;
-	foo.yAmp = o.yA || 30;
-	foo.action = {x:o.xF, y:o.yF};
-	enemy.push(foo);
+function addShip(o,t){//(object,type)
+    if (t == undefined){
+	var foo = new Ship();
+    }
+    if (t == 1){//****************Splitter
+	var foo = new Ship();
+	foo.kill  = function (){
+	    score += 1;
+	    bullet.remove(n);
+	    enemy.remove(i);
+	    enemy.push(createShip(this.x,this.y+30,0,{x:this.x,y:this.y},0,0,1,60));
+	    enemy.push(createShip(this.x,this.y-30,0,{x:this.x,y:this.y},0,0,1,60));
+	};
+    }
+    if (t == 2){//*****************Twin Bees
+	var foo = new Ship();
+	foo.update = function (){
+	    if (player.x < this.x){
+		this.x -= 1;
+	    }
+	    if (player.x >= this.x){
+		if (player.y > this.y){
+		    this.y += 1;
+		}
+		if (player.y <= this.y){
+		    this.y -+ 1;
+		}
+	    }
+	};
+    }
+    foo.x = o.x;
+    foo.y = o.y;
+    foo.i = enemy.length;
+    foo.wait = o.w || 1;
+    foo.position = o.p;
+    foo.xFreq = o.xF || 0;//decimals?
+    foo.xAmp = o.xA || 0;
+    foo.yFreq = o.yF || 0;
+    foo.yAmp = o.yA || 30;
+    foo.action = {x:o.xF, y:o.yF};
+    enemy.push(foo);
 }
 //Guy who gets a little bigger each time you hit him, until he explodes.
 //a REALLY small guy who zooms in and out of the screen really quickly who only shots one quick aimed shot at a time
