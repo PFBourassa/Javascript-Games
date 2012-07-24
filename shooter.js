@@ -127,7 +127,7 @@ function eShoot(clock) {
 	var foo = new Bullet();
 	foo.x = enemy[rand].x - 30;
 	foo.y = enemy[rand].y;
-	foo.speed = -5;
+	foo.speed = -2;
 	bullet.push(foo);
     }
 }

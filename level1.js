@@ -7,10 +7,14 @@ function level(){
 	enemy.push(createShip(816,160,6,{x:600,y:100},1,80,1,80));
 	enemy.push(createShip(816,160,7,{x:600,y:100},1,80,1,80));
 	
-	enemy.push(createShip(817,615,10,{x:700,y:400},1,0,1,120));
-	enemy.push(createShip(817,615,10,{x:650,y:400},1,0,1,120));
-	enemy.push(createShip(817,615,10,{x:600,y:400},1,0,1,120));
-	enemy.push(createShip(817,615,10,{x:550,y:400},1,0,1,120));
+//	enemy.push(createShip(817,615,10,{x:700,y:400},1,0,1,120));
+//	enemy.push(createShip(817,615,10,{x:650,y:400},1,0,1,120));
+//	enemy.push(createShip(817,615,10,{x:600,y:400},1,0,1,120));
+//enemy.push(createShip(817,615,10,{x:550,y:400},1,0,1,120));
+    addShip({x:817,y:615,w:10,p:{x:700,y:400},xF:1,yF:1,xA:0,yA:120});
+    addShip({x:817,y:615,w:10,p:{x:650,y:400},xF:1,yF:1,xA:0,yA:120});
+    addShip({x:817,y:615,w:10,p:{x:600,y:400},xF:1,yF:1,xA:0,yA:120});
+    addShip({x:817,y:615,w:10,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:120});
 	
 	enemy.push(createShip(400,615,15,{x:550,y:400},2,60,1,120));
 	enemy.push(createShip(400,615,16,{x:550,y:400},2,60,1,120));
@@ -22,7 +26,11 @@ function level(){
 	enemy.push(createShip(450,650,25,{x:500,y:350},1,0,1,30));
 	enemy.push(createShip(600,650,25,{x:550,y:350},1,0,1,30));
 	
-	addShip({x:600,y:25,w:0,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60},2);
+    addShip({x:815,y:25,w:30,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60},2);
+    addShip({x:815,y:25,w:31,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60},2);
+    addShip({x:815,y:25,w:32,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60},2);
+    addShip({x:815,y:25,w:33,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60},2);
+    addShip({x:815,y:25,w:34,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60},2);
 
 }
 //enemy that breaks into two.
