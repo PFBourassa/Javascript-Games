@@ -267,6 +267,7 @@ var update = function (modifier){
 	    console.log("fired_space");
 	    eShoot(clock);
 	    //enemy[0].shoot();
+	    soundManager.play('aSound');
 	    shoot(player.x+player.w/2+1,player.y);
 	    player.fired = true;
 	    //}
