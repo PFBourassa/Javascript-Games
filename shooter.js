@@ -27,7 +27,7 @@ var Bg = function () {
 	};
 }
 var background = new Bg;
-background.sequence.load(["images/600X800.png"]);
+background.sequence.load(["images/stars.png"]);
 
 function Sequence() {
 	var image = [];//list of images
@@ -64,7 +64,7 @@ var drone = new Sequence();
 //the things in the quotes, and it won't
 //break anything.
 
-drone.load(["images/32.png","images/32(2).png","images/32(3).png"]);
+drone.load(["images/red1.png","images/red2.png","images/red3.png","images/red4.png"]);
 //************************************************** RUSS
 
 //BOX STUFF
@@ -266,8 +266,7 @@ var update = function (modifier){
 	    //if(bullet.length === 0){
 	    console.log("fired_space");
 	    eShoot(clock);
-	    //enemy[0].shoot();
-	    soundManager.play('aSound');
+	    //soundManager.play('aSound');
 	    shoot(player.x+player.w/2+1,player.y);
 	    player.fired = true;
 	    //}
