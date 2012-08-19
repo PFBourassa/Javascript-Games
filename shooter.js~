@@ -1,7 +1,6 @@
-//**********************************
-//Shooter.js Created by Parker Bourassa
-//**********************************
-//TODO privatize more variables.
+//********************************** Shooter.js Created by Parker
+//Bourassa ********************************** TODO privatize more
+//variables.
 
 //var static{//Change these to not be global 
 //var score;//= 0;
@@ -266,8 +265,7 @@ var update = function (modifier){
 	    //if(bullet.length === 0){
 	    console.log("fired_space");
 	    eShoot(clock);
-	    //enemy[0].shoot();
-	    soundManager.play('aSound');
+	    //soundManager.play('aSound');
 	    shoot(player.x+player.w/2+1,player.y);
 	    player.fired = true;
 	    //}
@@ -373,4 +371,4 @@ var foo = setInterval(frame, 1);//this doesn't effect framrate, only init
 display.init();
 display.draw();
 reset();
-//document.getElementById("debug").innerHTML = ();
+//document.getElementById("debug").innerHTML = ()

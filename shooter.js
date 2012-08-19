@@ -1,7 +1,7 @@
-//**********************************
-//Shooter.js Created by Parker Bourassa
-//**********************************
-//TODO privatize more variables.
+//********************************** 
+//Shooter.js Created by ParkerBourassa 
+//********************************** 
+//TODO privatize morevariables.
 
 //var static{//Change these to not be global 
 //var score;//= 0;
@@ -372,4 +372,4 @@ var foo = setInterval(frame, 1);//this doesn't effect framrate, only init
 display.init();
 display.draw();
 reset();
-//document.getElementById("debug").innerHTML = ();
+//document.getElementById("debug").innerHTML = ()
