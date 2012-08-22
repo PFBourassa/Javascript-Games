@@ -4,6 +4,8 @@
 
 function level(){//22222222222222222 TWO 222222222222222222222
 
+    addShip({ x:500, y:500, w:1, p:{x:500,y:500}, xA:0, yA:0}, 3);
+
     //Five in a row vertically
     addShip({ x:915, y:100, w:5, p:{x:700,y:100}, xA:0, yA:0});
     addShip({ x:915, y:200, w:5, p:{x:700,y:200}, xA:0, yA:0});
@@ -79,7 +81,13 @@ function addShip(o,t){//(object,type)
     }
     if (t == 3){//****************CIRCLE
 	var foo = new Ship();
-	var degrees = 0
+	var r = 10;
+	this.degrees = 0
+	foo.update = function() {
+	    this.x = this.position.x + Math.cos(this.degrees);
+	    this.y = this.position.y + Math.sin(this.degress);
+	    this.degrees += 1;
+	}
     }
     if (t == 4){//***********MOVING CENTER
 	var foo = new Ship();
