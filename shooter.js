@@ -356,7 +356,7 @@ function playerCreate(){
 function reset(){ //TODO fix this by abstracting from global
 	//player = addRect(200,150,64,64,'#F02FB6');
 	playerCreate();
-	//player.sequence.load(["playercraft.png"]);
+
 	player.ready = true;
 	level();
 	game = 1;// 1 for in-progress, 0 for menu
