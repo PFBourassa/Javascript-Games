@@ -18,10 +18,10 @@ function level(){//22222222222222222 TWO 222222222222222222222
     addShip({ x:815, y:450, w:5, p:{x:600,y:450}, xA:0, yA:0});
 
     //Figure 8
-    addShip({x:400,y:615,w:15,p:{x:550,y:400},xF:2,xA:60,yF:1,yA:120});
-    addShip({x:400,y:615,w:16,p:{x:550,y:400},xF:2,xA:60,yF:1,yA:120});
-    addShip({x:400,y:615,w:17,p:{x:550,y:400},xF:2,xA:60,yF:1,yA:120});
-    addShip({x:400,y:615,w:18,p:{x:550,y:400},xF:2,xA:60,yF:1,yA:120});
+    addShip({x:400,y:615,w:15,p:{x:550,y:400},xA:60,yA:120});
+    addShip({x:400,y:615,w:16,p:{x:550,y:400},xA:60,yA:120});
+    addShip({x:400,y:615,w:17,p:{x:550,y:400},xA:60,yA:120});
+    addShip({x:400,y:615,w:18,p:{x:550,y:400},xA:60,yA:120});
 	
     //Four in a square pattern
     addShip({x:600,y:700,w:25,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:30});
@@ -35,7 +35,7 @@ function level(){//22222222222222222 TWO 222222222222222222222
     addShip({x:815,y:25,w:32,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60},2);
     addShip({x:815,y:25,w:33,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60},2);
     addShip({x:815,y:25,w:34,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60},2);
-
+    
 }
 
 //variable for vulnerablilty
@@ -77,7 +77,34 @@ function addShip(o,t){//(object,type)
 	    }
 	};
     }
-    if (t == 3){//****************BALLOON
+    if (t == 3){//****************CIRCLE
+	var foo = new Ship();
+	var degrees = 0
+    }
+    if (t == 4){//***********MOVING CENTER
+	var foo = new Ship();
+	foo.update = function() {
+	    if (this.x < this.position.x -this.xAmp){
+		this.action.x = this.xFreq;
+	    }
+	    if (this.x > this.position.x +this.xAmp){
+		this.action.x = -this.xFreq;
+	    }
+	    if (this.y < this.position.y -this.yAmp){
+		this.action.y = this.yFreq;
+	    }
+	    if (this.y > this.position.y +this.yAmp){
+		this.action.y = -this.yFreq;
+	    }
+	    this.y += this.action.y;
+	    this.x += this.action.x;
+	    for (n=0;n<bullet.length;n++){
+		if (bullet[n] instanceof Box && boxCollide(bullet[n],enemy[i])){
+		    this.kill();
+		}
+	    }
+	    this.position.y += 0.5;
+	};
     }
     foo.x = o.x;
     foo.y = o.y;
