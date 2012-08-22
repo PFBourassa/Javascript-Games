@@ -5,14 +5,14 @@
 function level(){//22222222222222222 TWO 222222222222222222222
 
     //Wobbly near the bottom
-    addShip({x:600,y:700,w:1,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:30});
+    addShip({x:600,y:700,w:1,p:{x:550,y:400},xF:0.5,yF:0.5,xA:0,yA:30});
 
     //Five in a row vertically
-    addShip({x:815,y:100,w:10,p:{x:600,y:100},xF:1,yF:1,xA:0,yA:0});
-    addShip({x:815,y:200,w:10,p:{x:600,y:200},xF:1,yF:1,xA:0,yA:0});
-    addShip({x:815,y:300,w:10,p:{x:600,y:300},xF:1,yF:1,xA:0,yA:0});
-    addShip({x:815,y:400,w:10,p:{x:600,y:400},xF:1,yF:1,xA:0,yA:0});
-    addShip({x:815,y:500,w:10,p:{x:600,y:500},xF:1,yF:1,xA:0,yA:0});
+    addShip({ x:815, y:100, w:10, p:{x:600,y:100}, xF:0.7, yF:0.7, xA:0, yA:0});
+    addShip({ x:815, y:200, w:10, p:{x:600,y:200}, xF:0.7, yF:0.7, xA:0, yA:0});
+    addShip({ x:815, y:300, w:10, p:{x:600,y:300}, xA:0, yA:0});
+    addShip({ x:815, y:400, w:10, p:{x:600,y:400}, xA:0, yA:0});
+    addShip({ x:815, y:500, w:10, p:{x:600,y:500}, xA:0, yA:0});
 
     //Figure 8
     addShip({x:400,y:615,w:15,p:{x:550,y:400},xF:2,xA:60,yF:1,yA:120});
@@ -81,11 +81,11 @@ function addShip(o,t){//(object,type)
     foo.i = enemy.length;
     foo.wait = o.w || 1;
     foo.position = o.p;
-    foo.xFreq = o.xF || 0;//decimals?
+    foo.xFreq = o.xF || 0.7;
     foo.xAmp = o.xA || 0;
-    foo.yFreq = o.yF || 0;
+    foo.yFreq = o.yF || 0.7;
     foo.yAmp = o.yA || 30;
-    foo.action = {x:o.xF, y:o.yF};
+    foo.action = {x:foo.xFreq, y:foo.yFreq};
     enemy.push(foo);
 }
 //Guy who gets a little bigger each time you hit him, until he explodes.

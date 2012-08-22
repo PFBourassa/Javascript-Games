@@ -142,9 +142,9 @@ function Ship(){//TODO Make them shoot
 	this.fill = "#666";
 	this.wait = 1;
 	this.position = {x:430,y:320};
-	this.xFreq = 1;//decimals
+    this.xFreq = 0.7;
 	this.xAmp = 60;
-	this.yFreq = 1;
+	this.yFreq = 0.7;
 	this.yAmp = 60;
 	this.action = {x:this.xFreq, y:this.yFreq};
 	this.update = function(){
@@ -188,7 +188,7 @@ function createShip(x,y,wait,position,xFreq,xAmp,yFreq,yAmp){
 	foo.i = enemy.length;
 	foo.wait = wait;
 	foo.position = position;
-	foo.xFreq = xFreq;//decimals work
+	foo.xFreq = xFreq || 0.7;
 	foo.xAmp = xAmp;
 	foo.yFreq = yFreq;
 	foo.yAmp = yAmp;
