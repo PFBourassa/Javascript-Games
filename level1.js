@@ -4,25 +4,30 @@
 
 function level(){
 
+    //Small circle
     addShip({x:816,y:160,w:5,p:{x:600,y:100},xF:1,xA:80,yF:1,yA:80});
     addShip({x:816,y:160,w:6,p:{x:600,y:100},xF:1,xA:80,yF:1,yA:80});
     addShip({x:816,y:160,w:7,p:{x:600,y:100},xF:1,xA:80,yF:1,yA:80});
 
+    //Four in a row horizontally
     addShip({x:817,y:615,w:10,p:{x:700,y:400},xF:1,yF:1,xA:0,yA:120});
     addShip({x:817,y:615,w:10,p:{x:650,y:400},xF:1,yF:1,xA:0,yA:120});
     addShip({x:817,y:615,w:10,p:{x:600,y:400},xF:1,yF:1,xA:0,yA:120});
     addShip({x:817,y:615,w:10,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:120});
-	
+
+    //Figure 8
     addShip({x:400,y:615,w:15,p:{x:550,y:400},xF:2,xA:60,yF:1,yA:120});
     addShip({x:400,y:615,w:15,p:{x:550,y:400},xF:2,xA:60,yF:1,yA:120});
     addShip({x:400,y:615,w:15,p:{x:550,y:400},xF:2,xA:60,yF:1,yA:120});
     addShip({x:400,y:615,w:15,p:{x:550,y:400},xF:2,xA:60,yF:1,yA:120});
 	
+    //Four in a square pattern
     addShip({x:600,y:700,w:25,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:30});
     addShip({x:450,y:700,w:25,p:{x:500,y:400},xF:1,yF:1,xA:0,yA:30});
     addShip({x:450,y:650,w:25,p:{x:500,y:350},xF:1,yF:1,xA:0,yA:30});
     addShip({x:600,y:650,w:25,p:{x:550,y:350},xF:1,yF:1,xA:0,yA:30});
 	
+    //Twin Bees (TOP)
     addShip({x:815,y:25,w:30,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60},2);
     addShip({x:815,y:25,w:31,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60},2);
     addShip({x:815,y:25,w:32,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:60},2);
