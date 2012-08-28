@@ -2,7 +2,7 @@
 //              screen is(800 X 600)
 //           top left is (0,0)
 
-function level(){
+function level1(){
 
     //Wobbly near the bottom
     addShip({x:600,y:700,w:25,p:{x:550,y:400},xF:1,yF:1,xA:0,yA:30});
