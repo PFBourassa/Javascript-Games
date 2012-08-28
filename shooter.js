@@ -1,18 +1,10 @@
 //********************************** 
 //Shooter.js Created by ParkerBourassa 
 //********************************** 
-//TODO privatize morevariables.
-
-//var static{//Change these to not be global 
-//var score;//= 0;
-//var then;//= Date.now();
 var start = Date.now();
-
-//var player;// = addRect(200, 200, 64, 64, '#FFC02B');
 var bullet = [];
 var enemy = [];
-
-//var audio = new Audio();
+var now;
 
 var Bg = function () {
     var offset = 0;
@@ -27,7 +19,7 @@ var Bg = function () {
 	};
 }
 var background = new Bg;
-background.sequence.load(["images/stars.png"]);
+//background.sequence.load(["images/stars.png"]);
 
 function Sequence() {
     var image = [];//list of images
@@ -226,21 +218,21 @@ function stuffToDraw(){
 	display.ctx.fillText("Score:" + score ,2,12);
     }
     if (game === 0){
-	display.ctx.fillStyle = "#f70";//background
-	display.ctx.fillRect(50, 50, 300, 200);
+	//display.ctx.fillStyle = "#f70";//background
+	//display.ctx.fillRect(450, 50, 300, 200);
 	display.ctx.fillStyle = "#5fc23f";//Button
-	display.ctx.fillRect(100, 150, 200, 70);
+	display.ctx.fillRect(500, 150, 200, 70);
 	display.ctx.fillStyle = "#000";//text
 	display.ctx.font = 'bold 50px sans-serif';
 	display.ctx.textAlign = 'center';
 	//START SCREEN
 	if (score === 0){
-	    display.ctx.fillText("Play",200,200);
-	    display.ctx.fillText("Shooter",200,120);//make these boxes
+	    display.ctx.fillText("Play",600,200);
+	    display.ctx.fillText("Shooter",400,50);//make these boxes
 	}
 	//GAME OVER
 	if (score > 0){
-	    display.ctx.fillText("Again",200,200);
+	    display.ctx.fillText("Again",600,200);
 	    display.ctx.fillText("Score:"+score,200,120);
 	}
     }
@@ -266,27 +258,24 @@ var update = function (modifier){
 	player.fired = false
     }
     if (32 in keysDown && player.fired==false) {  // Space Bar
-	//if(bullet.length === 0){
 	console.log("fired_space");
 	eShoot(clock);
-	//soundManager.play('aSound');
 	shoot(player.x+player.w/2+1,player.y);
 	player.fired = true;
-	//}
     }
-    if (player.y < player.h/2) {  //prevent jumping off screen
+    if (player.y < player.h/2) {  // PREVENT JUMPING OUT
 	player.y = player.h/2;
     }
-    if (player.y > display.height-player.h/2) {  //down
+    if (player.y > display.height-player.h/2) {
 	player.y = display.height-player.h/2;
     }
-    if (player.x < player.w/2) {  // <-
+    if (player.x < player.w/2) {
 	player.x =player.w/2;
     }
-    if (player.x > display.width-player.w/2) {  // ->
+    if (player.x > display.width-player.w/2) {
 	player.x = display.width-player.w/2;
     }
-    for (i=0;i<enemy.length;i++){
+    for (i=0;i<enemy.length;i++){ // EACH ENEMY
 	if (boxCollide(enemy[i],player)){
 	    console.log("Game Over_Enemy collision");
 	    game = 0;
@@ -295,7 +284,7 @@ var update = function (modifier){
 	    enemy[i].update();
 	}
     }
-    for (n=0;n<bullet.length;n++){
+    for (n=0;n<bullet.length;n++){ // EACH BULLET
 	if(bullet[n] instanceof Box){
 	    bullet[n].move();
 	}
@@ -312,23 +301,32 @@ var update = function (modifier){
 
 function frame (){
     if (game == 1){//Playing
-	var now = Date.now();
+	background.sequence.load(["images/stars.png"]);
+    }
+    if (game == 0){
+	//foo = window.clearInterval(foo);
+	//display.draw();
+    }
+    	var now = Date.now();
 	var delta = now - then;
 	update(delta/1000);
 	drone.update();
 	background.update();
 	display.draw();
 	then = now;
-	//eShoot();
-	//$("debug").innerHTML = 
-	//var rand = Math.floor(Math.random()*bullet.length);
-	//bullet.push.eShoot(enemy[rand].x,enemy[rand].y);
+};
+
+function loadState (n){
+    if (n == 1){//Playing
+	background.sequence.load(["images/stars.png"]);
     }
-    if (game == 0){
+    if (n == 0){
 	foo = window.clearInterval(foo);
 	display.draw();
     }
+    game = n;
 };
+
 
 function playerCreate(){
     this.fired = false;
