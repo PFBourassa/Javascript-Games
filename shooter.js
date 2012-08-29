@@ -1,6 +1,6 @@
-//********************************** 
-//Shooter.js Created by ParkerBourassa 
-//********************************** 
+//************************************* 
+//Shooter.js Created by Parker Bourassa 
+//*************************************
 var start = Date.now();
 var bullet = [];
 var enemy = [];
@@ -125,7 +125,7 @@ function eShoot(clock) {
 }
 
 //ENEMY STUFF
-function Ship(){//TODO Make them shoot
+function Ship(){
     this.sequence = drone;
     this.ready = true;
     this.w = 32;
@@ -140,7 +140,6 @@ function Ship(){//TODO Make them shoot
     this.yAmp = 60;
     this.action = {x:this.xFreq, y:this.yFreq};
     this.update = function(){
-	//action = {x:this.xFreq, y:this.yFreq};
 	if (this.x < this.position.x -this.xAmp){
 	    this.action.x = this.xFreq;
 	}
