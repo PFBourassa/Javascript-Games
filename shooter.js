@@ -189,28 +189,29 @@ function createShip(x,y,wait,position,xFreq,xAmp,yFreq,yAmp){
 }
 
 function stuffToDraw(){
+    display.ctx.fillStyle = "#11f";
+    if (true) {
+	background.draw();
+    }
+    if (false) {
+	display.ctx.fillRect(0, 0, display.width, display.height);
+    }
+    //PLAYER
+    player.draw(display.ctx);
+    //BULLETS
+    for (i=0;i<bullet.length;i++){
+	if (bullet[i] instanceof Box){
+	    bullet[i].draw(display.ctx);
+	}
+    }
     if (game > 0){
-	display.ctx.fillStyle = "#11f";
-	if (true) {
-	    background.draw();
-	}
-	if (false) {
-	    display.ctx.fillRect(0, 0, display.width, display.height);
-	}
 	//ENEMIES
 	for (i=0;i<enemy.length;i++){
 	    if (enemy[i] instanceof Box){
 		enemy[i].draw(display.ctx);
 	    }
 	}
-	//PLAYER
-	player.draw(display.ctx);
-	//BULLETS
-	for (i=0;i<bullet.length;i++){
-	    if (bullet[i] instanceof Box){
-		bullet[i].draw(display.ctx);
-	    }
-	}
+	
 	//SCORE
 	display.ctx.fillStyle = "#000";
 	display.ctx.font = 'bold 15px sans-serif';
@@ -239,10 +240,12 @@ function stuffToDraw(){
 };
 
 var update = function (modifier){
-    //Player movement
+    //CLOCK INCREMENT
     var now = Date.now();
-    var clock = parseInt(Math.round((now - start)/1000));
-    if (38 in keysDown && player.y > player.h/2) {  //up
+    if (game > 0){
+	var clock = parseInt(Math.round((now - start)/1000));
+    }
+    if (38 in keysDown && player.y > player.h/2) {  //PLAYER CONTROLS
 	player.y -=256*modifier;
     }
     if (40 in keysDown && player.y < display.height-player.h/2) {  //down
@@ -297,6 +300,9 @@ var update = function (modifier){
 	}	
     }
     $("debug").innerHTML = clock;
+	drone.update();
+	background.update();
+	display.draw();
 };
 
 function frame (){
@@ -310,9 +316,6 @@ function frame (){
     	var now = Date.now();
 	var delta = now - then;
 	update(delta/1000);
-	drone.update();
-	background.update();
-	display.draw();
 	then = now;
 };
 
