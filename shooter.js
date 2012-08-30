@@ -218,8 +218,6 @@ function stuffToDraw(){
 	display.ctx.fillText("Score:" + score ,2,12);
     }
     if (game === 0){
-	//display.ctx.fillStyle = "#f70";//background
-	//display.ctx.fillRect(450, 50, 300, 200);
 	display.ctx.fillStyle = "#5fc23f";//Button
 	display.ctx.fillRect(500, 150, 200, 70);
 	display.ctx.fillStyle = "#000";//text
@@ -228,7 +226,7 @@ function stuffToDraw(){
 	//START SCREEN
 	if (score === 0){
 	    display.ctx.fillText("Play",600,200);
-	    display.ctx.fillText("Shooter",400,50);//make these boxes
+	    display.ctx.fillText("Shooter",400,50);
 	}
 	//GAME OVER
 	if (score > 0){
@@ -239,11 +237,6 @@ function stuffToDraw(){
 };
 
 var update = function (modifier){
-    //CLOCK INCREMENT
-    var now = Date.now();
-    if (game > 0){
-	var clock = parseInt(Math.round((now - start)/1000));
-    }
     if (38 in keysDown && player.y > player.h/2) {  //PLAYER CONTROLS
 	player.y -=256*modifier;
     }
@@ -277,36 +270,50 @@ var update = function (modifier){
     if (player.x > display.width-player.w/2) {
 	player.x = display.width-player.w/2;
     }
-    for (i=0;i<enemy.length;i++){ // EACH ENEMY
-	if (boxCollide(enemy[i],player)){
-	    console.log("Game Over_Enemy collision");
-	    game = 0;
+    if (game > 0){
+	var now = Date.now();//CLOCK INCREMENT
+	if (game > 0){
+	    var clock = parseInt(Math.round((now - start)/1000));
 	}
-	if (enemy[i] instanceof Box && enemy[i].wait <= clock){
-	    enemy[i].update();
+	for (i=0;i<enemy.length;i++){ // EACH ENEMY
+	    if (boxCollide(enemy[i],player)){
+		console.log("Game Over_Enemy collision");
+		loadState(0);
+	    }
+	    if (enemy[i] instanceof Box && enemy[i].wait <= clock){
+		enemy[i].update();
+	    }
 	}
     }
+    
     for (n=0;n<bullet.length;n++){ // EACH BULLET
 	if(bullet[n] instanceof Box){
 	    bullet[n].move();
 	}
 	if (boxCollide(bullet[n],player)){
 	    console.log("Game Over_Bullet colllsion");
-	    game = 0;
+	    loadState(0);
+	}
+	if (game == 0){
+	    button = addRect(500, 150, 200 , 70);
+	    if (boxCollide(bullet[n],button)){
+		loadState(1);
+		reset();
+	    }
 	}
 	if (bullet[n].x >= 800 - bullet[n].w/2 || bullet[n].y >= 600 - bullet[n].h/2 || bullet[n].x < 0){
 	    bullet.remove(n);
 	}	
     }
     $("debug").innerHTML = clock;
-	drone.update();
-	background.update();
-	display.draw();
+    drone.update();
+    background.update();
+    display.draw();
 };
 
 function frame (){
-    if (game == 1){//Playing
-	background.sequence.load(["images/stars.png"]);
+    if (game == 1){
+	//background.sequence.load(["images/stars.png"]);
     }
     if (game == 0){
 	//foo = window.clearInterval(foo);
@@ -318,17 +325,20 @@ function frame (){
 	then = now;
 };
 
+var button;
+
 function loadState (n){
     if (n == 1){//Playing
 	background.sequence.load(["images/stars.png"]);
+	level1();
     }
     if (n == 0){
-	foo = window.clearInterval(foo);
+	//foo = window.clearInterval(foo);
 	display.draw();
     }
+    console.log("State loaded: " + n);
     game = n;
 };
-
 
 function playerCreate(){
     this.fired = false;
@@ -353,25 +363,20 @@ function playerCreate(){
             display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
 	}
     }
+    player.ready = true;
 }
 
-
-function reset(){ //TODO fix this by abstracting from global
-    //player = addRect(200,150,64,64,'#F02FB6');
+function reset(){
     playerCreate();
-    
-    player.ready = true;
-    level1();
+    //level1();
+    loadState(1);
     game = 1;//0 for menu, 1-3 for levels, 4 for game over.
     score = 0;
     then = Date.now();
     foo = setInterval(frame, 50);//framerate
-    background.onload = function () {
+    //background.onload = function () {
 	//bgReady = true;
-    };
-}
-
-function loadLevel() {
+    //};
 }
 
 var game = 0;
@@ -379,4 +384,3 @@ var foo = setInterval(frame, 1);//this doesn't effect framrate, only init
 display.init();
 display.draw();
 reset();
-//document.getElementById("debug").innerHTML = ()
