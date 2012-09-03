@@ -356,11 +356,12 @@ function playerCreate(){
 
 function loadState (n){
     if (n == 1){//Playing
-	background.sequence.load(["images/stars.png"]);
+	//background.sequence.load(["images/stars.png"]);
 	level1();
     }
     if (n == 0){
 	//foo = window.clearInterval(foo);
+	background.sequence.load(["images/stars.png"]);
 	display.draw();
     }
     console.log("State loaded: " + n);
@@ -371,22 +372,22 @@ function loadState (n){
     foo = setInterval(frame, 50);
 };
 
+/*
 function reset(){
-    playerCreate();
-    //level1();
+    //playerCreate();
     loadState(1);
-    game = 1;//0 for menu, 1-3 for levels, 4 for game over.
-    score = 0;
-    then = Date.now();
-    foo = setInterval(frame, 50);//framerate
-    //background.onload = function () {
-	//bgReady = true;
-    //};
-}
+    //game = 1;//0 for menu, 1-3 for levels, 4 for game over.
+    //score = 0;
+    //then = Date.now();
+    //foo = setInterval(frame, 50);//framerate
+}*/
 
 var game = 0;
 var foo = setInterval(frame, 1);//this doesn't effect framrate, only init
 display.init();
 display.draw();
-reset();
+
+//reset();
+loadState(1);//Why do I need this?
+score = 0;
 loadState(0);
