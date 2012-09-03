@@ -231,7 +231,7 @@ function stuffToDraw(){
 	//GAME OVER
 	if (score > 0){
 	    display.ctx.fillText("Again",600,200);
-	    display.ctx.fillText("Score:"+score,200,120);
+	    display.ctx.fillText("Score:"+score,400,50);
 	}
     }
 };
@@ -297,8 +297,9 @@ var update = function (modifier){
 	if (game == 0){
 	    button = addRect(500, 150, 200 , 70);
 	    if (boxCollide(bullet[n],button)){
+		console.log("Game is starting");
 		loadState(1);
-		reset();
+		//reset();
 	    }
 	}
 	if (bullet[n].x >= 800 - bullet[n].w/2 || bullet[n].y >= 600 - bullet[n].h/2 || bullet[n].x < 0){
@@ -327,19 +328,6 @@ function frame (){
 
 var button;
 
-function loadState (n){
-    if (n == 1){//Playing
-	background.sequence.load(["images/stars.png"]);
-	level1();
-    }
-    if (n == 0){
-	//foo = window.clearInterval(foo);
-	display.draw();
-    }
-    console.log("State loaded: " + n);
-    game = n;
-};
-
 function playerCreate(){
     this.fired = false;
     player = addRect(200,150,64,64,'#F02FB6');
@@ -366,6 +354,23 @@ function playerCreate(){
     player.ready = true;
 }
 
+function loadState (n){
+    if (n == 1){//Playing
+	background.sequence.load(["images/stars.png"]);
+	level1();
+    }
+    if (n == 0){
+	//foo = window.clearInterval(foo);
+	display.draw();
+    }
+    console.log("State loaded: " + n);
+    start = Date.now();
+    playerCreate();
+    game = n;
+    then = Date.now();
+    foo = setInterval(frame, 50);
+};
+
 function reset(){
     playerCreate();
     //level1();
@@ -384,3 +389,4 @@ var foo = setInterval(frame, 1);//this doesn't effect framrate, only init
 display.init();
 display.draw();
 reset();
+loadState(0);
