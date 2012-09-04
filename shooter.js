@@ -285,7 +285,6 @@ var update = function (modifier){
 	    }
 	}
     }
-    
     for (n=0;n<bullet.length;n++){ // EACH BULLET
 	if(bullet[n] instanceof Box){
 	    bullet[n].move();
@@ -355,6 +354,7 @@ function playerCreate(){
 }
 
 function loadState (n){
+    enemy = [1];
     if (n == 1){//Playing
 	//background.sequence.load(["images/stars.png"]);
 	level1();
