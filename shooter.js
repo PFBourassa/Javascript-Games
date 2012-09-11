@@ -312,13 +312,13 @@ var update = function (modifier){
 };
 
 function frame (){
-    if (game == 1){
+    //if (game == 1){
 	//background.sequence.load(["images/stars.png"]);
-    }
-    if (game == 0){
+    //}
+    //if (game == 0){
 	//foo = window.clearInterval(foo);
 	//display.draw();
-    }
+    //}
     	var now = Date.now();
 	var delta = now - then;
 	update(delta/1000);
@@ -358,6 +358,9 @@ function loadState (n){
     if (n == 1){//Playing
 	//background.sequence.load(["images/stars.png"]);
 	level1();
+    }
+    if (n == 2){
+	background.sequence.load(["images/level2.png"]);
     }
     if (n == 0){
 	//foo = window.clearInterval(foo);
