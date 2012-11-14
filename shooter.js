@@ -306,6 +306,9 @@ var update = function (modifier){
 	}	
     }
     $("debug").innerHTML = clock;
+    if (enemiy == []){
+	loadState(game+1);
+    }
     drone.update();
     background.update();
     display.draw();
