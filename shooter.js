@@ -41,6 +41,7 @@ function Sequence() {
 		}
 	};
     this.load = function (array) {
+	//image = [];
 	    for (n = 0; n < array.length; n++) {
 		    image.push(loadPic(array[n]));
 		}
@@ -164,7 +165,8 @@ function Ship(){
 	score += 1;
 	bullet.remove(n);
 	enemy.remove(i);
-	console.log("enemy "+i+" killed")
+	console.log("enemy "+i+" killed");
+	console.log(enemy.length + " Enemies remain");
     };
     this.shoot = function(){
 	eshoot(this.x-30,this.y);
@@ -284,6 +286,10 @@ var update = function (modifier){
 		enemy[i].update();
 	    }
 	}
+	if (enemy.length == 1){
+	    console.log("no more enemies, loading state: " + (parseInt(game,10) + 1));
+	    loadState(parseInt(game,10) + 1);
+	}
     }
     for (n=0;n<bullet.length;n++){ // EACH BULLET
 	if(bullet[n] instanceof Box){
@@ -306,22 +312,12 @@ var update = function (modifier){
 	}	
     }
     $("debug").innerHTML = clock;
-    if (enemiy == []){
-	loadState(game+1);
-    }
     drone.update();
     background.update();
     display.draw();
 };
 
 function frame (){
-    //if (game == 1){
-	//background.sequence.load(["images/stars.png"]);
-    //}
-    //if (game == 0){
-	//foo = window.clearInterval(foo);
-	//display.draw();
-    //}
     	var now = Date.now();
 	var delta = now - then;
 	update(delta/1000);
@@ -364,6 +360,7 @@ function loadState (n){
     }
     if (n == 2){
 	background.sequence.load(["images/level2.png"]);
+	level2();
     }
     if (n == 0){
 	//foo = window.clearInterval(foo);

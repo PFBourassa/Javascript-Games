@@ -19,10 +19,10 @@ function loadPic(a){
 
 //Image Stuff
 var bgReady = false;
-var bgImage = loadPic("STAGE.png");
-var coinLinks = ["collectable.png"];
-var links = ["player.png"];
-var badLinks = ["enemy.png"];
+var bgImage = loadPic("MVP_Images/STAGE.png");
+var coinLinks = ["MVP_Images/collectable.png"];
+var links = ["MVP_Images/player.png"];
+var badLinks = ["MVP_Images/enemy.png"];
 
 target.load(coinLinks);
 player.load(links);
