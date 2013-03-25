@@ -8,39 +8,54 @@ function loadPic(a){
 	return foo;
 }
 
+function Sequence() {
+	var image = [];//list of images
+	var i = 0;
+	this.get = function () {
+		return image[i];
+	};
+	this.update = function () {
+		if (image.length === 1 || i >= image.length-1) {
+			i = 0;
+		}
+		else if (image.length > 1) {
+			if ( i < image.length){
+				i += 1;
+			}
+			if ( i >= image.length-1) {
+				i = 0;			
+			}
+		}
+	};
+	this.load = function (array) {
+		for (n = 0; n <= array.length; n++) {
+			image.push(loadPic(array[n]));
+		}
+	};
+}
+
 function Box() {
 	this.ready = false;
-	this.pics = [];
-	this.state = 0;
+	this.sequence = new Sequence();
 	this.x = 0;
    	this.y = 0;
-   	this.w = 1;
-   	this.h = 1;
-	this.fill = "#444";
+   	this.w = 10;
+   	this.h = 10;
+	this.fill = "#fff";
 	var $this = this;
-	this.load = function(array){
-		var foo = [];
-		for(var i = 0; i < array.length; i++){
-			foo.push(loadPic(array[i]));
+	this.load = function(array) {
+		this.sequence.load(array);
+		if (this.sequence.image.length > 0) {
+			$this.ready = true;
 		}
-		$this.pics = foo;
-		$this.ready = true;
-	}
+	};
 	this.draw = function(ctx) {
-		if (this.ready) {
-			if(this.state < this.pics.length){
-				display.ctx.drawImage(this.pics[this.state], this.x - this.w/2, this.y-this.h/2);
-				this.state += 1;
-			}
-			else{
-				display.ctx.drawImage(this.pics[this.state-1], this.x - this.w/2, this.y-this.h/2);
-				this.state = 0;
-			}
+		if (this.ready == true){
+			display.ctx.drawImage(this.sequence.get(),this.x-this.w/2,this.y-this.h/2);		
 		}
 		else{
         		display.ctx.fillStyle = this.fill;
         		display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
-		
 		}
 	};
 }
@@ -63,3 +78,5 @@ function boxCollide(box1,box2){
 	}
 return false;
 };
+
+console.log("leadbox loaded");

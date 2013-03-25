@@ -8,6 +8,32 @@ function loadPic(a){
 	return foo;
 }
 
+function Sequence() {
+	var image = [];//list of images
+	var i = 0;
+	this.get = function () {
+		return image[i];
+	};
+	this.update = function () {
+		if (image.length === 1 || i >= image.length-1) {
+			i = 0;
+		}
+		else if (image.length > 1) {
+			if ( i < image.length){
+				i += 1;
+			}
+			if ( i >= image.length-1) {
+				i = 0;			
+			}
+		}
+	};
+	this.load = function (array) {
+		for (n = 0; n <= array.length; n++) {
+			image.push(loadPic(array[n]));
+		}
+	};
+}
+
 function Box() {
 	this.ready = false;
 	this.sequence = new Sequence();
@@ -52,3 +78,14 @@ function boxCollide(box1,box2){
 	}
 return false;
 };
+
+function addRect(x, y, w, h, fill) {
+    var rect = new Box();
+    rect.x = x;
+    rect.y = y;
+    rect.w = w;
+    rect.h = h;
+    rect.fill = fill;
+    return rect;
+}
+console.log("leadbox loaded");

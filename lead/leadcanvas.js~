@@ -1,6 +1,9 @@
 //leadcanvas.js
 //Parker Bourassa
 
+//document.createElement("canvas");
+//document.body.appendChild(canvas);
+
 var display = {
     canvas: 0,
     valid: false,
