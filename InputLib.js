@@ -31,8 +31,11 @@ var display = {
             }
         }
 	this.getCtx();
-    }
-
+    },
+	init: function() {
+		this.width = $("canvas").width;
+		this.height = $("canvas").height;
+	}
 };
 
 //TODO init function for canvas x,y size.
@@ -58,7 +61,7 @@ function getMouse(e) {
 var keysDown = {};//handles multiple keys
 
 window.addEventListener("keydown", function (e){
-	//document.getElementById("debug").innerHTML = ("Key " + e.keyCode + " was pressed.");
+	//$("debug").innerHTML = ("Key " + e.keyCode + " was pressed.");
 	keysDown[e.keyCode] = true;
 	invalidate();
 	//return false;
