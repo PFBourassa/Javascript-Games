@@ -21,33 +21,6 @@ var Bg = function () {
 var background = new Bg;
 //background.sequence.load(["images/stars.png"]);
 
-/*function Sequence() {
-    var image = [];//list of images
-    var i = 0;
-    this.get = function () {
-	    return image[i];
-	};
-    this.update = function () {
-	    if (image.length === 1 || i >= image.length-1) {
-		    i = 0;
-		}
-	    else if (image.length > 1) {
-		    if ( i < image.length){
-			    i += 1;
-			}
-		    if ( i >= image.length-1) {
-			    i = 0;			
-			}
-		}
-	};
-    this.load = function (array) {
-	//image = [];
-	    for (n = 0; n < array.length; n++) {
-		    image.push(loadPic(array[n]));
-		}
-	};
-}*/
-
 var drone = new Sequence();
 //************************************************* RUSS
 //RUSS! This is where the images for the enemies 
@@ -59,43 +32,6 @@ var drone = new Sequence();
 
 drone.load(["images/red1.png","images/red2.png","images/red3.png","images/red4.png"]);
 //************************************************** RUSS
-
-//BOX STUFF
-/*function Box() {
-    this.ready = false;
-    this.sequence = new Sequence();
-    this.x = 0;
-    this.y = 0;
-    this.w = 10;
-    this.h = 10;
-    this.fill = "#fff";
-    var $this = this;
-    this.load = function(array) {
-	    this.sequence.load(array);
-	    if (this.sequence.image.length > 0) {
-		    $this.ready = true;
-		}
-	};
-    this.draw = function(ctx) {
-	    if (this.ready == true){
-		    display.ctx.drawImage(this.sequence.get(),this.x-this.w/2,this.y-this.h/2);		
-		}
-	    else{
-        	    display.ctx.fillStyle = this.fill;
-        	    display.ctx.fillRect(this.x-this.w/2, this.y-this.h/2, this.h, this.w);
-		}
-	};
-}*/
-
-/*function addRect(x, y, w, h, fill) {
-    var rect = new Box();
-    rect.x = x;
-    rect.y = y;
-    rect.w = w;
-    rect.h = h;
-    rect.fill = fill;
-    return rect;
-}*/
 
 //BULLET STUFF
 function Bullet(){
@@ -317,13 +253,6 @@ var update = function (modifier){
     display.draw();
 };
 
-/*function frame (){
-    	var now = Date.now();
-	var delta = now - then;
-	update(delta/1000);
-	then = now;
-};*/
-
 var button;
 
 function playerCreate(){
@@ -374,16 +303,6 @@ function loadState (n){
     then = Date.now();
     foo = setInterval(frame, 50);
 };
-
-/*
-function reset(){
-    //playerCreate();
-    loadState(1);
-    //game = 1;//0 for menu, 1-3 for levels, 4 for game over.
-    //score = 0;
-    //then = Date.now();
-    //foo = setInterval(frame, 50);//framerate
-}*/
 
 var game = 0;
 //var foo = setInterval(frame, 1);//this doesn't effect framrate, only init

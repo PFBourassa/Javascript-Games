@@ -4,10 +4,9 @@ var leadinput = {};
 leadinput.keysDown = {};//handles multiple keys
 
 window.addEventListener("keydown", function (e){
-	//$("debug").innerHTML = ("Key " + e.keyCode + " was pressed.");
+	//console.log("Key " + e.keyCode + " was pressed.");
 	leadinput.keysDown[e.keyCode] = true;
 	invalidate();
-	//return false;
 	e.preventDefault();
 }, false);
 

@@ -12,7 +12,7 @@ window.addEventListener("keydown", function (e){
 }, false);
 
 addEventListener("keyup", function (e) {
-	delete keysDown[e.keyCode];
+	delete leadinput.keysDown[e.keyCode];
 	invalidate();
 }, false);
 

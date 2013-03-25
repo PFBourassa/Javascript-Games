@@ -334,10 +334,10 @@ function playerCreate(){
     var imgdown = loadPic("images/playerdown.png");//******************RUSS******************
     player.draw = function() {
 	if (this.ready == true) {
-	    if (38 in input.keysDown) {
+	    if (38 in leadinput.keysDown) {
 		display.ctx.drawImage(imgup,this.x-this.w/2,this.y-this.h/2);
 	    }
-	    else if (40 in input.keysDown) {
+	    else if (40 in leadinput.keysDown) {
 		display.ctx.drawImage(imgdown,this.x-this.w/2,this.y-this.h/2);
 	    }
 	    else {
