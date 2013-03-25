@@ -1,0 +1,25 @@
+//leadinput.js
+//Parker Bourassa
+var leadinput = {};
+leadinput.keysDown = {};//handles multiple keys
+
+window.addEventListener("keydown", function (e){
+	//console.log("Key " + e.keyCode + " was pressed.");
+	leadinput.keysDown[e.keyCode] = true;
+	invalidate();
+	e.preventDefault();
+}, false);
+
+addEventListener("keyup", function (e) {
+	delete leadinput.keysDown[e.keyCode];
+	invalidate();
+}, false);
+
+function getMouse(e) {
+    var x = Math.floor(e.pageX - $("canvas").getBoundingClientRect().left);
+    var y = Math.floor(e.pageY - $("canvas").getBoundingClientRect().top);
+    display.mx = x;
+    display.my = y;
+}
+
+console.log("leadinput loaded");
