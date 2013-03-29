@@ -40,4 +40,5 @@ function invalidate() {
     display.valid = false;
 }
 
+display.init();
 console.log("leadcanvas loaded");

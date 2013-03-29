@@ -1,10 +1,8 @@
 //************************************* 
 //Shooter.js Created by Parker Bourassa 
 //*************************************
-//var start = Date.now();
 var bullet = [];
 var enemy = [];
-//var now;
 
 var Bg = function () {
     var offset = 0;
@@ -290,15 +288,11 @@ function loadState (n){
     }
     console.log("State loaded: " + n);
     start = Date.now();
-
     game = n;
     then = Date.now();
     foo = setInterval(frame, 50);
 };
 
-var game = 1;
-//var foo = setInterval(frame, 1);//this doesn't effect framrate, only init
-display.init();
-//console.log(game);
-score = 0;
+var game = 0;
+var score = 0;
 loadState(0);
