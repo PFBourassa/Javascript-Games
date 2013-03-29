@@ -100,9 +100,9 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 
 
 
-<script type="text/javascript" src="shooter/level1.js"></script>
-<script type="text/javascript" src="shooter/level2.js"></script>
-<script type="text/javascript" src="shooter/shooter.js"></script>
+<script type="text/javascript" src="level1.js"></script>
+<script type="text/javascript" src="level2.js"></script>
+<script type="text/javascript" src="shooter.js"></script>
 
 <!--
 <div>
