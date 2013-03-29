@@ -30,7 +30,7 @@ var display = {
         }
 	this.getCtx();
     },
-	init: function() {
+	init:function() {
 		this.width = $("canvas").width;
 		this.height = $("canvas").height;
 	}
