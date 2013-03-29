@@ -39,3 +39,5 @@ var display = {
 function invalidate() {
     display.valid = false;
 }
+
+console.log("leadcanvas loaded");
