@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <head>
 <title>Pooter</title>
-<script type="text/javascript" src="..lead/leadclock.js"></script>
+<script type="text/javascript" src="../lead/leadclock.js"></script>
 <script type="text/javascript" src="../lead/leadutil.js"></script>
 <script type="text/javascript" src="../lead/leadbox.js"></script>
 <script type="text/javascript" src="../lead/leadinput.js"></script>

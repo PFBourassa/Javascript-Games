@@ -22,16 +22,7 @@ var background = new Bg;
 //background.sequence.load(["images/stars.png"]);
 
 var drone = new Sequence();
-//************************************************* RUSS
-//RUSS! This is where the images for the enemies 
-//are referenced. (Drones specifically)
-
-//If you make your own images, you can change 
-//the things in the quotes, and it won't
-//break anything.
-
 drone.load(["images/red1.png","images/red2.png","images/red3.png","images/red4.png"]);
-//************************************************** RUSS
 
 //BULLET STUFF
 function Bullet(){
@@ -283,6 +274,7 @@ function playerCreate(){
 
 function loadState (n){
     enemy = [1];
+    playerCreate();
     if (n == 1){//Playing
 	//background.sequence.load(["images/stars.png"]);
 	level1();
@@ -298,18 +290,15 @@ function loadState (n){
     }
     console.log("State loaded: " + n);
     start = Date.now();
-    playerCreate();
+
     game = n;
     then = Date.now();
     foo = setInterval(frame, 50);
 };
 
-var game = 0;
+var game = 1;
 //var foo = setInterval(frame, 1);//this doesn't effect framrate, only init
 display.init();
-display.draw();
-
-//reset();
-loadState(1);//Why do I need this?
+//console.log(game);
 score = 0;
 loadState(0);
