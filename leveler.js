@@ -8,7 +8,7 @@ function Grid(w,h){
 		}
 		this.grid.push(row);
 	}
-	this.update = function(x,y,value){//use point as argument?
+	this.save = function(x,y,value){//use point as argument?
 		c = this.grid[y-1];
         c[x-1]=value;
 	};
@@ -16,6 +16,16 @@ function Grid(w,h){
 		c = this.grid[y-1];
         return c[x-1];
 	};
+	this.draw = function(){
+	for(i=0;i<h;i++){
+		for(var n=0;n<w;n++){
+			//draw square(h,n)
+		}
+	}
 }
  var test= new Grid(4,4);
  
+ var key = {
+	 0:empty,
+	 1:block
+	 };
