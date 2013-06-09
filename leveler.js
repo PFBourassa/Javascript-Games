@@ -1,9 +1,9 @@
 function Grid(w,h){
-	this.pixels = 32;
-    this.grid=[];
-    var row;
+	var pixels = 32;
+    var grid=[];
+    var key;
     for(i=0;i<h;i++){
-		row = [];
+		var row = [];
 		for(var n=0;n<w;n++){
 			row.push(0);
 		}
@@ -20,19 +20,25 @@ function Grid(w,h){
 	this.draw = function(){
 		for(i=0;i<h;i++){
 			for(var n=0;n<w;n++){
-			//this.read(h,n);
+				display.ctx.drawImage(/*this.key.read(i,h)*/img), pixels * h, pixels * n);
 			}
 		}
 	}
+	this.init = function(){
+	}
+	this.setKey = function(x){
+		key = x;
+	}
 }
-var test= new Grid(4,4);
- 
+var test = new Grid(4,4);
+var img = loadPic("images/playercraft.png");
+test.draw();
+
 function Block(){
 	
- }
+}
  
- /*var key = {
-	 0:empty,
+ Grid.setKey({
+	 0:loadPic("images/playercraft.png"),
 	 1:block
-	 };
-	 */
+	 });
