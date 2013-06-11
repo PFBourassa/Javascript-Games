@@ -160,7 +160,7 @@ function stuffToDraw(){
 	    display.ctx.fillText("Again",600,200);
 	    display.ctx.fillText("Score:"+score,400,50);
 	}
-    }
+}
 };
 
 var update = function (modifier){
@@ -296,3 +296,4 @@ function loadState (n){
 var game = 0;
 var score = 0;
 loadState(0);
+

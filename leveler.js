@@ -7,20 +7,22 @@ function Grid(w,h){
 		for(var n=0;n<w;n++){
 			row.push(0);
 		}
-		this.grid.push(row);
+		grid.push(row);
 	}
 	this.save = function(x,y,value){//use point as argument?
-		c = this.grid[y-1];
+		c = grid[y-1];
 		c[x-1]=value;
 	}
 	this.read = function(x,y){//use point as argument?
-		c = this.grid[y-1];
+		c = grid[y-1];
 		return c[x-1];
 	}
-	this.draw = function(){
+	this.draw = function(ctx){
 		for(i=0;i<h;i++){
 			for(var n=0;n<w;n++){
-				display.ctx.drawImage(/*this.key.read(i,h)*/img), pixels * h, pixels * n);
+				display.ctx.fillRect(0, 0, display.width, display.height);
+				console.log("display.ctx");
+				//display.ctx.drawImage(/*this.key.read(i,h)*/img, 0,0)//pixels * h, pixels * n);
 			}
 		}
 	}
@@ -30,15 +32,19 @@ function Grid(w,h){
 		key = x;
 	}
 }
-var test = new Grid(4,4);
+var test = new Grid(1,1);
 var img = loadPic("images/playercraft.png");
-test.draw();
+//display.ctx.fillRect(0, 0, 30, 30);
+//display.ctx.fillRect(0, 0, display.width, display.height);
+//test.draw(display.ctx);
 
 function Block(){
 	
 }
  
- Grid.setKey({
+ /*Grid.setKey({
 	 0:loadPic("images/playercraft.png"),
-	 1:block
+	 1:0
 	 });
+*/
+console.log("leveler_loaded");
