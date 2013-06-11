@@ -29,10 +29,13 @@ var display = {
             }
         }
 	this.getCtx();
+	console.log("ctx gotten");
     },
 	init:function() {
 		this.width = $("canvas").width;
 		this.height = $("canvas").height;
+		this.getCtx();
+		console.log("ctx gotten by init");
 	}
 };
 
