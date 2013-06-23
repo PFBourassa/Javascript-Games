@@ -20,9 +20,9 @@ function Grid(w,h){
 	this.draw = function(ctx){
 		for(i=0;i<h;i++){
 			for(var n=0;n<w;n++){
-				display.ctx.fillRect(0, 0, display.width, display.height);
+				//display.ctx.fillRect(i*10, n*10, 10, 10);
 				console.log("display.ctx");
-				//display.ctx.drawImage(/*this.key.read(i,h)*/img, 0,0)//pixels * h, pixels * n);
+				display.ctx.drawImage(loadPic("images/red1.png"), 100,100);//pixels * h, pixels * n);
 			}
 		}
 	}
@@ -32,11 +32,11 @@ function Grid(w,h){
 		key = x;
 	}
 }
-var test = new Grid(1,1);
-var img = loadPic("images/playercraft.png");
-//display.ctx.fillRect(0, 0, 30, 30);
-//display.ctx.fillRect(0, 0, display.width, display.height);
-//test.draw(display.ctx);
+var test = new Grid(1, 1);
+var img = loadPic("images/red1.png");
+
+var drone = new Sequence();
+drone.load(["shooter/images/red1.png"]);
 
 function Block(){
 	
