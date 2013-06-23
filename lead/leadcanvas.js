@@ -28,8 +28,8 @@ var display = {
                 stuffToDraw();
             }
         }
-	this.getCtx();
-	console.log("ctx gotten");
+	//this.getCtx();
+	//console.log("ctx gotten");
     },
 	init:function() {
 		this.width = $("canvas").width;
@@ -45,3 +45,4 @@ function invalidate() {
 
 display.init();
 console.log("leadcanvas loaded");
+
