@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<head>
+<title>Pooter</title>
+<script type="text/javascript" src="../lead/leadclock.js"></script>
+<script type="text/javascript" src="../lead/leadutil.js"></script>
+<script type="text/javascript" src="../lead/leadbox.js"></script>
+<script type="text/javascript" src="../lead/leadinput.js"></script>
+<script type="text/javascript" src="../lead/leadcanvas.js"></script>
+
+<style type="text/css">
+#game {background: #fff;
+  margin: 0 auto;
+  width: 800px;
+  padding: 10px;
+  text-align: center;}
+#disqus_thread{margin: 0 auto;
+}
+.debug{text-allign:left;}
+</style>
+
+<meta charset="utf-8">
+
+</head>
+<body>
+
+<!-- include SM2 library (see builds for optimized versions) -->
+<!--<script type="text/javascript" src="soundmanagerv297a-20120624/script/soundmanager2.js"></script>-->
+
+<!-- configure SM2 for your use -->
+<!--<script type="text/javascript">
+
+soundManager.setup({
+
+  // location: path to SWF files, as needed (SWF file name is appended later.)
+
+  url: 'soundmanagerv297a-20120624/swf',
+
+  // optional: version of SM2 flash audio API to use (8 or 9; default is 8 if omitted, OK for most use cases.)
+  // flashVersion: 9,
+
+  // use soundmanager2-nodebug-jsmin.js, or disable debug mode (enabled by default) after development/testing
+  // debugMode: false,
+
+  // good to go: the onready() callback
+
+  onready: function() {
+
+    // SM2 has started - now you can create and play sounds!
+
+    var mySound = soundManager.createSound({
+      id: 'aSound',
+      url: 'sound.mp3',
+      onload: function() { console.log('sound loaded!', this); }
+      // other options here..
+    });
+
+    //mySound.play();
+
+  },
+
+  // optional: ontimeout() callback for handling start-up failure
+
+  ontimeout: function() {
+
+    // Hrmm, SM2 could not start. Missing SWF? Flash blocked? Show an error, etc.?
+    // See the flashblock demo when you want to start getting fancy.
+
+  }
+
+});
+
+</script>-->
+
+<!--
+<div style="float:right;">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-7884178648256837";
+/* MVP */
+google_ad_slot = "8666152891";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+<!--
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+-->
+
+<?php
+
+$game = $_GET['game'];
+include ($game.".php");
+
+?>
+
+<!--
+<div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'kaninepete'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+-->
+
+</body>
+</html>

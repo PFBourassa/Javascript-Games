@@ -1,0 +1,94 @@
+/**
+ *
+ * SoundManager 2: TEMPLATE EXAMPLE / DEMO ONLY, just to make the demo page pretty.
+ *
+ * You don't need this stuff for SM2 to work. :)
+ *
+ */
+
+body {
+ font-size:75%;
+}
+
+pre {
+ padding: 0.5em;
+ background: #f9f9f9;
+}
+
+code, pre {
+ font-family:"lucida console",monaco,courier,system;
+ font-size:100%;
+ color:#2233cc;
+}
+
+em em {
+ font-weight:normal;
+ font-style:normal;
+ color:#339933;
+}
+
+h1,
+h2.special {
+ letter-spacing: -0.005em;
+}
+
+h1, h2, h3, h4 {
+ font-family:"helvetica neue",helvetica,verdana,arial,tahoma,"sans serif";
+ font-size:1em;
+ margin:0px;
+ padding:0px;
+ vertical-align:middle;
+}
+
+h1 {
+ font-size:2em;
+ border-bottom: 1px dotted #999;
+}
+
+h2 {
+ font-family:"helvetica neue",helvetica,arial,verdana,tahoma,"sans serif";
+ font-size:1.5em;
+ margin-top: 1.5em;
+ margin-bottom: 0px;
+}
+
+h2 code {
+ font-size: 85%;
+}
+
+h3 {
+ font-size:1.17em;
+ border-bottom:1px solid #ccc;
+ padding-bottom:0.25em;
+ margin-top:1.5em;
+}
+
+h4 {
+ margin:1.5em 0px 0.5em 0px;
+ font-size:1.1em;
+}
+
+
+p,
+li {
+ font:normal 1em verdana,tahoma,arial,"sans serif";
+}
+
+code span,
+pre span {
+ color:#666;
+}
+
+ul.file-structure ul {
+  padding-left:1.5em;
+}
+
+ul.file-structure li {
+  list-style-type:square;
+  margin-top:0.25em;
+  margin-left:0px;
+}
+
+ul.file-structure li span {
+  color:#999;
+}
