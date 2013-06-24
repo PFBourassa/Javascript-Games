@@ -30,7 +30,7 @@ var display = {
         }
 	this.getCtx();
     },
-	init: function() {
+	init:function() {
 		this.width = $("canvas").width;
 		this.height = $("canvas").height;
 	}
@@ -39,3 +39,5 @@ var display = {
 function invalidate() {
     display.valid = false;
 }
+
+console.log("leadcanvas loaded");

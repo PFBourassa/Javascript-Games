@@ -1,13 +1,10 @@
 //leadclock
 //Parker Bourassa
 
-var start = Date.now();
-var then = Date.now();
-var now;
-
+//var start = Date.now();
 
 function frame (){
-    	var now = Date.now();
+    var now = Date.now();
 	var delta = now - then;
 	update(delta/1000);
 	then = now;
