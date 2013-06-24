@@ -16,7 +16,12 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=0
+current_page=4
+FILE_NAME_0=27;Javascript;0;16;1;1;0;/home/parker/Documents/HTML/games/lead/leadbox.js;0;4
+FILE_NAME_1=0;Javascript;0;16;1;1;0;/home/parker/Documents/HTML/games/lead/leadcanvas.js;0;4
+FILE_NAME_2=0;Javascript;0;16;1;1;0;/home/parker/Documents/HTML/games/lead/leadclock.js;0;4
+FILE_NAME_3=0;Javascript;0;16;1;1;0;/home/parker/Documents/HTML/games/lead/leadutil.js;0;4
+FILE_NAME_4=0;Javascript;0;16;1;1;0;/home/parker/Documents/HTML/games/lead/leadinput.js;0;4
 
 [VTE]
 last_dir=/home/parker/Documents/HTML/games
