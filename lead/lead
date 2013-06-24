@@ -9,14 +9,14 @@ indent_mode=2
 
 [project]
 name=leadJs
-base_path=/home/parker/Documents/HTML/games/lead/LeadJS
+base_path=/home/parker/Documents/HTML/games/lead
 
 [long line marker]
 long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=-1
+current_page=0
 
 [VTE]
 last_dir=/home/parker/Documents/HTML/games
