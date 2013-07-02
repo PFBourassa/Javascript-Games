@@ -15,7 +15,13 @@ display.ctx.fillRect(10, 10, 10, 10);
 function drawcoins(){
 	display.ctx.drawImage(imgO,30,30);
 	//display.ctx.drawImage(imgS.get(),50,50);
+	
+	var testGrid = new Grid(10,10);
+	console.log(testGrid);
+	testGrid.draw();
 }
+
+
 
 /*==============
 *loadPic() has no check for if the image is loaded or not.
