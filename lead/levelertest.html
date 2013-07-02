@@ -102,7 +102,12 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 
 <script type="text/javascript" src="../lead/leadcanvas.js"></script>
 <script type="text/javascript" src="../leveler.js"></script>
-<script type="text/javascript">test.draw(display.ctx);</script>
+<script type="text/javascript">
+	var test = new Grid(1, 1);
+	test.draw(display.ctx);
+	var img = loadPic("images/red1.png");
+	display.ctx.drawImage(img,100,100);
+	</script>
 <!--
 <div>
 <div id="disqus_thread"></div>
