@@ -32,12 +32,12 @@ function Grid(w,h){
 		key = x;
 	}
 }
-var test = new Grid(1, 1);
-var img = loadPic("images/red1.png");
-display.ctx.drawImage(img);
+//var test = new Grid(1, 1);
+//var img = loadPic("images/red1.png");
+//display.ctx.drawImage(img);
 
-var drone = new Sequence();
-drone.load(["shooter/images/red1.png"]);
+//var drone = new Sequence();
+//drone.load(["shooter/images/red1.png"]);
 
 function Block(){
 	
