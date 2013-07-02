@@ -11,6 +11,7 @@ function loadPic(a){
 function Sequence() {
 	var image = [];//list of images
 	var i = 0;
+	this.ready = false;
 	this.get = function () {
 		return image[i];
 	};
@@ -30,6 +31,11 @@ function Sequence() {
 	this.load = function (array) {
 		for (n = 0; n <= array.length; n++) {
 			image.push(loadPic(array[n]));
+			image[n].onload = function() {
+				if (n == array.length) {
+					this.ready = true;
+				}
+			};
 		}
 	};
 }
