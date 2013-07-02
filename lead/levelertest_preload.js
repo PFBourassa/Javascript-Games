@@ -4,5 +4,6 @@ var imgO = loadPic("testImage.png");
 //console.log(imgX);
 console.log(imgO);
 //display.ctx.drawImage(imgX,10,10);
-drawcoins()
-
+imgO.onload = function() {
+  drawcoins()
+}
