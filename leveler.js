@@ -21,10 +21,10 @@ function Grid(w,h){
 		for(i=0;i<h;i++){
 			for(var n=0;n<w;n++){
 				//display.ctx.fillRect(i*10, n*10, 10, 10);
-				console.log("display.ctx");
-				//display.ctx.drawImage(loadPic("images/red1.png"), 100,100);//pixels * h, pixels * n);
-				var img = loadPic("testImage.png");
-				display.ctx.drawImage(img,100,100);
+				//console.log("draw();");
+				display.ctx.drawImage(imgO, pixels * i, pixels * n);
+				//var img = loadPic("testImage.png");
+				//display.ctx.drawImage(imgO,100,100);
 			}
 		}
 	}
