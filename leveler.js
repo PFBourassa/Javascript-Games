@@ -1,11 +1,14 @@
+var coin = new GridObj("coin3.png", false);
+var coinville = new Key();
+
 function Grid(w,h){
 	var pixels = 32;
     var grid=[];
-    var key;
+    var key = coinville;
     for(i=0;i<h;i++){
 		var row = [];
 		for(var n=0;n<w;n++){
-			row.push(0);
+			row.push(1);
 		}
 		grid.push(row);
 	}
@@ -14,17 +17,17 @@ function Grid(w,h){
 		c[x-1]=value;
 	}
 	this.read = function(x,y){//use point as argument?
-		c = grid[y-1];
-		return c[x-1];
+		c = grid[y];
+		return c[x];
 	}
 	this.draw = function(ctx){
 		for(i=0;i<h;i++){
 			for(var n=0;n<w;n++){
-				//display.ctx.fillRect(i*10, n*10, 10, 10);
-				//console.log("draw();");
 				display.ctx.drawImage(imgO, pixels * i, pixels * n);
-				//var img = loadPic("testImage.png");
-				//display.ctx.drawImage(imgO,100,100);
+				var obj = this.read(i,n);
+				console.log("obj: " + obj);
+				console.log("key.obj: " + key.read(obj));
+				key.read(obj).draw();
 			}
 		}
 	}
@@ -34,6 +37,20 @@ function Grid(w,h){
 		key = x;
 	}
 }
+
+function GridObj(src, action) {
+  this.draw = function(x,y){
+	  display.ctx.drawImage(src, x, y);
+  }
+}
+
+function Key() {
+	var reg = {1: coin};
+	this.read = function(n){
+		return reg.n;
+	}
+}
+
 //var test = new Grid(1, 1);
 //var img = loadPic("images/red1.png");
 //display.ctx.drawImage(img);
