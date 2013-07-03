@@ -19,7 +19,8 @@ function drawcoins(){
 	var testGrid = new Grid(4,4);
 	
 	var coin = new GridObj(imgO, false);
-	var coinville = new Key(coin);
+	var coinville = new Key();
+	coinville.register(coin);
 	testGrid.setKey(coinville);
 	
 	testGrid.draw();

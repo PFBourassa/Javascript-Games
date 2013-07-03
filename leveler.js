@@ -6,7 +6,7 @@ function Grid(w,h){
     for(i=0;i<h;i++){
 		var row = [];
 		for(var n=0;n<w;n++){
-			row.push("a");
+			row.push("coin");
 		}
 		grid.push(row);
 	}
@@ -47,10 +47,13 @@ function GridObj(img, action) {
   }
 }
 
-function Key(coin) {
-	var reg = {a: coin};
-	this.read = function(a){
-		return reg.a;
+function Key() {
+	var reg = {a: "coin", b: "none"};
+	this.register = function(obj){
+		reg.obj = obj;
+	}
+	this.read = function(obj){
+		return reg.obj;
 	}
 }
 
