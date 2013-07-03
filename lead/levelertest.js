@@ -16,8 +16,12 @@ function drawcoins(){
 	display.ctx.drawImage(imgO,30,30);
 	//display.ctx.drawImage(imgS.get(),50,50);
 	
-	var testGrid = new Grid(10,10);
-	console.log(testGrid);
+	var testGrid = new Grid(4,4);
+	
+	var coin = new GridObj(imgO, false);
+	var coinville = new Key(coin);
+	testGrid.setKey(coinville);
+	
 	testGrid.draw();
 }
 

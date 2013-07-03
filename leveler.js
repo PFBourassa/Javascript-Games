@@ -1,14 +1,12 @@
-var coin = new GridObj("coin3.png", false);
-var coinville = new Key();
 
 function Grid(w,h){
 	var pixels = 32;
     var grid=[];
-    var key = coinville;
+    this.key;
     for(i=0;i<h;i++){
 		var row = [];
 		for(var n=0;n<w;n++){
-			row.push(1);
+			row.push("a");
 		}
 		grid.push(row);
 	}
@@ -23,31 +21,36 @@ function Grid(w,h){
 	this.draw = function(ctx){
 		for(i=0;i<h;i++){
 			for(var n=0;n<w;n++){
-				display.ctx.drawImage(imgO, pixels * i, pixels * n);
+				//display.ctx.drawImage(imgO, pixels * i, pixels * n);
 				var obj = this.read(i,n);
 				console.log("obj: " + obj);
-				console.log("key.obj: " + key.read(obj));
-				key.read(obj).draw();
+				console.log("this.key: " + this.key);
+				console.log("Key.obj: " + this.key.read(obj));
+				this.key.read(obj).draw(pixels * i, pixels * n);
+				//console.log("key.obj: " + key.read(obj).src);
+				//src = key.read(obj).src;
+				//display.ctx.drawImage(imgO, pixels * i, pixels * n);
 			}
 		}
 	}
 	this.init = function(){
 	}
 	this.setKey = function(x){
-		key = x;
+		this.key = x;
 	}
 }
 
-function GridObj(src, action) {
+function GridObj(img, action) {
+  this.img = img;
   this.draw = function(x,y){
-	  display.ctx.drawImage(src, x, y);
+	  display.ctx.drawImage(img, x, y);
   }
 }
 
-function Key() {
-	var reg = {1: coin};
-	this.read = function(n){
-		return reg.n;
+function Key(coin) {
+	var reg = {a: coin};
+	this.read = function(a){
+		return reg.a;
 	}
 }
 
