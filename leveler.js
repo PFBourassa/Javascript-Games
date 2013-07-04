@@ -48,7 +48,7 @@ function GridObj(img, action) {
 }
 
 function Key() {
-	var reg = {a: "coin", b: "none"};
+	var reg = {};
 	this.register = function(obj){
 		reg.obj = obj;
 	}

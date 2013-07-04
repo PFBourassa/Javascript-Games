@@ -1,8 +1,9 @@
 var imgO = loadPic("testImage.png");
+var img1 = loadPic("blank.png");
 
 console.log(imgO);
 
-imgO.onload = function() {
+img1.onload = function() {
   drawcoins()
 }
 
