@@ -1,28 +1,21 @@
-if (true){
-	console.log("display.ctx: " + display.canvas);
-}
-
-display.ctx.fillRect(10, 10, 10, 10);
-//var test = new Grid(1, 1);
-//test.draw(display.ctx);
-//var imgX = document.getElementById("test");
-//var imgO = loadPic("testImage.png");
-//var imgS = new Sequence();
-//imgS.load(["testImage.png"]);
-//console.log(imgX);
-//console.log(imgO);
-//display.ctx.drawImage(imgX,10,10);
 function drawcoins(){
-	display.ctx.drawImage(imgO,30,30);
-	//display.ctx.drawImage(imgS.get(),50,50);
 	
 	var testGrid = new Grid(4,4);
 	
-	var coin = new GridObj(imgO, false);
+	testGrid.setGrid([
+		['1', '1', '1', '1'],
+		['1', '0', '0', '1'],
+		['1', '0', '0', '1'],
+		['1', '1', '1', '1']]
+	);
+		
+	var coin = new GridObj(imgO);
 	var blank = new GridObj(img1);
+	
 	var coinville = new Key();
-	coinville.register(blank);
-	coinville.register(coin);
+	
+	coinville.register(blank, "0");
+	coinville.register(coin, "1");
 
 	testGrid.setKey(coinville);
 	
