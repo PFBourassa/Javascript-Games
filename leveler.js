@@ -47,19 +47,18 @@ function GridObj(img, action) {
 }
 
 function Key() {
-	var reg = {};
-	this.register = function(obj,num){
+	var reg = [];
+	this.register = function(obj){
 		//console.log("Inside obj: " + obj.img.src);
-		var foo = obj;
-		reg.num = foo;
-		console.log("Registered to " + num  + ": " + reg.num.img.src);
-		console.log("Confirm: " + this.read(num).img.src);
+		reg.push(obj);
+		console.log("Registered to " + reg.length  + ": " + obj.img.src);
+		//console.log("Confirm: " + reg[0].img.src);
 	}
 	this.read = function(num){
-		var foo = num
+		var foo = num;
 		//console.log(num);
-		console.log(reg.num.img.src);
-		return reg.num;
+		//console.log(reg.num.img.src);
+		return reg[num];
 	}
 }
 
