@@ -37,3 +37,25 @@ function drawcoins(){
 	toolbar.draw();
 }
 
+function myDown(e) {
+    /*getMouse(e);
+    var l = boxes.length;
+    for (var i = l - 1; i >= 0; i--) {
+        if ((display.mx > boxes[i].x && display.mx < boxes[i].x + boxes[i].w)&&(display.my > boxes[i].y && display.my < boxes[i].y + boxes[i].h)) {
+            display.mySel = boxes[i];
+            display.offsetx = display.mx - display.mySel.x;
+            display.offsety = display.my - display.mySel.y;
+            display.mySel.x = display.mx - display.offsetx;
+            display.mySel.y = display.my - display.offsety;
+            display.isDrag = true;
+            canvas.onmousemove = myMove;
+            invalidate();
+            return;
+        }
+        display.mySel = null;
+    }*/
+    getMouse(e);
+	console.log("getmouse: " + display.mx + ", " + display.my);
+}
+
+canvas.onmousedown = myDown;
