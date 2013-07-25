@@ -1,8 +1,9 @@
 function drawcoins(){
 	
-	var testGrid = new Grid(4,4);
+	var testGrid = new Grid(5, 4);
 	
 	testGrid.setGrid([
+		['0', '0', '0', '0'],
 		['1', '1', '1', '1'],
 		['1', '0', '0', '1'],
 		['1', '0', '0', '1'],
@@ -18,16 +19,21 @@ function drawcoins(){
 	coinville.register(coin, "1");
 
 	testGrid.setKey(coinville);
-	
 	testGrid.draw();
+	
+	//TOOLBAR STUFF
+	var x = 2;
+	var toolbar = new Grid(1,x);
+	
+	var inner = [];
+	for (i=0;i<x;i++){
+		inner.push(i);
+	}
+	
+	toolbar.setGrid([
+	['0', '1']]
+	);
+	toolbar.setKey(coinville);
+	toolbar.draw();
 }
 
-
-
-/*==============
-*loadPic() has no check for if the image is loaded or not.
-*Trying to draw the image too soon happens often.
-* 
-* Try this:
-* http://gamedev.stackexchange.com/questions/24102/resource-loader-for-an-html5-and-javascript-game
-*/

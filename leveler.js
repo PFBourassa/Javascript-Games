@@ -1,4 +1,3 @@
-
 function Grid(w,h){
 	var pixels = 32;
     this.grid=[];
@@ -24,7 +23,7 @@ function Grid(w,h){
 				
 				var num = this.read(i, n);
 				console.log(num);
-				var obj = this.key.read(num);//.draw(pixels * i, pixels * n);
+				var obj = this.key.read(num);
 				obj.draw(pixels * i, pixels * n);
 			}
 		}
