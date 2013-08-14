@@ -1,6 +1,8 @@
+var testGrid;
+var toolbar;
 function drawcoins(){
 	
-	var testGrid = new Grid(5, 4);
+	testGrid = new Grid(5, 4);
 	
 	testGrid.setGrid([
 		['0', '0', '0', '0'],
@@ -22,8 +24,8 @@ function drawcoins(){
 	testGrid.draw();
 	
 	//TOOLBAR STUFF
-	var x = 2;
-	var toolbar = new Grid(1,x);
+	var x = 2; //number of item possible
+	toolbar = new Grid(1,x);
 	
 	var inner = [];
 	for (i=0;i<x;i++){
@@ -37,25 +39,22 @@ function drawcoins(){
 	toolbar.draw();
 }
 
+var selection;
+
 function myDown(e) {
-    /*getMouse(e);
-    var l = boxes.length;
-    for (var i = l - 1; i >= 0; i--) {
-        if ((display.mx > boxes[i].x && display.mx < boxes[i].x + boxes[i].w)&&(display.my > boxes[i].y && display.my < boxes[i].y + boxes[i].h)) {
-            display.mySel = boxes[i];
-            display.offsetx = display.mx - display.mySel.x;
-            display.offsety = display.my - display.mySel.y;
-            display.mySel.x = display.mx - display.offsetx;
-            display.mySel.y = display.my - display.offsety;
-            display.isDrag = true;
-            canvas.onmousemove = myMove;
-            invalidate();
-            return;
-        }
-        display.mySel = null;
-    }*/
+	
     getMouse(e);
 	console.log("getmouse: " + display.mx + ", " + display.my);
+	
+	if (display.my <= 32){
+		selection = toolbar.read_from_click(display.mx, display.my);
+		console.log("Selection: " + selection);
+	}
+	else {
+		var a = testGrid.address_of_click(display.mx, display.my);
+	    testGrid.save(a.x, a.y, selection);
+	    testGrid.draw();
+	}
 }
 
 canvas.onmousedown = myDown;

@@ -1,21 +1,28 @@
 function Grid(w,h){
+	var x;//upper left corner of grid relative to display
+	var y;
 	var pixels = 32;
     this.grid=[];
     this.key;
-    //for(i=0;i<h;i++){
-		//var row = [];
-		//for(var n=0;n<w;n++){
-			//row.push("coin");
-		//}
-		//this.grid.push(row);
-	//}
 	this.save = function(x,y,value){//use point as argument?
-		c = this.grid[y-1];
-		c[x-1]=value;
+		c = this.grid[y];
+		c[x] = value;
 	}
 	this.read = function(x,y){//use point as argument?
 		c = this.grid[y];
 		return c[x];
+	}
+	this.read_from_click = function (mx,my){
+		xx = Math.floor(mx/pixels);
+		yy = Math.floor(my/pixels);
+		console.log(xx + ", " + yy);
+		return this.read(xx,yy);
+	}
+	this.address_of_click = function (mx, my){
+	    a = {};
+	    a.x = Math.floor(mx/pixels);
+	    a.y = Math.floor(my/pixels);
+	    return a;
 	}
 	this.draw = function(ctx){
 		for(i=0;i<h;i++){
@@ -61,26 +68,4 @@ function Key() {
 	}
 }
 
-/*========================================
- * THE PROBLEM, as it stands.
- * 
- * I'm currenly passing around these obj's
- * but my end goal is to have simple 
- * value that can represent them,
- * such as 1, or 0.
- * 
- * I cannot index in objects by number,
- * eg. Key.1.draw();
- * 
- * Currently, Key.read always returns coin.
-=========================================*/
-function Block(){
-	
-}
- 
- /*Grid.setKey({
-	 0:loadPic("images/playercraft.png"),
-	 1:0
-	 });
-*/
 console.log("leveler_loaded");
