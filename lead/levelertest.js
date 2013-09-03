@@ -21,7 +21,7 @@ function drawcoins(){
 	coinville.register(coin, "1");
 
 	testGrid.setKey(coinville);
-	testGrid.draw();
+	//testGrid.draw();
 	
 	//TOOLBAR STUFF
 	var x = 2; //number of item possible
@@ -36,7 +36,8 @@ function drawcoins(){
 	['0', '1']]
 	);
 	toolbar.setKey(coinville);
-	toolbar.draw();
+	//toolbar.draw();
+	display.draw();
 }
 
 var selection;
@@ -46,15 +47,21 @@ function myDown(e) {
     getMouse(e);
 	console.log("getmouse: " + display.mx + ", " + display.my);
 	
-	if (display.my <= 32){
+	if (display.my <= 32){ //TOOLBAR
 		selection = toolbar.read_from_click(display.mx, display.my);
 		console.log("Selection: " + selection);
 	}
-	else {
+	else { //GRID
 		var a = testGrid.address_of_click(display.mx, display.my);
 	    testGrid.save(a.x, a.y, selection);
-	    testGrid.draw();
+	    //testGrid.draw();
+	    display.draw();
 	}
 }
 
 canvas.onmousedown = myDown;
+
+function stuffToDraw() {
+    testGrid.draw();
+    toolbar.draw();
+}

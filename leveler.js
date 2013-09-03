@@ -1,10 +1,10 @@
 function Grid(w,h){
-	var x;//upper left corner of grid relative to display
-	var y;
-	var pixels = 32;
+    var x;//upper left corner of grid relative to display
+    var y;
+    var pixels = 32;
     this.grid=[];
     this.key;
-	this.save = function(x,y,value){//use point as argument?
+	this.save = function(x, y, value){//use point as argument?
 		c = this.grid[y];
 		c[x] = value;
 	}
@@ -19,10 +19,10 @@ function Grid(w,h){
 		return this.read(xx,yy);
 	}
 	this.address_of_click = function (mx, my){
-	    a = {};
-	    a.x = Math.floor(mx/pixels);
-	    a.y = Math.floor(my/pixels);
-	    return a;
+		a = {};
+		a.x = Math.floor(mx/pixels);
+		a.y = Math.floor(my/pixels);
+		return a;
 	}
 	this.draw = function(ctx){
 		for(i=0;i<h;i++){
